@@ -69,9 +69,19 @@ public class HomeActivity extends Activity implements DialogScanner.OnQRCodeScan
         tvCo.setText(person.getCoName());
 
         TextView tvId = (TextView)findViewById(R.id.textViewId);
-        tvId.setText(person.getCoName());
+        tvId.setText(person.getId());
 
         ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        if("12132131".equals(person.getId()))
+            imageView.setImageResource(R.drawable.kanaiya);
+        else if("12132132".equals(person.getId()))
+            imageView.setImageResource(R.drawable.swarnaba);
+        else if("12132133".equals(person.getId()))
+            imageView.setImageResource(R.drawable.najmul);
+        else if("12132134".equals(person.getId()))
+            imageView.setImageResource(R.drawable.amit);
+        else if("12132135".equals(person.getId()))
+            imageView.setImageResource(R.drawable.vikram);
 
     }
 }
