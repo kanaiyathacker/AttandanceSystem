@@ -12,15 +12,17 @@ import android.widget.TimePicker;
 import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.com.bean.Person;
+import com.com.services.AttandanceRestService;
 import com.google.gson.Gson;
+import com.octo.android.robospice.SpiceManager;
 
 import java.util.Calendar;
 
 
-public class HomeActivity extends Activity implements DialogScanner.OnQRCodeScanListener
-{
+public class HomeActivity extends Activity implements DialogScanner.OnQRCodeScanListener {
     static final String TAG = Activity.class.getSimpleName();
     private TimePicker timePicker;
+    SpiceManager spiceManager = new SpiceManager(AttandanceRestService.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class HomeActivity extends Activity implements DialogScanner.OnQRCodeScan
         Calendar cal = Calendar.getInstance();
         timePicker.setCurrentHour(cal.get(Calendar.HOUR));
         timePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
+        timePicker.setIs24HourView(true);
     }
 
 

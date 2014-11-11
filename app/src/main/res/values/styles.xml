@@ -6,7 +6,7 @@
         <item name="android:textViewStyle">@style/DatePicker</item>
     </style>
 
-    <style name="timePicker" parent="android:Theme.Holo.Light">
+    <style name="DatePicker" parent="android:Theme.Holo.Light">
         <item name="android:textColor">#FFFF</item>
         <item name="android:divider">@color/border_color</item>
         <item name="android:dividerHeight">1px</item>

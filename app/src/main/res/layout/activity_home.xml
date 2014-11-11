@@ -29,10 +29,10 @@
 
     <ImageView
         android:paddingTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:id="@+id/imageView"
-        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/ScanButton"
         />
 
@@ -67,16 +67,15 @@
         android:layout_toRightOf="@+id/imageView"
         android:layout_below="@+id/textViewCo" />
 
-
-
     <TimePicker
         style="@android:style/Widget.Holo"
         android:paddingTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/timePicker"
-        android:layout_below="@+id/textViewId"
+        android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
+
         />
 
     <RadioGroup
@@ -86,9 +85,10 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewId"
+        android:layout_below="@+id/imageView"
         android:layout_alignBottom="@+id/timePicker"
         android:orientation="vertical" >
+
         <RadioButton
             android:text="Check In"
             android:layout_width="wrap_content"
@@ -100,11 +100,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:id="@+id/" />
+          />
 
     </RadioGroup>
-
-
 
     <Button
         style="@style/buttonStyle"
