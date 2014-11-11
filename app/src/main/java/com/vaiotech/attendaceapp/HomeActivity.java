@@ -22,6 +22,8 @@ public class HomeActivity extends Activity implements DialogScanner.OnQRCodeScan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+            imageView.setImageResource(R.drawable.kanaiya);
     }
 
 
