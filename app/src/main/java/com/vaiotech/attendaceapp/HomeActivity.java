@@ -7,23 +7,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.com.bean.Person;
 import com.google.gson.Gson;
 
+import java.util.Calendar;
+
 
 public class HomeActivity extends Activity implements DialogScanner.OnQRCodeScanListener
 {
     static final String TAG = Activity.class.getSimpleName();
+    private TimePicker timePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ImageView imageView = (ImageView)findViewById(R.id.imageView);
-            imageView.setImageResource(R.drawable.kanaiya);
+        imageView.setImageResource(R.drawable.kanaiya);
+        timePicker = (TimePicker)findViewById(R.id.timePicker);
+        Calendar cal = Calendar.getInstance();
+        timePicker.setCurrentHour(cal.get(Calendar.HOUR));
+        timePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
     }
 
 
