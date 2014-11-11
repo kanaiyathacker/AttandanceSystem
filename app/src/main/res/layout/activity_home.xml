@@ -14,10 +14,11 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
     >
-
     </FrameLayout>
 
-        <Button
+
+    <Button
+            style="@style/buttonStyle"
             android:id="@+id/ScanButton"
             android:text="Scan"
             android:layout_width="fill_parent"
@@ -25,36 +26,96 @@
             android:gravity="center"
             android:onClick="launchScanBack"
             android:layout_gravity="center_horizontal|bottom" />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:id="@+id/textViewName"
-        android:layout_below="@+id/ScanButton" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:id="@+id/textViewCo"
-        android:layout_below="@+id/ScanButton" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:id="@+id/textViewId"
-        android:layout_below="@+id/textViewCo" />
 
     <ImageView
+        android:paddingTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/ScanButton"
+        />
+
+
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Person Name"
+        android:id="@+id/textViewName"
+        android:layout_below="@+id/ScanButton"
+        android:layout_toRightOf="@+id/imageView" />
+
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Company name"
+        android:id="@+id/textViewCo"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/textViewName" />
+
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Company ID"
+        android:id="@+id/textViewId"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/textViewCo" />
+
+
+
+    <TimePicker
+        style="@android:style/Widget.Holo"
+        android:paddingTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
         android:layout_below="@+id/textViewId"
-         />
+        android:layout_alignParentLeft="true"
+        />
+
+    <RadioGroup
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:id="@+id/timeFlag"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewId"
+        android:layout_alignBottom="@+id/timePicker"
+        android:orientation="vertical" >
+        <RadioButton
+            android:text="Check In"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:layout_marginTop="20dp"
+            android:text="Check Out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:id="@+id/" />
+
+    </RadioGroup>
+
+
+
+    <Button
+        style="@style/buttonStyle"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/save"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
