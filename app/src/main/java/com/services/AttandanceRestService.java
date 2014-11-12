@@ -6,7 +6,7 @@ import com.octo.android.robospice.retrofit.RetrofitGsonSpiceService;
  * Created by kanaiyalalt on 11/11/2014.
  */
 public class AttandanceRestService extends RetrofitGsonSpiceService {
-    private final static String BASE_URL = "http://kanserviceslive.elasticbeanstalk.com/ScanAttandanceApp/";
+    private final static String BASE_URL = "http://kanserviceslive.elasticbeanstalk.com";
 
     @Override
     public void onCreate() {

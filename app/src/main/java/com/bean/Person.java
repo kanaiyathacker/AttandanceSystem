@@ -17,6 +17,18 @@ public class Person {
     String time;
     String desc;
 
+    public Person() {
+        id = "";
+        fName = "";
+        mName = "";
+        lname = "";
+        coName = "";
+        coId = "";
+        date = "";
+        time = "";
+        desc = "";
+    }
+
 
 	public String getId() {
 		return id;

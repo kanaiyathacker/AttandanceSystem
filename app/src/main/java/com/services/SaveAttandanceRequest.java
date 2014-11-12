@@ -8,7 +8,6 @@ import roboguice.inject.ContextSingleton;
 /**
  * Created by kanaiyalalt on 11/11/2014.
  */
-@ContextSingleton
 public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> {
 
     private String companyId;
