@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
@@ -30,5 +30,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.octo.android.robospice:robospice-retrofit:1.4.14'
     compile 'com.octo.android.robospice:robospice:1.4.14'
-    compile 'com.android.support:support-v4:21.0.0'
+    compile files('libs/core.jar')
 }

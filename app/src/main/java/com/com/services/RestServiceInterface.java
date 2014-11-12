@@ -1,12 +1,16 @@
 package com.com.services;
 
 import retrofit.http.GET;
+import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
  * Created by kanaiyalalt on 11/11/2014.
  */
 public interface RestServiceInterface {
-    @GET("/")
-    Object getPanchang(@Query("cityname") String cityName , @Query("yr") int year  , @Query("mn") int month , @Query("dt") int date);
+    @POST("/saveDetails")
+    Object save(@Path("companyId") String companyId , @Path("personId") String personId ,@Path("fName") String fName,
+                @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
+                @Path("time") String time,@Path("desc") String desc );
 }
