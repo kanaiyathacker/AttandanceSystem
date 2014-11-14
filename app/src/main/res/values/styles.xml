@@ -1,7 +1,7 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo">
+    <!-- Base application theme. -->ss
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
         <item name="android:datePickerStyle">@style/DatePicker</item>
         <item name="android:textViewStyle">@style/DatePicker</item>
     </style>
