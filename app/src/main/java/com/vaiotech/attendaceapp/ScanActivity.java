@@ -1,12 +1,20 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.barcodescannerfordialogs.DialogScanner;
+import com.bean.Person;
+import com.google.gson.Gson;
 
 
-public class ScanActivity extends Activity {
+public class ScanActivity extends Activity implements DialogScanner.OnQRCodeScanListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +42,17 @@ public class ScanActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void scan(View view) {
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onQRCodeScan(String contents) {
+        Intent intent = new Intent(this,HomeActivity.class);
+        intent.putExtra("SCAN_CONTENT" , contents);
+        startActivity(intent);
     }
 }

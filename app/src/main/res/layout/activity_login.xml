@@ -76,8 +76,8 @@
 
     <Button
         android:onClick="login"
-        android:textSize="20dp"
         android:layout_marginBottom="30dp"
+        android:textSize="20dp"
         android:textColor="#02233C"
         android:background="#E5E3DF"
         android:width="150dp"

@@ -1,7 +1,5 @@
 package com.bean;
 
-import com.google.inject.Singleton;
-
 import roboguice.inject.ContextSingleton;
 
 @ContextSingleton
@@ -10,18 +8,27 @@ public class Person {
 	String id;
 	String fName;
 	String mName;
-	String lname;
+	String lName;
 	String coName;
     String coId;
     String date;
     String time;
     String desc;
+    String department;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public Person() {
         id = "1";
         fName = "1";
         mName = "1";
-        lname = "1";
+        lName = "1";
         coName = "1";
         coId = "1";
         date = "1";
@@ -48,11 +55,11 @@ public class Person {
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
-	public String getLname() {
-		return lname;
+	public String getlName() {
+		return lName;
 	}
-	public void setLname(String lname) {
-		this.lname = lname;
+	public void setlName(String lName) {
+		this.lName = lName;
 	}
 	public String getCoName() {
 		return coName;

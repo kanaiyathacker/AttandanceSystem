@@ -1,59 +1,48 @@
 package com.vaiotech.attendaceapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.bean.Person;
 import com.google.gson.Gson;
-import com.google.inject.Inject;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.services.SaveAttandanceRequest;
 
-import java.util.Calendar;
-
 import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_home)
-public class HomeActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener {
+public class HomeActivity extends BaseActivity {
 
-//    @InjectView(R.id.timePicker) TimePicker timePicker;
-    SaveAttandanceRequest saveAttandanceRequest;
-    @Inject Person person;
+    private SaveAttandanceRequest saveAttandanceRequest;
+    private Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        ImageView imageView = (ImageView)findViewById(R.id.personLOGOIV);
         imageView.setImageResource(R.drawable.kanaiya);
-//        timePicker = (TimePicker)findViewById(R.id.timePicker);
-        Calendar cal = Calendar.getInstance();
-//        timePicker.setCurrentHour(cal.get(Calendar.HOUR));
-//        timePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
-//        timePicker.setIs24HourView(true);
+        setData();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
@@ -73,42 +62,59 @@ public class HomeActivity extends BaseActivity implements DialogScanner.OnQRCode
         dialog.show(getFragmentManager(), "dialogScanner");
     }
 
-    @Override
-    public void onQRCodeScan(String contents)
+    public void setData()
     {
+        String contents = getIntent().getStringExtra("SCAN_CONTENT");
         System.out.println("********** content --- " + contents);
         Gson gson = new Gson();
-        Person person = gson.fromJson(contents , Person.class);
-        TextView tvName = (TextView)findViewById(R.id.textViewName);
-        tvName.setText(person.getfName() + " " + person.getmName() + " " + person.getLname());
+        person = gson.fromJson(contents , Person.class);
+        if(person != null) {
+            TextView tvName = (TextView) findViewById(R.id.personNameTV);
+            tvName.setText(person.getfName() + " " + person.getmName() + " " + person.getlName());
 
-        TextView tvCo = (TextView)findViewById(R.id.textViewCo);
-        tvCo.setText(person.getCoName());
+            TextView tvCo = (TextView) findViewById(R.id.personCONameTV);
+            tvCo.setText(person.getCoName());
 
-        TextView tvId = (TextView)findViewById(R.id.textViewId);
-        tvId.setText(person.getId());
+            TextView tvId = (TextView) findViewById(R.id.personIDTV);
+            tvId.setText(person.getId());
 
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        if("12132131".equals(person.getId()))
-            imageView.setImageResource(R.drawable.kanaiya);
-        else if("12132132".equals(person.getId()))
-            imageView.setImageResource(R.drawable.swarnaba);
-        else if("12132133".equals(person.getId()))
-            imageView.setImageResource(R.drawable.najmul);
-        else if("12132134".equals(person.getId()))
-            imageView.setImageResource(R.drawable.amit);
-        else if("12132135".equals(person.getId()))
-            imageView.setImageResource(R.drawable.vikram);
-
-
-
+            ImageView imageView = (ImageView) findViewById(R.id.personLOGOIV);
+            if ("12132131".equals(person.getId()))
+                imageView.setImageResource(R.drawable.kanaiya);
+            else if ("12132132".equals(person.getId()))
+                imageView.setImageResource(R.drawable.swarnaba);
+            else if ("12132133".equals(person.getId()))
+                imageView.setImageResource(R.drawable.najmul);
+            else if ("12132134".equals(person.getId()))
+                imageView.setImageResource(R.drawable.amit);
+            else if ("12132135".equals(person.getId()))
+                imageView.setImageResource(R.drawable.vikram);
+        }
     }
 
     public void save(View view) {
-        saveAttandanceRequest
-                = new SaveAttandanceRequest(person.getCoId() , person.getId(), person.getfName(), person.getmName(),
-                person.getLname(), person.getDate(),person.getTime(),person.getDesc());
-        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+//        saveAttandanceRequest
+//                = new SaveAttandanceRequest(person.getCoId() , person.getId(), person.getfName(), person.getmName(),
+//                person.getlName(), person.getDate(),person.getTime(),person.getDesc());
+//        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        openDialog(view);
+    }
+
+    public void openDialog(View view){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + (person != null ? person.getfName() : "") + " noted as 12:15");
+        alertDialogBuilder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
     }
 
     private class SaveAttandanceRequestListener implements com.octo.android.robospice.request.listener.RequestListener<Object> {

@@ -9,96 +9,82 @@
     android:background="#02233C"
     tools:context=".HomeActivity">
 
-    <FrameLayout
-        android:id="@+id/cameraPreview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-    >
-
-
-    </FrameLayout>
-    <Button
-            android:layout_alignParentTop="true"
-            android:textColor="#02233C"
-            android:background="#C6D9F1"
-            style="@style/buttonStyle"
-            android:id="@+id/ScanButton"
-            android:text="Scan"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:onClick="launchScanBack"
-            android:layout_gravity="center_horizontal|bottom" />
-
     <ImageView
-        android:paddingTop="10dp"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/imageView"
+        android:layout_marginLeft="5dp"
+        android:background="#E5E3DF"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:id="@+id/personLOGOIV"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ScanButton"
-        />
+        android:layout_alignParentStart="true" />
 
 
     <TextView
-        android:textColor="#C6D9F1"
+        android:layout_marginLeft="5dp"
+        android:textSize="15dp"
+        android:textColor="#E5E3DF"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Person Name"
-        android:id="@+id/textViewName"
-        android:layout_below="@+id/ScanButton"
-        android:layout_toRightOf="@+id/imageView" />
+        android:id="@+id/personNameTV"
+        android:layout_toRightOf="@+id/personLOGOIV" />
 
     <TextView
-        android:textColor="#C6D9F1"
-        android:paddingTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Company name"
-        android:id="@+id/textViewCo"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_below="@+id/textViewName" />
-
-    <TextView
-        android:textColor="#C6D9F1"
+        android:textSize="15dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#E5E3DF"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Company ID"
-        android:id="@+id/textViewId"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_below="@+id/textViewCo" />
+        android:id="@+id/personCONameTV"
+        android:layout_toRightOf="@+id/personLOGOIV"
+        android:layout_below="@+id/personNameTV" />
+
+    <TextView
+        android:textSize="15dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#E5E3DF"
+        android:paddingTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Department"
+        android:id="@+id/personIDTV"
+        android:layout_toRightOf="@+id/personLOGOIV"
+        android:layout_below="@+id/personCONameTV" />
 
     <Button
+        android:layout_margin="20dp"
+        android:textSize="20dp"
         android:textColor="#02233C"
         android:background="#E5E3DF"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:width="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" In Time"
+        android:text="In Time"
         android:onClick="save"
-        android:id="@+id/in"
+        android:id="@+id/inBUTTON"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         />
 
     <Button
+        android:layout_margin="20dp"
+        android:textSize="20dp"
         android:textColor="#02233C"
         android:background="#E5E3DF"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:width="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Out Time"
         android:onClick="save"
-        android:id="@+id/out"
+        android:id="@+id/outBUTTON"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
          />
+
 </RelativeLayout>
