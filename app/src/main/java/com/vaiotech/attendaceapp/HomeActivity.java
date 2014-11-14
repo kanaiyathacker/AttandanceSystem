@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,15 +20,20 @@ import com.google.gson.Gson;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.services.SaveAttandanceRequest;
 
+import java.util.Calendar;
+
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends BaseActivity {
 
-    @InjectView(R.id.personNameTV) TextView personNameTV;
-    @InjectView(R.id.personIDTV)   TextView personIDTV;
-    @InjectView(R.id.personDeptTV) TextView personDeptTV;
+    @InjectView(R.id.personNameTV)   TextView personNameTV;
+    @InjectView(R.id.personIDTV)     TextView personIDTV;
+    @InjectView(R.id.personDeptTV)   TextView personDeptTV;
+    @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
+    @InjectView(R.id.hhET)   EditText hhET;
+    @InjectView(R.id.mmET) EditText mmET;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.personLOGOIV) ImageView personLOGOIV;
@@ -44,8 +50,19 @@ public class HomeActivity extends BaseActivity {
         personNameTV.setTypeface(font);
         personIDTV.setTypeface(font);
         personDeptTV.setTypeface(font);
+
+        seperateTimeTV.setTypeface(font);
+        hhET.setTypeface(font);
+        mmET.setTypeface(font);
+
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
+
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR);
+        int min = cal.get(Calendar.MINUTE);
+        hhET.setText(""+hour);
+        mmET.setText(""+min);
         setData();
     }
 
