@@ -7,7 +7,36 @@
     android:background="#02233C"
     tools:context="com.vaiotech.attendaceapp.ScanActivity">
 
-    <TextView android:text="" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:id="@+id/companyLOGOIV"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kanaiyalal"
+        android:id="@+id/companyAdminNameTV"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/companyLOGOIV"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kanaiyalal"
+        android:id="@+id/companyAdminCodeTV"
+        android:layout_toRightOf="@+id/companyLOGOIV"
+        android:layout_below="@+id/companyAdminNameTV"
+        />
+
+
 
 </RelativeLayout>
