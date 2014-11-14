@@ -10,7 +10,6 @@
     tools:context=".HomeActivity">
 
     <ImageView
-        android:layout_marginLeft="5dp"
         android:background="#E5E3DF"
         android:layout_width="130dp"
         android:layout_height="130dp"
@@ -21,8 +20,9 @@
 
 
     <TextView
+        android:layout_toEndOf="@+id/personLOGOIV"
         android:layout_marginLeft="5dp"
-        android:textSize="15dp"
+        android:textSize="20sp"
         android:textColor="#E5E3DF"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
@@ -32,20 +32,22 @@
         android:layout_toRightOf="@+id/personLOGOIV" />
 
     <TextView
-        android:textSize="15dp"
+        android:layout_toEndOf="@+id/personLOGOIV"
+        android:textSize="20sp"
         android:layout_marginLeft="5dp"
         android:textColor="#E5E3DF"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Company ID"
-        android:id="@+id/personCONameTV"
+        android:text="Person ID"
+        android:id="@+id/personIDTV"
         android:layout_toRightOf="@+id/personLOGOIV"
         android:layout_below="@+id/personNameTV" />
 
     <TextView
-        android:textSize="15dp"
+        android:layout_toEndOf="@+id/personLOGOIV"
+        android:textSize="20sp"
         android:layout_marginLeft="5dp"
         android:textColor="#E5E3DF"
         android:paddingTop="10dp"
@@ -53,13 +55,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Department"
-        android:id="@+id/personIDTV"
+        android:id="@+id/personDeptTV"
         android:layout_toRightOf="@+id/personLOGOIV"
-        android:layout_below="@+id/personCONameTV" />
+        android:layout_below="@+id/personIDTV" />
 
     <Button
+        android:layout_alignParentStart="true"
         android:layout_margin="20dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="#02233C"
         android:background="#E5E3DF"
         android:width="100dp"
@@ -74,7 +77,7 @@
 
     <Button
         android:layout_margin="20dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="#02233C"
         android:background="#E5E3DF"
         android:width="100dp"
@@ -83,6 +86,7 @@
         android:text="Out Time"
         android:onClick="save"
         android:id="@+id/outBUTTON"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
          />

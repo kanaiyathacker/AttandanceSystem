@@ -3,10 +3,12 @@ package com.vaiotech.attendaceapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,9 +20,18 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.services.SaveAttandanceRequest;
 
 import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends BaseActivity {
+
+    @InjectView(R.id.personNameTV) TextView personNameTV;
+    @InjectView(R.id.personIDTV)   TextView personIDTV;
+    @InjectView(R.id.personDeptTV) TextView personDeptTV;
+    @InjectView(R.id.inBUTTON) Button inBUTTON;
+    @InjectView(R.id.outBUTTON) Button outBUTTON;
+    @InjectView(R.id.personLOGOIV) ImageView personLOGOIV;
+
 
     private SaveAttandanceRequest saveAttandanceRequest;
     private Person person;
@@ -29,8 +40,12 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ImageView imageView = (ImageView)findViewById(R.id.personLOGOIV);
-        imageView.setImageResource(R.drawable.kanaiya);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+        personNameTV.setTypeface(font);
+        personIDTV.setTypeface(font);
+        personDeptTV.setTypeface(font);
+        inBUTTON.setTypeface(font);
+        outBUTTON.setTypeface(font);
         setData();
     }
 
@@ -69,26 +84,20 @@ public class HomeActivity extends BaseActivity {
         Gson gson = new Gson();
         person = gson.fromJson(contents , Person.class);
         if(person != null) {
-            TextView tvName = (TextView) findViewById(R.id.personNameTV);
-            tvName.setText(person.getfName() + " " + person.getmName() + " " + person.getlName());
+            personNameTV.setText(person.getfName() + " " + person.getmName() + " " + person.getlName());
+            personIDTV.setText(person.getId());
+            personDeptTV.setText(person.getDepartment());
 
-            TextView tvCo = (TextView) findViewById(R.id.personCONameTV);
-            tvCo.setText(person.getCoName());
-
-            TextView tvId = (TextView) findViewById(R.id.personIDTV);
-            tvId.setText(person.getId());
-
-            ImageView imageView = (ImageView) findViewById(R.id.personLOGOIV);
             if ("12132131".equals(person.getId()))
-                imageView.setImageResource(R.drawable.kanaiya);
+                personLOGOIV.setImageResource(R.drawable.kanaiya);
             else if ("12132132".equals(person.getId()))
-                imageView.setImageResource(R.drawable.swarnaba);
+                personLOGOIV.setImageResource(R.drawable.swarnaba);
             else if ("12132133".equals(person.getId()))
-                imageView.setImageResource(R.drawable.najmul);
+                personLOGOIV.setImageResource(R.drawable.najmul);
             else if ("12132134".equals(person.getId()))
-                imageView.setImageResource(R.drawable.amit);
+                personLOGOIV.setImageResource(R.drawable.amit);
             else if ("12132135".equals(person.getId()))
-                imageView.setImageResource(R.drawable.vikram);
+                personLOGOIV.setImageResource(R.drawable.vikram);
         }
     }
 
@@ -102,6 +111,7 @@ public class HomeActivity extends BaseActivity {
 
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
         alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + (person != null ? person.getfName() : "") + " noted as 12:15");
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
@@ -111,7 +121,6 @@ public class HomeActivity extends BaseActivity {
                         startActivity(intent);
                     }
                 });
-
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
 
