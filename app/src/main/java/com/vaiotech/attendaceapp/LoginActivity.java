@@ -11,18 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.services.LoginRequest;
+import com.services.SaveAttandanceRequest;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_login)
-public class LoginActivity  extends RoboActivity {
+public class LoginActivity  extends BaseActivity {
 
     @InjectView(R.id.loginIDTV)   TextView loginIDTV;
     @InjectView(R.id.loginIDET)   EditText loginIDET;
     @InjectView(R.id.passwordTV)  TextView passwordTV;
     @InjectView(R.id.passwordET)  EditText passwordET;
     @InjectView(R.id.loginBUTTON) Button loginBUTTON;
+
+    private LoginRequest loginRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class LoginActivity  extends RoboActivity {
     }
 
     public void login(View view) {
-        Intent intent = new Intent(this,ScanActivity.class);
-        startActivity(intent);
+        loginRequest = new LoginRequest(loginIDET.getText().toString() , passwordET.getText().toString() , "DEV ID");
+        spiceManager.execute(loginRequest ,new LoginRequestListener(this));
     }
 }
