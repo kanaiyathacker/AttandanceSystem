@@ -24,7 +24,7 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener {
 
-    @InjectView(R.id.timePicker) TimePicker timePicker;
+//    @InjectView(R.id.timePicker) TimePicker timePicker;
     SaveAttandanceRequest saveAttandanceRequest;
     @Inject Person person;
 
@@ -36,9 +36,9 @@ public class HomeActivity extends BaseActivity implements DialogScanner.OnQRCode
         imageView.setImageResource(R.drawable.kanaiya);
 //        timePicker = (TimePicker)findViewById(R.id.timePicker);
         Calendar cal = Calendar.getInstance();
-        timePicker.setCurrentHour(cal.get(Calendar.HOUR));
-        timePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
-        timePicker.setIs24HourView(true);
+//        timePicker.setCurrentHour(cal.get(Calendar.HOUR));
+//        timePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
+//        timePicker.setIs24HourView(true);
     }
 
 

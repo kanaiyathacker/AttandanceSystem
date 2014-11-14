@@ -6,6 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#02233C"
     tools:context=".HomeActivity">
 
     <FrameLayout
@@ -14,10 +15,13 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
     >
+
+
     </FrameLayout>
-
-
     <Button
+            android:layout_alignParentTop="true"
+            android:textColor="#02233C"
+            android:background="#C6D9F1"
             style="@style/buttonStyle"
             android:id="@+id/ScanButton"
             android:text="Scan"
@@ -38,6 +42,7 @@
 
 
     <TextView
+        android:textColor="#C6D9F1"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -48,6 +53,7 @@
         android:layout_toRightOf="@+id/imageView" />
 
     <TextView
+        android:textColor="#C6D9F1"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -58,6 +64,7 @@
         android:layout_below="@+id/textViewName" />
 
     <TextView
+        android:textColor="#C6D9F1"
         android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -67,68 +74,33 @@
         android:layout_toRightOf="@+id/imageView"
         android:layout_below="@+id/textViewCo" />
 
-    <TimePicker
-        style="@android:style/Widget.Holo"
-        android:paddingTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-
-        />
-
-    <RadioGroup
-        android:layout_centerHorizontal="true"
-        android:paddingTop="20dp"
-        android:id="@+id/timeFlag"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignBottom="@+id/timePicker"
-        android:orientation="vertical" >
-
-        <RadioButton
-            android:text="Check In"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:layout_marginTop="20dp"
-            android:text="Check Out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-          />
-
-    </RadioGroup>
-<!--
-    <com.dlazaro66.qrcodereaderview.QRCodeReaderView
-        android:id="@+id/qrdecoderview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
-    <ImageView
-        android:id="@+id/red_line_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/qrdecoderview"
-        android:src="@drawable/amit" />
--->
     <Button
-        style="@style/buttonStyle"
+        android:textColor="#02233C"
+        android:background="#E5E3DF"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text=" In Time"
         android:onClick="save"
-        android:id="@+id/save"
+        android:id="@+id/in"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        />
+
+    <Button
+        android:textColor="#02233C"
+        android:background="#E5E3DF"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Out Time"
+        android:onClick="save"
+        android:id="@+id/out"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+         />
 
 
 </RelativeLayout>

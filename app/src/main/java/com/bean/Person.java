@@ -18,15 +18,15 @@ public class Person {
     String desc;
 
     public Person() {
-        id = "";
-        fName = "";
-        mName = "";
-        lname = "";
-        coName = "";
-        coId = "";
-        date = "";
-        time = "";
-        desc = "";
+        id = "1";
+        fName = "1";
+        mName = "1";
+        lname = "1";
+        coName = "1";
+        coId = "1";
+        date = "1";
+        time = "1";
+        desc = "1";
     }
 
 
