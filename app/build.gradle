@@ -34,4 +34,6 @@ dependencies {
     compile 'com.octo.android.robospice:robospice:1.4.14'
     compile 'org.roboguice:roboguice:3.+'
     compile files('libs/android-smart-image-view-1.0.0.jar')
+    compile 'net.glxn:qrgen:1.4'
+
 }

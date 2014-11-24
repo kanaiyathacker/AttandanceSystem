@@ -26,7 +26,8 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
-        Intent intent = new Intent(loginActivity,ScanActivity.class);
+//        Intent intent = new Intent(loginActivity,ScanActivity.class);
+        Intent intent = new Intent(loginActivity,UserActivity.class);
         if(o != null) {
             LinkedTreeMap map = (LinkedTreeMap)o;
             Gson gson = new Gson();
