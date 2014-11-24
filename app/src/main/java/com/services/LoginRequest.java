@@ -23,8 +23,7 @@ public class LoginRequest  extends RetrofitSpiceRequest<Object, RestServiceInter
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
-        getService().login(loginID , password , deviceId);
-        return null;
+        return getService().login(loginID , password , deviceId);
     }
 
 }
