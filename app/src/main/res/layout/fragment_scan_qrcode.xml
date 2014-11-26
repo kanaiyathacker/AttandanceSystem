@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#02233C"
+    tools:context="com.vaiotech.attendaceapp.ScanQRCodeFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/cameraPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+        >
+        </FrameLayout>
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:background="#E5E3DF"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/companyLOGOIV"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="kanaiyalal"
+            android:id="@+id/companyAdminNameTV"
+            android:layout_toRightOf="@+id/companyLOGOIV"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0120523"
+            android:id="@+id/companyAdminCodeTV"
+            android:layout_toRightOf="@+id/companyLOGOIV"
+            android:layout_below="@+id/companyAdminNameTV"
+            />
+
+        <Button
+            android:onClick="scan"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:textColor="#02233C"
+            android:background="#E5E3DF"
+            android:width="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan"
+            android:id="@+id/scanBUTTON"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|bottom" />
+        </RelativeLayout>
+</FrameLayout>

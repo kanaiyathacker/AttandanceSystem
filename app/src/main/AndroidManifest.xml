@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.vaiotech.attendaceapp.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name" >
         </activity>
 
@@ -34,16 +34,21 @@
             android:exported="false" />
 
         <activity
-            android:name="com.vaiotech.attendaceapp.ScanActivity"
+            android:name=".ScanActivity"
             android:label="Scan" >
         </activity>
         <activity
-            android:name="com.vaiotech.attendaceapp.LoginActivity"
+            android:name=".LoginActivity"
             android:label="Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".TabActivity"
+            android:label="@string/title_activity_tab" >
         </activity>
     </application>
 

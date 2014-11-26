@@ -25,7 +25,8 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
-        Intent intent = new Intent(loginActivity,ScanActivity.class);
+//        Intent intent = new Intent(loginActivity,ScanActivity.class);
+        Intent intent = new Intent(loginActivity,TabActivity.class);
         Gson gson = new Gson();
         Admin admin = new Admin();
         admin.setfName("Admin");
