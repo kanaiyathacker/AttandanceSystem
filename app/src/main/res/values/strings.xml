@@ -9,7 +9,12 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-    <string name="hello_world">Hello world!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_scan_qrcode">ScanQRCodeActivity</string>
+    <string name="title_activity_scan_card">ScanCardActivity</string>
+    <string name="title_activity_scan_voice">ScanVoiceActivity</string>
 
 </resources>

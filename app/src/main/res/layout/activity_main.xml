@@ -1,0 +1,62 @@
+   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="#02233C"
+        tools:context="com.vaiotech.attendaceapp.MainActivity">
+
+       <TextView
+           android:id="@+id/adminName"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentTop="true"
+           android:text="Kanaiyalal Thacker"
+           android:gravity="center"
+           android:textSize="30dp"
+           android:layout_marginBottom="10dp"
+       />
+        <LinearLayout
+            android:layout_below="@+id/adminName"
+            android:id="@+id/liner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_margin="5dp"
+                android:textColor="#02233C"
+                android:background="#E5E3DF"
+                android:onClick="scanQRCode"
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="QR Code Scanner"/>
+            <Button
+                android:layout_margin="5dp"
+                android:textColor="#02233C"
+                android:background="#E5E3DF"
+                android:onClick="scanCard"
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Electornic Card Scanner"/>
+            <Button
+                android:layout_margin="5dp"
+                android:textColor="#02233C"
+                android:background="#E5E3DF"
+                android:onClick="scanVoice"
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Voice Scanner"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+

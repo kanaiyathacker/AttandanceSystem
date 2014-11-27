@@ -32,6 +32,7 @@ public class HomeActivity extends BaseActivity {
     @InjectView(R.id.personIDTV)     TextView personIDTV;
     @InjectView(R.id.personDeptTV)   TextView personDeptTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
+    @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET)   EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
@@ -50,19 +51,23 @@ public class HomeActivity extends BaseActivity {
         personNameTV.setTypeface(font);
         personIDTV.setTypeface(font);
         personDeptTV.setTypeface(font);
+        timeTV.setTypeface(font);
 
-        seperateTimeTV.setTypeface(font);
-        hhET.setTypeface(font);
-        mmET.setTypeface(font);
+        Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
+        seperateTimeTV.setTypeface(digital);
+        hhET.setTypeface(digital);
+        mmET.setTypeface(digital);
+        timeTV.setTypeface(digital);
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
 
         Calendar cal = Calendar.getInstance();
-        int hour = cal.get(Calendar.HOUR);
+        cal.set(Calendar.AM_PM, Calendar.PM);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
         int min = cal.get(Calendar.MINUTE);
         hhET.setText(""+hour);
-        mmET.setText(""+min);
+        mmET.setText(""+(min < 10 ? "0"+ min : min));
         setData();
     }
 

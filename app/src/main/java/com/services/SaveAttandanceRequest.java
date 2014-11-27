@@ -36,7 +36,6 @@ public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServ
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
-        getService().save(companyId , personId , fName , mName , lName , date , time , desc);
-        return null;
+        return getService().save(companyId , personId , fName , mName , lName , date , time , desc);
     }
 }

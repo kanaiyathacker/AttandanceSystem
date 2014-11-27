@@ -40,15 +40,30 @@
         <activity
             android:name=".LoginActivity"
             android:label="Login" >
+        </activity>
+        <activity
+            android:name=".UserActivity"
+            android:label="@string/title_activity_user" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".TabActivity"
-            android:label="@string/title_activity_tab" >
+            android:name=".ScanQRCodeActivity"
+            android:label="@string/title_activity_scan_qrcode" >
+        </activity>
+        <activity
+            android:name=".ScanCardActivity"
+            android:label="@string/title_activity_scan_card" >
+        </activity>
+        <activity
+            android:name=".ScanVoiceActivity"
+            android:label="@string/title_activity_scan_voice" >
         </activity>
     </application>
 

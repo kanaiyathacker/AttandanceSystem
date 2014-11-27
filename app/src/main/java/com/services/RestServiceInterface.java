@@ -14,6 +14,8 @@ public interface RestServiceInterface {
                 @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
                 @Path("time") String time,@Path("desc") String desc );
 
-    @POST("/ScanAttandanceApp/login/{loginID}/{password}/{deviceId}")
-    Object login(@Path("loginID") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
+
+    @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
+    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
+
 }

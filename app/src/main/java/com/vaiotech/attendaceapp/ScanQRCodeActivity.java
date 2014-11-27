@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,71 +19,37 @@ import android.widget.Toast;
 import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.bean.Admin;
-import com.bean.Person;
 import com.google.gson.Gson;
-import com.loopj.android.image.SmartImageView;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
 import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_scan)
-public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCodeScanListener {
 
-    @InjectView(R.id.companyAdminNameTV) TextView companyAdminNameTV;
+public class ScanQRCodeActivity extends RoboActivity implements DialogScanner.OnQRCodeScanListener {
+
+    @InjectView(R.id.companyAdminNameTV)
+    TextView companyAdminNameTV;
     @InjectView(R.id.companyAdminCodeTV) TextView companyAdminCodeTV;
-    @InjectView(R.id.companyLOGOIV) ImageView companyLOGOIV;
-    @InjectView(R.id.scanBUTTON) Button scanBUTTON;
+    @InjectView(R.id.companyLOGOIV)
+    ImageView companyLOGOIV;
+    @InjectView(R.id.scanBUTTON)
+    Button scanBUTTON;
     Bitmap bitmap;
     ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan);
+        setContentView(R.layout.activity_scan_qrcode);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         companyAdminNameTV.setTypeface(font);
         companyAdminCodeTV.setTypeface(font);
         scanBUTTON.setTypeface(font);
         String adminDetails = getIntent().getStringExtra("ADMIN_DETAILS");
-        Gson gson = new Gson();
-        Admin admin = gson.fromJson(adminDetails , Admin.class);
-        companyAdminNameTV.setText(admin.getfName() + " " + admin.getlName());
-        companyAdminCodeTV.setText(admin.getCoId());
-//        new LoadImage().execute("https://scontent-a-lhr.xx.fbcdn.net/hphotos-xfp1/t31.0-8/55693_1633169943360_2329464_o.jpg");
     }
-
-    private class LoadImage extends AsyncTask<String, String, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(ScanActivity.this);
-            pDialog.setMessage("Loading Image ....");
-            pDialog.show();
-        }
-        protected Bitmap doInBackground(String... args) {
-            try {
-                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-        protected void onPostExecute(Bitmap image) {
-            if(image != null){
-                companyLOGOIV.setImageBitmap(image);
-                pDialog.dismiss();
-            }else{
-                pDialog.dismiss();
-                Toast.makeText(ScanActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

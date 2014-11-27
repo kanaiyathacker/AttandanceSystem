@@ -60,7 +60,7 @@
         android:layout_below="@+id/personIDTV" />
 
     <TextView
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textColor="#E5E3DF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,23 +72,23 @@
         />
 
     <EditText
+        android:inputType="number"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="45sp"
         android:gravity="center"
         android:width="40dp"
-        android:textColor="#02233C"
-        android:background="#E5E3DF"
+        android:textColor="#E81B11"
+        android:background="#080807"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hhET"
-        android:text="21"
         android:maxLength="2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
 
     <TextView
-        android:textSize="20sp"
+        android:textSize="45sp"
         android:textColor="#E5E3DF"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -101,17 +101,17 @@
         android:textStyle="bold" />
 
     <EditText
+        android:inputType="number"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="45sp"
         android:maxLength="2"
         android:gravity="center"
         android:width="40dp"
-        android:textColor="#02233C"
-        android:background="#E5E3DF"
+        android:textColor="#E81B11"
+        android:background="#080807"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mmET"
-        android:text="21"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/seperateTimeTV"
         />
