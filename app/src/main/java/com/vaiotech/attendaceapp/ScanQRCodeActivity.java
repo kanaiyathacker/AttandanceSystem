@@ -25,18 +25,16 @@ import java.io.InputStream;
 import java.net.URL;
 
 import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-
+@ContentView(R.layout.activity_scan_qrcode)
 public class ScanQRCodeActivity extends RoboActivity implements DialogScanner.OnQRCodeScanListener {
 
-    @InjectView(R.id.companyAdminNameTV)
-    TextView companyAdminNameTV;
-    @InjectView(R.id.companyAdminCodeTV) TextView companyAdminCodeTV;
-    @InjectView(R.id.companyLOGOIV)
-    ImageView companyLOGOIV;
-    @InjectView(R.id.scanBUTTON)
-    Button scanBUTTON;
+//    @InjectView(R.id.companyAdminNameTV) TextView companyAdminNameTV;
+//    @InjectView(R.id.companyAdminCodeTV) TextView companyAdminCodeTV;
+//    @InjectView(R.id.companyLOGOIV) ImageView companyLOGOIV;
+    @InjectView(R.id.scanBUTTON) Button scanBUTTON;
     Bitmap bitmap;
     ProgressDialog pDialog;
 
@@ -45,8 +43,6 @@ public class ScanQRCodeActivity extends RoboActivity implements DialogScanner.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qrcode);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
-        companyAdminNameTV.setTypeface(font);
-        companyAdminCodeTV.setTypeface(font);
         scanBUTTON.setTypeface(font);
         String adminDetails = getIntent().getStringExtra("ADMIN_DETAILS");
     }

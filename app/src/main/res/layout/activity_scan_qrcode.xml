@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#02233C"
+    android:background="#B9C6ED"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -14,39 +14,8 @@
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"></FrameLayout>
-
-    <ImageView
-        android:id="@+id/companyLOGOIV"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:background="#E5E3DF" />
-
-    <TextView
-        android:id="@+id/companyAdminNameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/companyLOGOIV"
-        android:text="kanaiyalal"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/companyAdminCodeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/companyAdminNameTV"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/companyLOGOIV"
-        android:text="0120523"
-        android:textSize="20sp" />
+        >
+     </FrameLayout>
 
     <Button
         android:id="@+id/scanBUTTON"

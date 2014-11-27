@@ -2,26 +2,36 @@ package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.TextView;
 
-import com.barcodescannerfordialogs.DialogScanner;
-import com.barcodescannerfordialogs.helpers.CameraFace;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
+@ContentView(R.layout.activity_main)
+public class MainActivity extends RoboActivity {
 
-public class MainActivity extends Activity {
+    @InjectView(R.id.adminName) TextView adminName;
+    @InjectView(R.id.button1) Button button1;
+    @InjectView(R.id.button2) Button button2;
+    @InjectView(R.id.button3) Button button3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+        adminName.setTypeface(font);
+        button1.setTypeface(font);
+        button2.setTypeface(font);
+        button3.setTypeface(font);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,17 +53,17 @@ public class MainActivity extends Activity {
     }
 
     public void scanQRCode(View view) {
-        Intent intent = new Intent(this , ScanQRCodeActivity.class);
+        Intent intent = new Intent(this , HomeActivity.class);
         startActivity(intent);
     }
 
     public void scanCard(View view) {
-        Intent intent = new Intent(this , ScanCardActivity.class);
+        Intent intent = new Intent(this , HomeActivity.class);
         startActivity(intent);
     }
 
     public void scanVoice(View view) {
-        Intent intent = new Intent(this , ScanVoiceActivity.class);
+        Intent intent = new Intent(this , HomeActivity.class);
         startActivity(intent);
     }
 }

@@ -28,16 +28,16 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends BaseActivity {
 
-    @InjectView(R.id.personNameTV)   TextView personNameTV;
-    @InjectView(R.id.personIDTV)     TextView personIDTV;
-    @InjectView(R.id.personDeptTV)   TextView personDeptTV;
+    @InjectView(R.id.counter) TextView counter;
+//    @InjectView(R.id.personIDTV)     TextView personIDTV;
+//    @InjectView(R.id.personDeptTV)   TextView personDeptTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET)   EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
-    @InjectView(R.id.personLOGOIV) ImageView personLOGOIV;
+//    @InjectView(R.id.personLOGOIV) ImageView personLOGOIV;
 
 
     private SaveAttandanceRequest saveAttandanceRequest;
@@ -48,9 +48,8 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
-        personNameTV.setTypeface(font);
-        personIDTV.setTypeface(font);
-        personDeptTV.setTypeface(font);
+//        personIDTV.setTypeface(font);
+//        personDeptTV.setTypeface(font);
         timeTV.setTypeface(font);
 
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
@@ -59,8 +58,11 @@ public class HomeActivity extends BaseActivity {
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
+        counter.setTypeface(digital);
+
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
+
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.AM_PM, Calendar.PM);
@@ -106,20 +108,20 @@ public class HomeActivity extends BaseActivity {
         Gson gson = new Gson();
         person = gson.fromJson(contents , Person.class);
         if(person != null) {
-            personNameTV.setText(person.getfName() + " " + person.getmName() + " " + person.getlName());
-            personIDTV.setText(person.getId());
-            personDeptTV.setText(person.getDepartment());
+//            personNameTV.setText(person.getfName() + " " + person.getmName() + " " + person.getlName());
+//            personIDTV.setText(person.getId());
+//            personDeptTV.setText(person.getDepartment());
 
-            if ("12132131".equals(person.getId()))
-                personLOGOIV.setImageResource(R.drawable.kanaiya);
-            else if ("12132132".equals(person.getId()))
-                personLOGOIV.setImageResource(R.drawable.swarnaba);
-            else if ("12132133".equals(person.getId()))
-                personLOGOIV.setImageResource(R.drawable.najmul);
-            else if ("12132134".equals(person.getId()))
-                personLOGOIV.setImageResource(R.drawable.amit);
-            else if ("12132135".equals(person.getId()))
-                personLOGOIV.setImageResource(R.drawable.vikram);
+//            if ("12132131".equals(person.getId()))
+//                personLOGOIV.setImageResource(R.drawable.kanaiya);
+//            else if ("12132132".equals(person.getId()))
+//                personLOGOIV.setImageResource(R.drawable.swarnaba);
+//            else if ("12132133".equals(person.getId()))
+//                personLOGOIV.setImageResource(R.drawable.najmul);
+//            else if ("12132134".equals(person.getId()))
+//                personLOGOIV.setImageResource(R.drawable.amit);
+//            else if ("12132135".equals(person.getId()))
+//                personLOGOIV.setImageResource(R.drawable.vikram);
         }
     }
 
