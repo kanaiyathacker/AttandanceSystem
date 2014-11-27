@@ -3,6 +3,7 @@ package com.vaiotech.attendaceapp;
 import android.content.Intent;
 
 import com.bean.Admin;
+import com.bean.User;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -28,25 +29,36 @@ public class LoginRequestListener implements RequestListener<Object> {
     public void onRequestSuccess(Object o) {
 //        Intent intent = new Intent(loginActivity,ScanActivity.class);
 //        Intent intent = new Intent(loginActivity,TabActivity.class);
-        Intent intent = new Intent(loginActivity,MainActivity.class);
-        Gson gson = new Gson();
-        Admin admin = new Admin();
-        admin.setfName("Admin");
-        admin.setCoId("1212121");
-        intent.putExtra("ADMIN_DETAILS" , gson.toJson(admin));
-        loginActivity.startActivity(intent);
-//        if(o != null) {
-//            LinkedTreeMap map = (LinkedTreeMap)o;
-//            Gson gson = new Gson();
-//            Admin admin = new Admin();
-//            admin.setfName(map.get("fName").toString());
-//            admin.setlName(map.get("lName").toString());
-//            admin.setmName(map.get("mName").toString());
-//            admin.setfName(map.get("fName").toString());
-//            admin.setCoId(map.get("coId").toString());
-//            admin.setCoName(map.get("coName").toString());
-//            intent.putExtra("ADMIN_DETAILS", gson.toJson(admin));
-//            loginActivity.startActivity(intent);
-//        }
+//        Intent intent = new Intent(loginActivity,MainActivity.class);
+//        Gson gson = new Gson();
+//        Admin admin = new Admin();
+//        admin.setfName("Admin");
+//        admin.setCoId("1212121");
+//        intent.putExtra("ADMIN_DETAILS" , gson.toJson(admin));
+//        loginActivity.startActivity(intent);
+        if(o != null) {
+            LinkedTreeMap map = (LinkedTreeMap)o;
+            Gson gson = new Gson();
+            User user = new User();
+            user.setfName(map.get("fName").toString());
+            user.setlName(map.get("lName").toString());
+            user.setmName(map.get("mName").toString());
+            user.setId(map.get("id").toString());
+            String type = map.get("type").toString();
+            user.setType(type);
+            Intent intent = getIntend(type);
+            intent.putExtra("USER_DETAILS", gson.toJson(user));
+            loginActivity.startActivity(intent);
+        }
+    }
+
+    public Intent getIntend(String type) {
+        Intent intent = null;
+        if(type.equalsIgnoreCase("ADMIN")) {
+            intent = new Intent(loginActivity,MainActivity.class);
+        } else {
+
+        }
+        return intent;
     }
 }
