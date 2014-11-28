@@ -1,7 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.listener.LoginRequestListener;
 import com.services.LoginRequest;
-import com.services.SaveAttandanceRequest;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 

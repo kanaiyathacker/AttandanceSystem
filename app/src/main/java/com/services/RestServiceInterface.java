@@ -1,5 +1,6 @@
 package com.services;
 
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -9,10 +10,13 @@ import retrofit.http.Path;
  */
 public interface RestServiceInterface {
 
-    @POST("/ScanAttandanceApp/saveDetails/{companyId}/{personId}/{fName}/{mName}/{lName}/{date}/{time}/{desc}")
-    Object save(@Path("companyId") String companyId , @Path("personId") String personId ,@Path("fName") String fName,
-                @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
-                @Path("time") String time,@Path("desc") String desc );
+//    @POST("/ScanAttandanceApp/saveDetails/{companyId}/{personId}/{fName}/{mName}/{lName}/{date}/{time}/{desc}")
+//    Object save(@Path("companyId") String companyId , @Path("personId") String personId ,@Path("fName") String fName,
+//                @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
+//                @Path("time") String time,@Path("desc") String desc );
+
+    @POST("/ScanAttandanceApp/saveDetails")
+    Object save(@Body SaveAttandanceRequest saveAttandanceRequest);
 
 
     @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
