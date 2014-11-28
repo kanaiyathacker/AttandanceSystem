@@ -164,7 +164,8 @@ public class ScanCardBatchActivity extends BaseActivity {
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
         User user = gson.fromJson(val , User.class);
-        return user.getId();
+        return "21";
+//        return user.getId();
     }
 
     public void openDialog(View view){

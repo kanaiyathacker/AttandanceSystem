@@ -7,7 +7,7 @@ import com.octo.android.robospice.retrofit.RetrofitGsonSpiceService;
  */
 public class AttandanceRestService extends RetrofitGsonSpiceService {
 //    private final static String BASE_URL = "http://kanserviceslive.elasticbeanstalk.com";
-    private final static String BASE_URL = "http://localhost:8080/api-web/v1/sources/local/1/stores/10/loyalty";
+    private final static String BASE_URL = "http://localhost:8080";
 
     @Override
     public void onCreate() {

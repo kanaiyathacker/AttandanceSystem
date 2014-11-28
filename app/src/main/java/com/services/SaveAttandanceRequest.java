@@ -1,14 +1,17 @@
 package com.services;
 
+import com.bean.User;
 import com.google.inject.Singleton;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
+
+import java.io.Serializable;
 
 import roboguice.inject.ContextSingleton;
 
 /**
  * Created by kanaiyalalt on 11/11/2014.
  */
-public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> {
+public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> implements Serializable {
 
 //    private String companyId;
 //    private String personId;
@@ -51,6 +54,7 @@ public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServ
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
-        return getService().save(this);
+        User user = new User();
+        return getService().save(user);
     }
 }

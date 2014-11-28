@@ -1,6 +1,7 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,10 +37,12 @@ public class ScanCardSelectionActivity extends Activity {
     }
 
     public void singleScan(View view) {
-
+        Intent intent = new Intent(this , ScanCardBatchActivity.class);
+        startActivity(intent);
     }
 
     public void batchScan(View view) {
-
+        Intent intent = new Intent(this , ScanCardBatchActivity.class);
+        startActivity(intent);
     }
 }

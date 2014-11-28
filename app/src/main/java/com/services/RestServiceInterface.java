@@ -1,5 +1,7 @@
 package com.services;
 
+import com.bean.User;
+
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -15,8 +17,8 @@ public interface RestServiceInterface {
 //                @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
 //                @Path("time") String time,@Path("desc") String desc );
 
-    @POST("/ScanAttandanceApp/saveDetails")
-    Object save(@Body SaveAttandanceRequest saveAttandanceRequest);
+    @POST("/api-web/v1/sources/local/1/stores/10/loyalty/ScanAttandanceApp/saveDetails")
+    Object save(@Body User user);
 
 
     @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
