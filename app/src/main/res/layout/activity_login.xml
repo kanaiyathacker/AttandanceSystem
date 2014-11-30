@@ -4,13 +4,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#87CEEB"
+    android:background="#D6AB87"
     tools:context="com.vaiotech.attendaceapp.LoginActivity">
 
 
     <TextView
         android:textSize="20sp"
-        android:textColor="#030909"
+        android:textColor="#512500"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,11 +24,12 @@
     <EditText
         android:textSize="20sp"
         android:layout_margin="10dp"
-        android:textColor="#00E9E9"
-        android:background="#454B4B"
+        android:textColor="#FFF5EC"
+        android:background="#512500"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/loginIDET"
+        android:text="admin"
         android:width="150dp"
         android:layout_toRightOf="@+id/passwordTV"
         android:layout_centerVertical="true"
@@ -38,7 +39,7 @@
 
     <TextView
         android:textSize="20sp"
-        android:textColor="#030909"
+        android:textColor="#512500"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,12 +51,13 @@
     <EditText
         android:textSize="20sp"
         android:layout_margin="10dp"
-        android:textColor="#00E9E9"
-        android:background="#454B4B"
+        android:textColor="#FFF5EC"
+        android:background="#512500"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/passwordET"
         android:inputType="textPassword"
+        android:text="admin"
         android:width="150dp"
         android:layout_toRightOf="@+id/passwordTV"
         android:layout_above="@+id/firstHLine"
@@ -68,14 +70,14 @@
         android:layout_marginTop="40dp"
         android:id="@+id/firstHLine"
         android:layout_marginBottom="40dp"
-        android:background="#00E9E9"/>
+        android:background="#512500"/>
 
     <Button
         android:onClick="login"
         android:layout_marginBottom="30dp"
         android:textSize="20sp"
-        android:textColor="#00E9E9"
-        android:background="#454B4B"
+        android:textColor="#FFF5EC"
+        android:background="#512500"
         android:width="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

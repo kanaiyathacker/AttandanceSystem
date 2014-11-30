@@ -4,11 +4,20 @@ package com.bean;
 import java.io.Serializable;
 
 public class User implements Serializable{
-    String id;
-    String fName;
-    String mName;
-    String lName;
-    String type;
+
+    private String id;
+    private String userId;
+    private String coId;
+    private String coName;
+    private String contactNumber;
+    private String fName;
+    private String lName;
+    private String mName;
+    private String password;
+    private String reportType;
+    private String status;
+    private String tranTable;
+    private String type;
 
     public String getId() {
         return id;
@@ -48,5 +57,69 @@ public class User implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getCoId() {
+        return coId;
+    }
+
+    public void setCoId(String coId) {
+        this.coId = coId;
+    }
+
+    public String getCoName() {
+        return coName;
+    }
+
+    public void setCoName(String coName) {
+        this.coName = coName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTranTable() {
+        return tranTable;
+    }
+
+    public void setTranTable(String tranTable) {
+        this.tranTable = tranTable;
     }
 }

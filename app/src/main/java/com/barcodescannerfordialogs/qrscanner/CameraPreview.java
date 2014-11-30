@@ -23,7 +23,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	private boolean mAutoFocus = true;
 	private Camera.PreviewCallback mPreviewCallback;
 
-	private static final int PREVIEW_SIZE_MAX_WIDTH = 640;
+//	private static final int PREVIEW_SIZE_MAX_WIDTH = 640;
+private static final int PREVIEW_SIZE_MAX_WIDTH = 600;
 
 	int mCameraWidth;
 	int mCameraHeight;

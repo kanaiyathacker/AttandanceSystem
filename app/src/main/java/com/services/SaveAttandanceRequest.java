@@ -1,5 +1,6 @@
 package com.services;
 
+import com.bean.AttandanceTransaction;
 import com.bean.User;
 import com.google.inject.Singleton;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
@@ -38,23 +39,17 @@ public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServ
 //
 //    }
 
-    private String cardId;
-    private String adminId;
-    private String date;
-    private String time;
+    private AttandanceTransaction attandanceTransaction;
 
 
-    public SaveAttandanceRequest(String adminId , String cardId , String date , String time) {
+    public SaveAttandanceRequest(AttandanceTransaction attandanceTransaction) {
         super(Object.class, RestServiceInterface.class);
-        this.adminId = adminId;
-        this.cardId = cardId;
-        this.date = date;
-        this.time = time;
+        this.attandanceTransaction = attandanceTransaction;
     }
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
         User user = new User();
-        return getService().save(user);
+        return getService().save(attandanceTransaction);
     }
 }

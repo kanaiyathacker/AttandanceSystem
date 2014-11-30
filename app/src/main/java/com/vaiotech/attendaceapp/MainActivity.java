@@ -53,7 +53,7 @@ public class MainActivity extends RoboActivity {
     }
 
     public void scanQRCode(View view) {
-        Intent intent = new Intent(this , HomeActivity.class);
+        Intent intent = new Intent(this , ScanActivity.class);
         startActivity(intent);
     }
 

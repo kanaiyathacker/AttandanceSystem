@@ -37,7 +37,7 @@ public class ScanCardSelectionActivity extends Activity {
     }
 
     public void singleScan(View view) {
-        Intent intent = new Intent(this , ScanCardBatchActivity.class);
+        Intent intent = new Intent(this , ScanCardSingleActivity.class);
         startActivity(intent);
     }
 

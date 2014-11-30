@@ -1,5 +1,6 @@
 package com.services;
 
+import com.bean.AttandanceTransaction;
 import com.bean.User;
 
 import retrofit.http.Body;
@@ -17,11 +18,11 @@ public interface RestServiceInterface {
 //                @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
 //                @Path("time") String time,@Path("desc") String desc );
 
-    @POST("/api-web/v1/sources/local/1/stores/10/loyalty/ScanAttandanceApp/saveDetails")
-    Object save(@Body User user);
+    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")
+    Object save(@Body AttandanceTransaction attandanceTransaction);
 
 
-    @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
+    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
     Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
 
 }

@@ -23,7 +23,7 @@ import me.dm7.barcodescanner.zbar.Result;
 
 public class ZBarScannerView extends BarcodeScannerView
 {
-	static final int DEFAULT_SCANNER_WIDTH = 640;
+	static final int DEFAULT_SCANNER_WIDTH = 540;
 	static final int DEFAULT_SCANNER_HEIGHT = 480;
 	static final int DEFAULT_VIEWFINDER_PADDING = 70;
 

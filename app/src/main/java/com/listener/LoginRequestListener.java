@@ -47,6 +47,9 @@ public class LoginRequestListener implements RequestListener<Object> {
             user.setfName(map.get("fName").toString());
             user.setlName(map.get("lName").toString());
             user.setmName(map.get("mName").toString());
+            user.setUserId(map.get("userId").toString());
+            user.setTranTable(map.get("tranTable").toString());
+
             user.setId(map.get("id").toString());
             String type = map.get("type").toString();
             user.setType(type);
