@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,19 +11,10 @@ import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.MifareClassic;
-import android.nfc.tech.MifareUltralight;
-import android.nfc.tech.NfcF;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +23,11 @@ import com.bean.User;
 import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
 import com.services.SaveAttandanceRequest;
-import com.util.NdefMessageParser;
-import com.util.ParsedNdefRecord;
 import com.util.Util;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import roboguice.inject.ContentView;
@@ -136,7 +122,7 @@ public class ScanCardBatchActivity extends BaseActivity {
         super.onPause();
         if (mNfcAdapter != null) {
             mNfcAdapter.disableForegroundDispatch(this);
-           mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
+            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
         }
     }
 
