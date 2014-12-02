@@ -35,4 +35,5 @@ dependencies {
     compile 'com.octo.android.robospice:robospice:1.4.14'
     compile 'org.roboguice:roboguice:3.+'
     compile 'com.android.support:support-v13:21.0.0'
+    compile files('libs/ndeftools-1.2.3.jar')
 }
