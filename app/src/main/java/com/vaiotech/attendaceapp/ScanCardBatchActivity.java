@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,11 +49,11 @@ public class ScanCardBatchActivity extends BaseActivity {
     private String cardId;
     private NdefMessage mNdefPushMessage;
 
+    @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.timeTV) TextView timeTV;
-    @InjectView(R.id.timeTV) TextView hhET;
-    @InjectView(R.id.timeTV) TextView seperateTimeTV;
-    @InjectView(R.id.timeTV) TextView mmET;
-    @InjectView(R.id.timeTV) TextView counterValTV;
+    @InjectView(R.id.hhET) EditText hhET;
+    @InjectView(R.id.mmET) EditText mmET;
+    @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
 
@@ -78,7 +79,7 @@ public class ScanCardBatchActivity extends BaseActivity {
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int min = cal.get(Calendar.MINUTE);
         hhET.setText(""+hour);
-        mmET.setText("" + (min < 10 ? "0" + min : min));
+        mmET.setText(""+(min < 10 ? "0"+ min : min));
 
         if (mNfcAdapter != null) {
             Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
@@ -152,6 +153,10 @@ public class ScanCardBatchActivity extends BaseActivity {
                 byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
                 long cardId = getReversed(id);
             this.cardId = ""+cardId;
+            String count =counterValTV.getText().toString();
+            int cnt = Integer.parseInt(count);
+            ++cnt;
+            counterValTV.setText(""+cnt);
         }
     }
 

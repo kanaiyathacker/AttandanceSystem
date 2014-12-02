@@ -10,71 +10,17 @@
     tools:context="com.vaiotech.attendaceapp.ScanCardBatchActivity">
 
     <TextView
-        android:textSize="40sp"
-        android:textColor="#021C68"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time"
-        android:id="@+id/timeTV"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/hhET"
-    />
-
-    <EditText
-        android:inputType="number"
-        android:textStyle="bold"
-        android:textSize="45sp"
-        android:gravity="center"
-        android:width="40dp"
-        android:textColor="#00E9E9"
-        android:background="#454B4B"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/hhET"
-        android:maxLength="2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-    />
-
-    <TextView
-        android:textSize="45sp"
-        android:textColor="#021C68"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=":"
-        android:id="@+id/seperateTimeTV"
-        android:layout_toRightOf="@+id/hhET"
-        android:textStyle="bold" />
-
-    <EditText
-        android:inputType="number"
-        android:textStyle="bold"
-        android:textSize="45sp"
-        android:maxLength="2"
-        android:gravity="center"
-        android:width="40dp"
-        android:textColor="#FFF5EC"
-        android:background="#454B4B"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mmET"
-        android:layout_toRightOf="@+id/seperateTimeTV"
-        />
-
-    <TextView
         android:layout_marginTop="10dp"
         android:text="0"
         android:textStyle="bold"
         android:textSize="100sp"
         android:gravity="center"
-        android:textColor="#FFF5EC"
-        android:background="#454B4B"
+        android:textColor="#E81B11"
+        android:background="#080807"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/counterValTV"
-        android:layout_below="@+id/mmET"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />
 
@@ -91,13 +37,71 @@
         android:layout_centerHorizontal="true"
         />
 
+    <TextView
+        android:textSize="40sp"
+        android:textColor="#512500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:id="@+id/timeTV"
+        android:layout_toLeftOf="@+id/hhET"
+        android:layout_above="@+id/firstHLine"
+        android:layout_marginRight="15dp"
+        />
+
+    <EditText
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hhET"
+        android:maxLength="2"
+        android:layout_above="@+id/firstHLine"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:textSize="45sp"
+        android:textColor="#512500"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:layout_above="@+id/firstHLine"
+        android:id="@+id/seperateTimeTV"
+        android:layout_toRightOf="@+id/hhET"
+        android:textStyle="bold" />
+
+    <EditText
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="45sp"
+        android:maxLength="2"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mmET"
+        android:layout_above="@+id/firstHLine"
+        android:layout_toRightOf="@+id/seperateTimeTV"
+        />
+
     <View
-        android:layout_below="@+id/counterLableTV"
+        android:layout_above="@+id/inBUTTON"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:id="@+id/firstHLine"
-        android:layout_marginBottom="10dp"
-        android:background="#550000"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#512500"/>
 
     <Button
         android:layout_alignParentStart="true"
