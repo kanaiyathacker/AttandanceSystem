@@ -29,6 +29,7 @@ import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -173,7 +174,7 @@ public class ScanCardSingleActivity extends BaseActivity {
 
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
-        t.setCardId(cardId);
+        t.setCardId(Arrays.asList(cardId));
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setTrasTable(user.getTranTable());
@@ -184,12 +185,12 @@ public class ScanCardSingleActivity extends BaseActivity {
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + "id1231231" + " noted as 12:15");
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + cardId + " noted as 12:15");
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     }
                 });

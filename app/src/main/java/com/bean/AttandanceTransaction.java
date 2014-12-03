@@ -1,12 +1,13 @@
 package com.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by kanaiyathacker on 28/11/2014.
  */
 public class AttandanceTransaction implements Serializable{
-    private String cardId;
+    private List<String> cardId;
     private String adminId;
     private String date;
     private String time;
@@ -32,11 +33,11 @@ public class AttandanceTransaction implements Serializable{
 
     }
 
-    public String getCardId() {
+    public List<String> getCardId() {
         return cardId;
     }
 
-    public void setCardId(String cardId) {
+    public void setCardId(List<String> cardId) {
         this.cardId = cardId;
     }
 

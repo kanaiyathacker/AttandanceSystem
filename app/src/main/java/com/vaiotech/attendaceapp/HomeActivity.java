@@ -26,6 +26,8 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -135,7 +137,7 @@ public class HomeActivity extends BaseActivity {
 
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
-        t.setCardId(cardId);
+        t.setCardId(Arrays.asList(cardId));
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setTrasTable(user.getTranTable());

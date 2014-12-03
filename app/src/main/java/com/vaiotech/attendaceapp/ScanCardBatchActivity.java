@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.Vibrator;
@@ -33,6 +34,7 @@ import org.ndeftools.Record;
 import org.ndeftools.externaltype.AndroidApplicationRecord;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +66,7 @@ public class ScanCardBatchActivity extends BaseActivity {
     @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
+    private List<String> list;
 
 
     protected NfcAdapter nfcAdapter;
@@ -107,7 +110,8 @@ public class ScanCardBatchActivity extends BaseActivity {
 
         // initialize NFC
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, this.getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        list = new ArrayList<String>();
     }
 
     public void enableForegroundMode() {
@@ -120,7 +124,6 @@ public class ScanCardBatchActivity extends BaseActivity {
 
     public void disableForegroundMode() {
         Log.d(TAG, "disableForegroundMode");
-
         nfcAdapter.disableForegroundDispatch(this);
     }
 
@@ -129,44 +132,17 @@ public class ScanCardBatchActivity extends BaseActivity {
         Log.d(TAG, "onNewIntent");
 
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
-            TextView textView = (TextView) findViewById(R.id.counterValTV);
-
-            textView.setText("Hello NFC!");
-
-            Parcelable[] messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-            if (messages != null) {
-
-                Log.d(TAG, "Found " + messages.length + " NDEF messages"); // is almost always just one
-
-                vibrate(); // signal found messages :-)
-
-                // parse to records
-                for (int i = 0; i < messages.length; i++) {
-                    try {
-                        List<Record> records = new Message((NdefMessage)messages[i]);
-
-                        Log.d(TAG, "Found " + records.size() + " records in message " + i);
-
-                        for(int k = 0; k < records.size(); k++) {
-                            Log.d(TAG, " Record #" + k + " is of class " + records.get(k).getClass().getSimpleName());
-
-                            Record record = records.get(k);
-
-                            if(record instanceof AndroidApplicationRecord) {
-                                AndroidApplicationRecord aar = (AndroidApplicationRecord)record;
-                                Log.d(TAG, "Package is " + aar.getDomain() + " " + aar.getType());
-                            }
-
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Problem parsing message", e);
-                    }
-
-                }
-            }
-        } else {
-            // ignore
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            byte[] id =tag.getId();
+            long cardId = getReversed(id);
+            this.cardId = ""+cardId;
+            String count =counterValTV.getText().toString();
+            int cnt = Integer.parseInt(count);
+            ++cnt;
+            counterValTV.setText(""+cnt);
+            list.add(this.cardId);
         }
+
     }
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
@@ -193,7 +169,6 @@ public class ScanCardBatchActivity extends BaseActivity {
 //            mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
 //            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
 //        }
-
         enableForegroundMode();
     }
 
@@ -204,26 +179,7 @@ public class ScanCardBatchActivity extends BaseActivity {
 //            mNfcAdapter.disableForegroundDispatch(this);
 //           mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
 //        }
-
         disableForegroundMode();
-    }
-
-    private void showWirelessSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("dsds");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
-            }
-        });
-        builder.create().show();
-        return;
     }
 
     private void resolveIntent(Intent intent) {
@@ -238,6 +194,7 @@ public class ScanCardBatchActivity extends BaseActivity {
             int cnt = Integer.parseInt(count);
             ++cnt;
             counterValTV.setText(""+cnt);
+            list.add(this.cardId);
         }
     }
 
@@ -273,7 +230,7 @@ public class ScanCardBatchActivity extends BaseActivity {
 
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
-        t.setCardId(cardId);
+        t.setCardId(list);
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setTrasTable(user.getTranTable());
@@ -284,12 +241,12 @@ public class ScanCardBatchActivity extends BaseActivity {
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + "id1231231" + " noted as 12:15");
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + counterValTV.getText() + " noted as 12:15");
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     }
                 });
