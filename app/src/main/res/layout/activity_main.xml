@@ -25,7 +25,7 @@
                android:text="Kanaiyalal Thacker"
                android:gravity="center"
                android:textSize="30dp"
-           />
+               android:singleLine="true" />
        </LinearLayout>
         <LinearLayout
             android:layout_above="@+id/linerTwo"
@@ -45,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="QR Code Scanner"/>
+                android:text="QR Code Scanner"
+                android:lines="@integer/viewfinder_border_width" />
             <Button
                 android:textSize="30dp"
                 android:layout_margin="5dp"
@@ -56,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Smart Card Scanner"/>
+                android:text="Smart Card Scanner"
+                android:lines="@integer/viewfinder_border_length" />
             <Button
                 android:textSize="30dp"
                 android:layout_margin="5dp"

@@ -19,5 +19,6 @@
     <string name="title_activity_scan_card_selection">ScanCardSelectionActivity</string>
     <string name="title_activity_scan_card_batch">ScanCardBatchActivity</string>
     <string name="title_activity_scan_card_single">ScanCardSingleActivity</string>
+    <string name="title_activity_functional_main">FunctionalMainActivity</string>
 
 </resources>
