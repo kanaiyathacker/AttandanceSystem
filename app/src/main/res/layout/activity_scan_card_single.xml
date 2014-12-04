@@ -32,6 +32,28 @@
         />
 
     <TextView
+        android:paddingLeft="10dp"
+        android:textSize="30sp"
+        android:textColor="#512500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name : "
+        android:id="@+id/nameLableTV"
+        android:layout_below="@+id/idLableTV"
+        />
+
+    <TextView
+        android:textSize="30sp"
+        android:textColor="#512500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/nameValueTV"
+        android:layout_toRightOf="@+id/nameLableTV"
+        android:layout_below="@+id/idLableTV"
+        />
+
+    <TextView
         android:textSize="40sp"
         android:textColor="#512500"
         android:layout_width="wrap_content"
@@ -107,7 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Info"
-        android:onClick="save"
+        android:onClick="getInfo"
+        android:enabled="false"
         android:id="@+id/getInfoBUTTON"
         android:layout_above="@+id/inBUTTON"
         />

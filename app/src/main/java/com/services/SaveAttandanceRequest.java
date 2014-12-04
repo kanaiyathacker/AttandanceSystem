@@ -14,33 +14,7 @@ import roboguice.inject.ContextSingleton;
  */
 public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> implements Serializable {
 
-//    private String companyId;
-//    private String personId;
-//    private String fName;
-//    private String mName;
-//    private String lName;
-//    private String date;
-//    private String time;
-//    private String desc;
-//
-
-//    public SaveAttandanceRequest( String companyId , String personId , String fName , String mName ,
-//                                  String lName , String date ,String time ,String desc ) {
-//        super(Object.class, RestServiceInterface.class);
-//
-//        this.companyId = companyId;
-//        this.personId = personId;
-//        this.fName = fName;
-//        this.mName = mName;
-//        this.lName = lName;
-//        this.date = date;
-//        this.time = time;
-//        this.desc = desc;
-//
-//    }
-
     private AttandanceTransaction attandanceTransaction;
-
 
     public SaveAttandanceRequest(AttandanceTransaction attandanceTransaction) {
         super(Object.class, RestServiceInterface.class);

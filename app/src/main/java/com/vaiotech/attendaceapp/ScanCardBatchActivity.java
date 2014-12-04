@@ -241,12 +241,12 @@ public class ScanCardBatchActivity extends BaseActivity {
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + counterValTV.getText() + " noted as 12:15");
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText());
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
                 });

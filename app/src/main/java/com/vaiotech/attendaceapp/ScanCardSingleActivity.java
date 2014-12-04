@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +26,9 @@ import android.widget.Toast;
 import com.bean.AttandanceTransaction;
 import com.bean.User;
 import com.google.gson.Gson;
+import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
+import com.services.GetInfoRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
@@ -38,16 +42,19 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_scan_card_single)
-public class ScanCardSingleActivity extends BaseActivity {
+public class ScanCardSingleActivity extends BaseActivity implements Animation.AnimationListener {
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
     @InjectView(R.id.idValueTV) TextView idValueTV;
+    @InjectView(R.id.nameLableTV) TextView nameLableTV;
+    @InjectView(R.id.nameValueTV) TextView nameValueTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
+    @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
 
     private NfcAdapter mNfcAdapter;
     private PendingIntent mPendingIntent;
@@ -56,6 +63,8 @@ public class ScanCardSingleActivity extends BaseActivity {
     private String cardId;
     private NdefMessage mNdefPushMessage;
     private SaveAttandanceRequest saveAttandanceRequest;
+    private GetInfoRequest getInfoRequest;
+    Animation animBlink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,8 @@ public class ScanCardSingleActivity extends BaseActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         idLableTV.setTypeface(font);
         idValueTV.setTypeface(font);
+        nameLableTV.setTypeface(font);
+        nameValueTV.setTypeface(font);
 
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
@@ -74,7 +85,7 @@ public class ScanCardSingleActivity extends BaseActivity {
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
-
+        getInfoBUTTON.setTypeface(font);
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.AM_PM, Calendar.PM);
@@ -93,6 +104,31 @@ public class ScanCardSingleActivity extends BaseActivity {
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
 
+        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+        animBlink.setAnimationListener(this);
+        animBlink.start();
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        // Take any action after completing the animation
+
+        // check for blink animation
+        if (animation == animBlink) {
+            System.out.println("onAnimationEnd ...");
+        }
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+        System.out.println("onAnimationRepeat ...");
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+        System.out.println("onAnimationStart ...");
     }
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
@@ -139,6 +175,7 @@ public class ScanCardSingleActivity extends BaseActivity {
             long cardId = getReversed(id);
             this.cardId = ""+cardId;
             idValueTV.setText(this.cardId);
+            getInfoBUTTON.setEnabled(true);
         }
     }
 
@@ -166,6 +203,11 @@ public class ScanCardSingleActivity extends BaseActivity {
         openDialog(view);
     }
 
+    public void getInfo(View view) {
+        getInfoRequest = new GetInfoRequest(cardId);
+        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
+    }
+
     public AttandanceTransaction buildAttandanceTransaction(String type) {
         SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
@@ -185,12 +227,12 @@ public class ScanCardSingleActivity extends BaseActivity {
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for" : "OUT Time for ") + cardId + " noted as 12:15");
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + cardId + " noted as " + hhET.getText() + ":" + mmET.getText());
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
                 });

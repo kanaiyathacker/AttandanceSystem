@@ -25,4 +25,6 @@ public interface RestServiceInterface {
     @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
     Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
 
+    @GET("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/getUserInfo/{cardId}")
+    Object getUserInfo(@Path("cardId") String cardId);
 }
