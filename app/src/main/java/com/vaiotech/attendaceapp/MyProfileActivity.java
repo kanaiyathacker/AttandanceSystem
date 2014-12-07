@@ -1,11 +1,16 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.bean.User;
+import com.google.gson.Gson;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -33,6 +38,7 @@ public class MyProfileActivity extends BaseActivity {
 
     @InjectView(R.id.retypePasswordTV) TextView retypePasswordTV;
     @InjectView(R.id.retypePasswordEV) TextView retypePasswordEV;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,17 @@ public class MyProfileActivity extends BaseActivity {
         newPasswordEV.setTypeface(font);
         retypePasswordTV.setTypeface(font);
         retypePasswordEV.setTypeface(font);
+
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+
+        idValueTV.setText(user.getUserId());
+        nameValueTV.setText(user.getfName() + " " + user.getmName() + " " +user.getlName());
+        orgValueTV.setText(user.getCoName());
+        statusValueTV.setText(user.getStatus());
+
     }
 
 

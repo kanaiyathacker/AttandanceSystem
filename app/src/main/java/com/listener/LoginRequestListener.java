@@ -55,7 +55,7 @@ public class LoginRequestListener implements RequestListener<Object> {
             user.setType(type);
             Intent intent = getIntend(type);
             String userDetail = gson.toJson(user);
-            intent.putExtra("USER_DETAILS", userDetail);
+//            intent.putExtra("USER_DETAILS", userDetail);
             SharedPreferences.Editor editor = loginActivity.getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE).edit();
             editor.putString("USER_DETAILS" , userDetail).apply();
             loginActivity.startActivity(intent);
@@ -65,6 +65,8 @@ public class LoginRequestListener implements RequestListener<Object> {
     public Intent getIntend(String type) {
         Intent intent = null;
         if(type.equalsIgnoreCase("ADMIN")) {
+            loginActivity.getIntent().getStringExtra("");
+            intent.putExtra("ACTIVITY_SELECTED" , "MY_PROFILE");
             intent = new Intent(loginActivity,MainActivity.class);
         } else {
 

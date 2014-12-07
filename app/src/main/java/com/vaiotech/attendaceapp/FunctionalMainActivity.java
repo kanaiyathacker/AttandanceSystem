@@ -1,13 +1,18 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.bean.User;
+import com.google.gson.Gson;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -20,6 +25,8 @@ public class FunctionalMainActivity extends BaseActivity {
     @InjectView(R.id.smartScanButton) TextView smartScanButton;
     @InjectView(R.id.viewReportButton) TextView viewReportButton;
     @InjectView(R.id.contactUsButton) TextView contactUsButton;
+    private SharedPreferences sharedPreferences;
+    boolean isLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +38,34 @@ public class FunctionalMainActivity extends BaseActivity {
         smartScanButton.setTypeface(font);
         viewReportButton.setTypeface(font);
         contactUsButton.setTypeface(font);
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+
     }
 
     public void smartScan(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = null;
+        if(isLogin) {
+            intent = new Intent(this, MainActivity.class);
+        } else {
+             intent = new Intent(this, LoginActivity.class);
+             intent.putExtra("ACTIVITY_SELECTED" , "SMART_SCAN");
+        }
         startActivity(intent);
     }
 
     public void myProfile(View view) {
-        Intent intent = new Intent(this, MyProfileActivity.class);
+        Intent intent = null;
+        if(isLogin) {
+            intent = new Intent(this, MyProfileActivity.class);
+        } else {
+            intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("ACTIVITY_SELECTED" , "MY_PROFILE");
+        }
         startActivity(intent);
     }
 
@@ -49,7 +75,13 @@ public class FunctionalMainActivity extends BaseActivity {
     }
 
     public void viewReport(View view) {
-        Intent intent = new Intent(this, ViewReportActivity.class);
+        Intent intent = null;
+        if(isLogin) {
+            intent = new Intent(this, ViewReportActivity.class);
+        } else {
+            intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("ACTIVITY_SELECTED" , "VIEW_REPORT");
+        }
         startActivity(intent);
     }
 
