@@ -69,7 +69,8 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
 		}
 
 		mPreview = new CameraPreview(getContext(), mScannerWidth, mScannerHeight);
-		mViewFinderView = new ViewFinderView(getContext(), mScannerWidth, mScannerHeight, mScannerPadding);
+//		mViewFinderView = new ViewFinderView(getContext(), mScannerWidth, mScannerHeight, mScannerPadding);
+        mViewFinderView = new ViewFinderView(getContext(), mScannerWidth, mScannerHeight, 0);
 		addView(mPreview);
 		addView(mViewFinderView);
 	}

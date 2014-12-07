@@ -24,5 +24,6 @@
     <string name="title_activity_about_ipresence">About IPresence</string>
     <string name="title_activity_view_report">View Report</string>
     <string name="title_activity_contact_us">Contact Us</string>
+    <string name="title_activity_scan_qrcode_single">ScanQRCodeSingleActivity</string>
 
 </resources>

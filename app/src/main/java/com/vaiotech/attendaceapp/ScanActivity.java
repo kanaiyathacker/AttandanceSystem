@@ -109,7 +109,7 @@ public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCode
 
     @Override
     public void onQRCodeScan(String contents) {
-        Intent intent = new Intent(this,HomeActivity.class);
+        Intent intent = new Intent(this,ScanQRCodeSingleActivity.class);
         intent.putExtra("SCAN_CONTENT" , contents);
         startActivity(intent);
     }

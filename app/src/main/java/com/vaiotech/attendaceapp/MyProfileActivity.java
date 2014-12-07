@@ -64,13 +64,14 @@ public class MyProfileActivity extends BaseActivity {
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
+        if(val != null) {
+            User user = gson.fromJson(val, User.class);
 
-        idValueTV.setText(user.getUserId());
-        nameValueTV.setText(user.getfName() + " " + user.getmName() + " " +user.getlName());
-        orgValueTV.setText(user.getCoName());
-        statusValueTV.setText(user.getStatus());
-
+            idValueTV.setText(user.getUserId());
+            nameValueTV.setText(user.getfName() + " " + user.getmName() + " " + user.getlName());
+            orgValueTV.setText(user.getCoName());
+            statusValueTV.setText(user.getStatus());
+        }
     }
 
 

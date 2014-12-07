@@ -33,8 +33,8 @@ public class ViewFinderView extends View {
 		super(context);
 		mScannerWidth = width;
 		mScannerHeight = height;
-		mPadding = padding;
-
+//		mPadding = padding;
+        mPadding = 0;
 		// DEBUG
 		Log.i(TAG, "width: " + width + ", height: " + height + ", padding: " + padding);
 	}

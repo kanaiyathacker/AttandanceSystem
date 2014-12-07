@@ -138,4 +138,5 @@ public class ZBarScannerView extends BarcodeScannerView
 			camera.setOneShotPreviewCallback(this);
 		}
 	}
+
 }
