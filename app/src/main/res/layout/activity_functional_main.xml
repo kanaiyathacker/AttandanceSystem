@@ -27,6 +27,7 @@
 
 
             <Button
+                android:onClick="myProfile"
                 android:textSize="25sp"
                 android:textColor="#DCE0E5"
                 android:background="#604A7B"
@@ -35,9 +36,10 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="My Profile"
-                android:id="@+id/button1" />
+                android:id="@+id/myProfileButton" />
 
             <Button
+                android:onClick="aboutIPresence"
                 android:textSize="25sp"
                 android:textColor="#DCE0E5"
                 android:background="#143153"
@@ -46,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="About iPresence"
-                android:id="@+id/button2" />
+                android:id="@+id/aboutiPresenceButton" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,13 +59,16 @@
             android:layout_gravity="center_horizontal">
 
             <Button
+                android:onClick="smartScan"
                 android:textSize="25sp"
                 android:textColor="#DCE0E5"
                 android:background="#595959"
                 android:text="Smart Scan"
                 android:layout_margin="3dp"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent"
+                android:id="@+id/smartScanButton"
+                />
 
             </LinearLayout>
 
@@ -75,6 +80,7 @@
             android:layout_gravity="center_horizontal">
 
             <Button
+                android:onClick="viewReport"
                 android:textSize="25sp"
                 android:textColor="#DCE0E5"
                 android:background="#31859C"
@@ -83,9 +89,10 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="View Report"
-                android:id="@+id/button3" />
+                android:id="@+id/viewReportButton" />
 
             <Button
+                android:onClick="contactUs"
                 android:textSize="25sp"
                 android:textColor="#DCE0E5"
                 android:background="#E46C0A"
@@ -94,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="Contact Us"
-                android:id="@+id/button4" />
+                android:id="@+id/contactUsButton" />
 
             </LinearLayout>
 

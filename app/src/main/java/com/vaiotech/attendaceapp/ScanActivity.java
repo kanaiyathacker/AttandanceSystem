@@ -47,8 +47,9 @@ public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCode
         scanBUTTON.setTypeface(font);
         String adminDetails = getIntent().getStringExtra("ADMIN_DETAILS");
         Gson gson = new Gson();
-        Admin admin = gson.fromJson(adminDetails , Admin.class);
-//        new LoadImage().execute("https://scontent-a-lhr.xx.fbcdn.net/hphotos-xfp1/t31.0-8/55693_1633169943360_2329464_o.jpg");
+        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
+        dialog.show(getFragmentManager(), "dialogScanner");
+
     }
 
     private class LoadImage extends AsyncTask<String, String, Bitmap> {

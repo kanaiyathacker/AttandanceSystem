@@ -63,6 +63,12 @@ public class ScanCardBatchActivity extends BaseActivity {
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
+
+    @InjectView(R.id.dateTV) TextView dateTV;
+    @InjectView(R.id.ddET) EditText ddET;
+    @InjectView(R.id.MMET) EditText MMET;
+    @InjectView(R.id.yyET) EditText yyET;
+
     @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
@@ -84,6 +90,12 @@ public class ScanCardBatchActivity extends BaseActivity {
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
+
+        ddET.setTypeface(digital);
+        MMET.setTypeface(digital);
+        yyET.setTypeface(digital);
+        dateTV.setTypeface(digital);
+
         counterValTV.setTypeface(digital);
 
         inBUTTON.setTypeface(font);
@@ -95,6 +107,14 @@ public class ScanCardBatchActivity extends BaseActivity {
         int min = cal.get(Calendar.MINUTE);
         hhET.setText(""+hour);
         mmET.setText(""+(min < 10 ? "0"+ min : min));
+
+        int date = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+
+        ddET.setText("" + date);
+        MMET.setText("" + month);
+        yyET.setText("" + year);
 
 //        if (mNfcAdapter != null) {
 //            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();

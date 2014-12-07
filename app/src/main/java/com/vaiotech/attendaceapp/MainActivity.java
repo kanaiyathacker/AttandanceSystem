@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import roboguice.activity.RoboActivity;
@@ -17,17 +18,16 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends RoboActivity {
 
-    @InjectView(R.id.adminName) TextView adminName;
     @InjectView(R.id.button1) Button button1;
     @InjectView(R.id.button2) Button button2;
     @InjectView(R.id.button3) Button button3;
+    @InjectView(R.id.modeRadioGroup) RadioGroup modeRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
-        adminName.setTypeface(font);
         button1.setTypeface(font);
         button2.setTypeface(font);
         button3.setTypeface(font);
@@ -58,7 +58,9 @@ public class MainActivity extends RoboActivity {
     }
 
     public void scanCard(View view) {
-        Intent intent = new Intent(this , ScanCardSelectionActivity.class);
+        Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
+                new Intent(this, ScanCardSingleActivity.class) : new Intent(this, ScanCardBatchActivity.class);
+
         startActivity(intent);
     }
 

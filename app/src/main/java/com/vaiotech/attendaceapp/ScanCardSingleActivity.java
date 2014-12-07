@@ -46,12 +46,18 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
     @InjectView(R.id.idValueTV) TextView idValueTV;
-    @InjectView(R.id.nameLableTV) TextView nameLableTV;
-    @InjectView(R.id.nameValueTV) TextView nameValueTV;
+    @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
+    @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
+
+    @InjectView(R.id.dateTV) TextView dateTV;
+    @InjectView(R.id.ddET) EditText ddET;
+    @InjectView(R.id.MMET) EditText MMET;
+    @InjectView(R.id.yyET) EditText yyET;
+
     @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
@@ -73,8 +79,8 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         idLableTV.setTypeface(font);
         idValueTV.setTypeface(font);
-        nameLableTV.setTypeface(font);
-        nameValueTV.setTypeface(font);
+        adminNameLableTV.setTypeface(font);
+        adminValueLableTV.setTypeface(font);
 
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
@@ -82,6 +88,12 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
+
+        ddET.setTypeface(digital);
+        MMET.setTypeface(digital);
+        yyET.setTypeface(digital);
+        dateTV.setTypeface(digital);
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
@@ -94,10 +106,19 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         hhET.setText(""+hour);
         mmET.setText(""+(min < 10 ? "0"+ min : min));
 
+        int date = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+
+        ddET.setText("" + date);
+        MMET.setText("" + month);
+        yyET.setText("" + year);
+
+
         if (mNfcAdapter != null) {
-            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "This phone is not NFC enabled", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "This phone is not NFC enabled", Toast.LENGTH_SHORT).show();
         }
         mPendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, ScanCardSingleActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
