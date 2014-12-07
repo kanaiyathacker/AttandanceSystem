@@ -48,7 +48,7 @@ public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCode
         String adminDetails = getIntent().getStringExtra("ADMIN_DETAILS");
         Gson gson = new Gson();
         DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
-        dialog.show(getFragmentManager(), "dialogScanner");
+        dialog.show(getFragmentManager(), "cameraPreview");
 
     }
 

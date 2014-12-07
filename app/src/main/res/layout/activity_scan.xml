@@ -8,13 +8,6 @@
     tools:context="com.vaiotech.attendaceapp.ScanActivity">
 
 
-    <FrameLayout
-        android:id="@+id/cameraPreview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    >
-    </FrameLayout>
-
     <Button
         android:onClick="scan"
         android:textSize="20sp"

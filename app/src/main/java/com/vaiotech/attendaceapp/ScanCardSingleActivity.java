@@ -53,10 +53,10 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
 
-    @InjectView(R.id.dateTV) TextView dateTV;
-    @InjectView(R.id.ddET) EditText ddET;
-    @InjectView(R.id.MMET) EditText MMET;
-    @InjectView(R.id.yyET) EditText yyET;
+//    @InjectView(R.id.dateTV) TextView dateTV;
+//    @InjectView(R.id.ddET) EditText ddET;
+//    @InjectView(R.id.MMET) EditText MMET;
+//    @InjectView(R.id.yyET) EditText yyET;
 
     @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
@@ -89,10 +89,10 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
 
-        ddET.setTypeface(digital);
-        MMET.setTypeface(digital);
-        yyET.setTypeface(digital);
-        dateTV.setTypeface(digital);
+//        ddET.setTypeface(digital);
+//        MMET.setTypeface(digital);
+//        yyET.setTypeface(digital);
+//        dateTV.setTypeface(digital);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         inBUTTON.setTypeface(font);
@@ -110,9 +110,9 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         int month = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
 
-        ddET.setText("" + date);
-        MMET.setText("" + month);
-        yyET.setText("" + year);
+//        ddET.setText("" + date);
+//        MMET.setText("" + month);
+//        yyET.setText("" + year);
 
 
         if (mNfcAdapter != null) {
@@ -125,9 +125,9 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
 
-        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
-        animBlink.setAnimationListener(this);
-        animBlink.start();
+//        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+//        animBlink.setAnimationListener(this);
+//        animBlink.start();
 
     }
 

@@ -7,10 +7,172 @@
     android:background="#604A7B"
     tools:context="com.vaiotech.attendaceapp.MyProfileActivity">
 
+
     <TextView
-        android:gravity="center"
-        android:text="My Profile"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Id : "
+        android:id="@+id/idTV"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/idValueTV"
+        android:text="1234567890"
+        android:layout_alignTop="@+id/idTV"
+        android:layout_toRightOf="@+id/idTV"
+        android:layout_toEndOf="@+id/idTV" />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name : "
+        android:id="@+id/nameTV"
+        android:layout_below="@+id/idTV"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameValueTV"
+        android:text="first middle last name"
+        android:layout_alignTop="@+id/nameTV"
+        android:layout_toRightOf="@+id/nameTV"
+        android:layout_toEndOf="@+id/nameTV"
+        />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Org Name : "
+        android:id="@+id/orgTV"
+        android:layout_below="@+id/nameTV"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orgValueTV"
+        android:text="org name"
+        android:layout_alignTop="@+id/orgTV"
+        android:layout_toRightOf="@+id/orgTV"
+        android:layout_toEndOf="@+id/orgTV"
+        />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status : "
+        android:id="@+id/statusTV"
+        android:layout_below="@+id/orgTV"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusValueTV"
+        android:text="Active / Inactive"
+        android:layout_alignTop="@+id/statusTV"
+        android:layout_toRightOf="@+id/statusTV"
+        android:layout_toEndOf="@+id/statusTV"
+        />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Existing Password : "
+        android:id="@+id/existingPasswordTV"
+        android:layout_below="@+id/statusTV"
+        android:layout_margin="5dp" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:ems="10"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/existingPasswordEV"
+        android:text="Active / Inactive"
+        android:layout_alignTop="@+id/existingPasswordTV"
+        android:layout_toRightOf="@+id/existingPasswordTV"
+        android:layout_toEndOf="@+id/existingPasswordTV"
+        />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Password : "
+        android:id="@+id/newPasswordTV"
+        android:layout_below="@+id/existingPasswordTV"
+        android:layout_margin="5dp" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:ems="10"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/newPasswordEV"
+        android:text="Active / Inactive"
+        android:layout_alignTop="@+id/newPasswordTV"
+        android:layout_toRightOf="@+id/newPasswordTV"
+        android:layout_toEndOf="@+id/newPasswordTV"
+        />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retype Password : "
+        android:id="@+id/retypePasswordTV"
+        android:layout_below="@+id/newPasswordTV"
+        android:layout_margin="5dp" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:ems="10"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/retypePasswordEV"
+        android:text="Active / Inactive"
+        android:layout_alignTop="@+id/retypePasswordTV"
+        android:layout_toRightOf="@+id/retypePasswordTV"
+        android:layout_toEndOf="@+id/retypePasswordTV"
+        />
+
+    <Button
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:background="#ffffff"
+        android:textColor="#604A7B"
+        android:text="Change Password"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        />
+
 
 </RelativeLayout>

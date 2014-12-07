@@ -32,7 +32,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 
     int mWindowWidth = 480;
     int mWindowHeight = 600;
-    int mViewFinderPadding = 10;
+    int mViewFinderPadding = 0;
 
 	static final String BUNDLE_CAMERA_FACE = "cameraFace";
 
