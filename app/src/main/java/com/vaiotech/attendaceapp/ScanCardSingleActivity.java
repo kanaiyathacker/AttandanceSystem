@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
@@ -123,6 +121,7 @@ public class ScanCardSingleActivity extends BaseActivity {
         inBUTTON.setAlpha(.5f);
         outBUTTON.setAlpha(.5f);
         getInfoBUTTON.setAlpha(.5f);
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);

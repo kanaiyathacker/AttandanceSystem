@@ -1,12 +1,17 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +19,17 @@ import android.widget.TextView;
 
 import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
+import com.bean.AttandanceTransaction;
+import com.bean.User;
+import com.listener.GetInfoRequestListener;
+import com.listener.SaveAttandanceRequestListener;
+import com.services.GetInfoRequest;
+import com.services.SaveAttandanceRequest;
+import com.util.Util;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -40,6 +54,13 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
+
+    private SaveAttandanceRequest saveAttandanceRequest;
+    private GetInfoRequest getInfoRequest;
+    private LocationManager lm;
+    private Location location;
+    private User user;
+    private String cardId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +104,15 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         MMET.setText("" + month);
         yyET.setText("" + year);
 
+        inBUTTON.setEnabled(false);
+        outBUTTON.setEnabled(false);
+        getInfoBUTTON.setEnabled(false);
+
+        inBUTTON.setAlpha(.5f);
+        outBUTTON.setAlpha(.5f);
+        getInfoBUTTON.setAlpha(.5f);
+
+
         DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
         dialog.show(getFragmentManager(), "cameraPreview");
     }
@@ -114,8 +144,70 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @Override
     public void onQRCodeScan(String contents) {
         idValueTV.setText("content---" + contents);
+        this.cardId = contents;
+
+        inBUTTON.setEnabled(true);
+        outBUTTON.setEnabled(true);
+        getInfoBUTTON.setEnabled(true);
+
+
+        inBUTTON.setAlpha(1f);
+        outBUTTON.setAlpha(1f);
+        getInfoBUTTON.setAlpha(1f);
+
 //        Intent intent = new Intent(this,ScanQRCodeSingleActivity.class);
 //        intent.putExtra("SCAN_CONTENT" , contents);
 //        startActivity(intent);
+    }
+
+    public void save(View view) {
+        String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
+        saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
+        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        openDialog(view);
+    }
+
+    public void getInfo(View view) {
+        getInfoRequest = new GetInfoRequest(cardId);
+        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
+    }
+
+    public AttandanceTransaction buildAttandanceTransaction(String type) {
+//        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+//        String val = sharedPreferences.getString("USER_DETAILS" , null);
+//        Gson gson = new Gson();
+//        User user = gson.fromJson(val , User.class);
+
+        AttandanceTransaction t = new AttandanceTransaction();
+        t.setAdminId(user.getUserId());
+        t.setCardId(Arrays.asList(cardId));
+        t.setDate(Util.convertDateToString(new Date()));
+        t.setTime(hhET.getText() + ":" + mmET.getText());
+        t.setTrasTable(user.getTranTable());
+        t.setType(type);
+        if(lm != null) {
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(location != null) {
+                t.setLongitude(location.getLongitude());
+                t.setLatitude(location.getLatitude());
+            }
+        }
+        return t;
+    }
+
+    public void openDialog(View view){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + cardId + " noted as " + hhET.getText() + ":" + mmET.getText());
+        alertDialogBuilder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

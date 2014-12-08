@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -78,6 +80,9 @@ public class ScanCardBatchActivity extends BaseActivity {
 
     protected NfcAdapter nfcAdapter;
     protected PendingIntent nfcPendingIntent;
+    private LocationManager lm;
+    private Location location;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +125,10 @@ public class ScanCardBatchActivity extends BaseActivity {
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
 
-        inBUTTON.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-        outBUTTON.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        inBUTTON.setAlpha(.5f);
+        outBUTTON.setAlpha(.5f);
+
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
 //        if (mNfcAdapter != null) {
 //            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
@@ -172,8 +179,8 @@ public class ScanCardBatchActivity extends BaseActivity {
                 inBUTTON.setEnabled(true);
                 outBUTTON.setEnabled(true);
 
-                inBUTTON.getBackground().setColorFilter(null);
-                outBUTTON.getBackground().setColorFilter(null);
+                inBUTTON.setAlpha(1f);
+                outBUTTON.setAlpha(1f);
             }
         }
     }
@@ -263,10 +270,10 @@ public class ScanCardBatchActivity extends BaseActivity {
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
-        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
-        Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
+//        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+//        String val = sharedPreferences.getString("USER_DETAILS" , null);
+//        Gson gson = new Gson();
+//        User user = gson.fromJson(val , User.class);
 
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
@@ -275,6 +282,13 @@ public class ScanCardBatchActivity extends BaseActivity {
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setTrasTable(user.getTranTable());
         t.setType(type);
+        if(lm != null) {
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(location != null) {
+                t.setLongitude(location.getLongitude());
+                t.setLatitude(location.getLatitude());
+            }
+        }
         return t;
     }
 
