@@ -60,7 +60,6 @@ public class FunctionalMainActivity extends BaseActivity {
 
     public void myProfile(View view) {
         Intent intent = null;
-        isLogin = true;
         if(isLogin) {
             intent = new Intent(this, MyProfileActivity.class);
         } else {
