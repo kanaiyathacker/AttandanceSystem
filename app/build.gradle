@@ -36,4 +36,6 @@ dependencies {
     compile 'org.roboguice:roboguice:3.+'
     compile 'com.android.support:support-v13:21.0.0'
     compile files('libs/ndeftools-1.2.3.jar')
+    compile 'com.romainpiel.shimmer:library:1.2.0@aar'
+
 }

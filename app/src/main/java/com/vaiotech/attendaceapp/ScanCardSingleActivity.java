@@ -26,6 +26,8 @@ import com.bean.User;
 import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 import com.services.GetInfoRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
@@ -55,12 +57,14 @@ public class ScanCardSingleActivity extends BaseActivity {
     @InjectView(R.id.ddET) EditText ddET;
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;
-
     @InjectView(R.id.inBUTTON) Button inBUTTON;
+
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
-
     private NfcAdapter mNfcAdapter;
+
+    @InjectView(R.id.shimmer_tv) ShimmerTextView shimmer_tv;
+
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
     private String[][] mNFCTechLists;
@@ -138,6 +142,8 @@ public class ScanCardSingleActivity extends BaseActivity {
                 new Intent(this, ScanCardSingleActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
+        Shimmer shimmer = new Shimmer();
+        shimmer.start(shimmer_tv);
 
     }
 
