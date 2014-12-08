@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,7 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -16,12 +19,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
@@ -42,7 +42,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_scan_card_single)
-public class ScanCardSingleActivity extends BaseActivity implements Animation.AnimationListener {
+public class ScanCardSingleActivity extends BaseActivity {
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
     @InjectView(R.id.idValueTV) TextView idValueTV;
@@ -70,7 +70,9 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
     private NdefMessage mNdefPushMessage;
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
-    Animation animBlink;
+    private LocationManager lm;
+    private Location location;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,19 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         MMET.setText("" + month);
         yyET.setText("" + year);
 
+        inBUTTON.setEnabled(false);
+        outBUTTON.setEnabled(false);
+        getInfoBUTTON.setEnabled(false);
+
+        inBUTTON.setAlpha(.5f);
+        outBUTTON.setAlpha(.5f);
+        getInfoBUTTON.setAlpha(.5f);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        user = gson.fromJson(val , User.class);
+        adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
 
         if (mNfcAdapter != null) {
 //            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
@@ -125,31 +140,6 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
 
-//        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
-//        animBlink.setAnimationListener(this);
-//        animBlink.start();
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        // Take any action after completing the animation
-
-        // check for blink animation
-        if (animation == animBlink) {
-            System.out.println("onAnimationEnd ...");
-        }
-
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-        System.out.println("onAnimationRepeat ...");
-    }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
-        System.out.println("onAnimationStart ...");
     }
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
@@ -196,7 +186,15 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
             long cardId = getReversed(id);
             this.cardId = ""+cardId;
             idValueTV.setText(this.cardId);
+
+            inBUTTON.setEnabled(true);
+            outBUTTON.setEnabled(true);
             getInfoBUTTON.setEnabled(true);
+
+
+            inBUTTON.setAlpha(1f);
+            outBUTTON.setAlpha(1f);
+            getInfoBUTTON.setAlpha(1f);
         }
     }
 
@@ -230,10 +228,10 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
-        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
-        Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
+//        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+//        String val = sharedPreferences.getString("USER_DETAILS" , null);
+//        Gson gson = new Gson();
+//        User user = gson.fromJson(val , User.class);
 
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
@@ -242,6 +240,13 @@ public class ScanCardSingleActivity extends BaseActivity implements Animation.An
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setTrasTable(user.getTranTable());
         t.setType(type);
+        if(lm != null) {
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(location != null) {
+                t.setLongitude(location.getLongitude());
+                t.setLatitude(location.getLatitude());
+            }
+        }
         return t;
     }
 

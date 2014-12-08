@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -49,7 +51,6 @@ public class ScanCardBatchActivity extends BaseActivity {
     private static final String TAG = ScanCardBatchActivity.class.getName();
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
-//    public static final String TAG = "NfcDemo";
 
     private NfcAdapter mNfcAdapter;
     private PendingIntent mPendingIntent;
@@ -116,6 +117,12 @@ public class ScanCardBatchActivity extends BaseActivity {
         MMET.setText("" + month);
         yyET.setText("" + year);
 
+        inBUTTON.setEnabled(false);
+        outBUTTON.setEnabled(false);
+
+        inBUTTON.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        outBUTTON.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+
 //        if (mNfcAdapter != null) {
 //            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
 //        } else {
@@ -161,8 +168,14 @@ public class ScanCardBatchActivity extends BaseActivity {
             ++cnt;
             counterValTV.setText(""+cnt);
             list.add(this.cardId);
-        }
+            if(cnt > 0 ) {
+                inBUTTON.setEnabled(true);
+                outBUTTON.setEnabled(true);
 
+                inBUTTON.getBackground().setColorFilter(null);
+                outBUTTON.getBackground().setColorFilter(null);
+            }
+        }
     }
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
@@ -215,6 +228,13 @@ public class ScanCardBatchActivity extends BaseActivity {
             ++cnt;
             counterValTV.setText(""+cnt);
             list.add(this.cardId);
+            if(cnt > 0 ) {
+                inBUTTON.setEnabled(true);
+                outBUTTON.setEnabled(true);
+
+                inBUTTON.setAlpha(1f);
+                outBUTTON.setAlpha(1f);
+            }
         }
     }
 

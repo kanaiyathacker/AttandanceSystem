@@ -28,9 +28,8 @@ public class GetInfoRequestListener implements com.octo.android.robospice.reques
         LinkedTreeMap map = (LinkedTreeMap) o;
         String name = valueOf(map.get("fName")) + " " +valueOf(map.get("mName")) + " " + valueOf(map.get("lName"));
         String contactNo = valueOf(map.get("contactNumber"));
-        TextView nameValueTV = (TextView)baseActivity.findViewById(R.id.adminValueLableTV);
+        TextView nameValueTV = (TextView)baseActivity.findViewById(R.id.userNameValueTV);
         nameValueTV.setText(name);
-
 
         System.out.print(name);
     }

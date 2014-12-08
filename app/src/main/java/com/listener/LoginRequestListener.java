@@ -31,6 +31,7 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     }
 
+
     @Override
     public void onRequestSuccess(Object o) {
 //        Intent intent = new Intent(loginActivity,ScanActivity.class);

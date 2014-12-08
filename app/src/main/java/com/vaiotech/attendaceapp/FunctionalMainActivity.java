@@ -39,12 +39,14 @@ public class FunctionalMainActivity extends BaseActivity {
         viewReportButton.setTypeface(font);
         contactUsButton.setTypeface(font);
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        isUserLogedIn();
+    }
 
+    public void isUserLogedIn() {
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
         User user = gson.fromJson(val , User.class);
         isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
-
     }
 
     public void smartScan(View view) {
@@ -110,5 +112,11 @@ public class FunctionalMainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isUserLogedIn();
     }
 }

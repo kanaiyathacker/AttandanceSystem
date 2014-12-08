@@ -1,5 +1,8 @@
 package com.vaiotech.attendaceapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bean.User;
+import com.google.gson.Gson;
 import com.listener.LoginRequestListener;
 import com.services.LoginRequest;
 
@@ -59,6 +64,22 @@ public class LoginActivity  extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        if(val != null) {
+            Gson gson = new Gson();
+            User user = gson.fromJson(val, User.class);
+            boolean isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+            if (isLogin) {
+                Intent intent = new Intent(this, FunctionalMainActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 
     public void login(View view) {
