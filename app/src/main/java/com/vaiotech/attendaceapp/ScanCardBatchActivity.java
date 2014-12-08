@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
@@ -62,6 +63,9 @@ public class ScanCardBatchActivity extends BaseActivity {
     private String cardId;
     private NdefMessage mNdefPushMessage;
 
+    @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
+    @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
+
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
@@ -83,12 +87,13 @@ public class ScanCardBatchActivity extends BaseActivity {
     private LocationManager lm;
     private Location location;
     private User user;
+    private boolean isNFCSupported;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_card_batch);
-//        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
@@ -128,13 +133,23 @@ public class ScanCardBatchActivity extends BaseActivity {
         inBUTTON.setAlpha(.5f);
         outBUTTON.setAlpha(.5f);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        user = gson.fromJson(val , User.class);
+        adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
+
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-//        if (mNfcAdapter != null) {
-//            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "This phone is not NFC enabled", Toast.LENGTH_SHORT).show();
-//        }
+        if (mNfcAdapter != null) {
+            isNFCSupported = true;
+//            Toast.makeText(this, "Smart Card Scan Not Supported", Toast.LENGTH_SHORT).show();
+            nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+            nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        } else {
+            isNFCSupported = false;
+            Toast.makeText(this, "Smart Card Scan Not Supported In This Phone", Toast.LENGTH_SHORT).show();
+        }
 //        mPendingIntent = PendingIntent.getActivity(this, 0,
 //                new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 //        mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
@@ -143,8 +158,6 @@ public class ScanCardBatchActivity extends BaseActivity {
 
 
         // initialize NFC
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         list = new ArrayList<String>();
     }
 
@@ -209,7 +222,8 @@ public class ScanCardBatchActivity extends BaseActivity {
 //            mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
 //            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
 //        }
-        enableForegroundMode();
+        if(isNFCSupported)
+            enableForegroundMode();
     }
 
     @Override
@@ -219,6 +233,7 @@ public class ScanCardBatchActivity extends BaseActivity {
 //            mNfcAdapter.disableForegroundDispatch(this);
 //           mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
 //        }
+        if(isNFCSupported)
         disableForegroundMode();
     }
 

@@ -2,8 +2,10 @@ package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
@@ -21,6 +23,7 @@ import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.bean.AttandanceTransaction;
 import com.bean.User;
+import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
 import com.services.GetInfoRequest;
@@ -111,6 +114,14 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         inBUTTON.setAlpha(.5f);
         outBUTTON.setAlpha(.5f);
         getInfoBUTTON.setAlpha(.5f);
+
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        user = gson.fromJson(val , User.class);
+        adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
 
 
         DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
