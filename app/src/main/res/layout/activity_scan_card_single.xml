@@ -253,9 +253,10 @@
         android:text="Scanning..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#444"
+        android:textColor="#080807"
         android:textSize="20sp"
-        android:layout_below="@+id/userNameValueTV"
+        android:layout_above="@+id/secHLine"
+        android:layout_centerHorizontal="true"
         />
 
 
@@ -265,7 +266,7 @@
         android:layout_height="1dp"
         android:id="@+id/secHLine"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="#080807"/>
 
 

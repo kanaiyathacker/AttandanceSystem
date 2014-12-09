@@ -154,7 +154,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
 
     @Override
     public void onQRCodeScan(String contents) {
-        idValueTV.setText("content---" + contents);
+        idValueTV.setText(contents);
         this.cardId = contents;
 
         inBUTTON.setEnabled(true);
@@ -199,8 +199,8 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         if(lm != null) {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(location != null) {
-                t.setLongitude(location.getLongitude());
-                t.setLatitude(location.getLatitude());
+                t.setLongitude(""+location.getLongitude());
+                t.setLatitude(""+location.getLatitude());
             }
         }
         return t;

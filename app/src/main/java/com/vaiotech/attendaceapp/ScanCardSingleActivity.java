@@ -64,6 +64,7 @@ public class ScanCardSingleActivity extends BaseActivity {
     private NfcAdapter mNfcAdapter;
 
     @InjectView(R.id.shimmer_tv) ShimmerTextView shimmer_tv;
+    private Shimmer shimmer;
 
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
@@ -142,9 +143,8 @@ public class ScanCardSingleActivity extends BaseActivity {
                 new Intent(this, ScanCardSingleActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
-        Shimmer shimmer = new Shimmer();
+        shimmer = new Shimmer();
         shimmer.start(shimmer_tv);
-
     }
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
@@ -200,6 +200,8 @@ public class ScanCardSingleActivity extends BaseActivity {
             inBUTTON.setAlpha(1f);
             outBUTTON.setAlpha(1f);
             getInfoBUTTON.setAlpha(1f);
+            shimmer.cancel();
+            shimmer_tv.setText("");
         }
     }
 
@@ -248,8 +250,8 @@ public class ScanCardSingleActivity extends BaseActivity {
         if(lm != null) {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(location != null) {
-                t.setLongitude(location.getLongitude());
-                t.setLatitude(location.getLatitude());
+                t.setLongitude(""+location.getLongitude());
+                t.setLatitude(""+location.getLatitude());
             }
         }
         return t;

@@ -31,6 +31,8 @@ import com.bean.AttandanceTransaction;
 import com.bean.User;
 import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
@@ -76,6 +78,9 @@ public class ScanCardBatchActivity extends BaseActivity {
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;
 
+    @InjectView(R.id.counterLableTV) TextView counterLableTV;
+
+
     @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
@@ -88,6 +93,8 @@ public class ScanCardBatchActivity extends BaseActivity {
     private Location location;
     private User user;
     private boolean isNFCSupported;
+    private Shimmer shimmer;
+    @InjectView(R.id.shimmer_tv) ShimmerTextView shimmer_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +108,7 @@ public class ScanCardBatchActivity extends BaseActivity {
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
+        counterLableTV.setTypeface(digital);
 
         ddET.setTypeface(digital);
         MMET.setTypeface(digital);
@@ -158,6 +166,8 @@ public class ScanCardBatchActivity extends BaseActivity {
 
 
         // initialize NFC
+        shimmer = new Shimmer();
+        shimmer.start(shimmer_tv);
         list = new ArrayList<String>();
     }
 
@@ -194,6 +204,8 @@ public class ScanCardBatchActivity extends BaseActivity {
 
                 inBUTTON.setAlpha(1f);
                 outBUTTON.setAlpha(1f);
+                shimmer.cancel();
+                shimmer_tv.setText("");
             }
         }
     }
@@ -234,7 +246,7 @@ public class ScanCardBatchActivity extends BaseActivity {
 //           mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
 //        }
         if(isNFCSupported)
-        disableForegroundMode();
+            disableForegroundMode();
     }
 
     private void resolveIntent(Intent intent) {
@@ -256,7 +268,10 @@ public class ScanCardBatchActivity extends BaseActivity {
 
                 inBUTTON.setAlpha(1f);
                 outBUTTON.setAlpha(1f);
+                shimmer.cancel();
+                shimmer_tv.setText("");
             }
+
         }
     }
 
@@ -300,8 +315,8 @@ public class ScanCardBatchActivity extends BaseActivity {
         if(lm != null) {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(location != null) {
-                t.setLongitude(location.getLongitude());
-                t.setLatitude(location.getLatitude());
+                t.setLongitude(""+location.getLongitude());
+                t.setLatitude(""+location.getLatitude());
             }
         }
         return t;

@@ -13,8 +13,8 @@ public class AttandanceTransaction implements Serializable{
     private String time;
     private String type;
     private String trasTable;
-    private double latitude;
-    private double longitude;
+    private String latitude;
+    private String longitude;
 
     public String getTrasTable() {
         return trasTable;
@@ -67,19 +67,19 @@ public class AttandanceTransaction implements Serializable{
         this.time = time;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 }
