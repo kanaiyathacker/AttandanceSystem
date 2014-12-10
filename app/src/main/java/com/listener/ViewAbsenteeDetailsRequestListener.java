@@ -33,18 +33,15 @@ public class ViewAbsenteeDetailsRequestListener implements RequestListener<Objec
     public void onRequestSuccess(Object o) {
 
         LinkedTreeMap map = (LinkedTreeMap)o;
-//        List<LinkedTreeMap>
+        List<LinkedTreeMap> listMap = (List<LinkedTreeMap>) map.get("absentList");
         List<Item> result = new ArrayList<Item>();
         result.add(new Item("User Id" , "Name"));
-        result.add(new Item("kathacker" , "Kanaiya Thacker"));
-        result.add(new Item("sseth" , "Swarnabha Seth"));
-        result.add(new Item("nkhan" , "najmul Khan"));
-        result.add(new Item("vdulani" , "Vikram Dulani"));
-        result.add(new Item("akumar" , "Amit kumar"));
-        result.add(new Item("sthacker" , "Samir thacker"));
-        result.add(new Item("rgupta" , "Ravi Gupta"));
-        ListView listView = (ListView)viewReportActivity.findViewById(R.id.absentResultLV);
+        for(LinkedTreeMap currVal : listMap) {
+            String name = currVal.get("fName") + " " + currVal.get("lName");
+            result.add(new Item(currVal.get("userId").toString() , name));
+        }
 
+        ListView listView = (ListView)viewReportActivity.findViewById(R.id.absentResultLV);
         ItemAdapter adapter = new ItemAdapter(viewReportActivity , R.layout.list_item, result);
         listView.setAdapter(adapter);
     }

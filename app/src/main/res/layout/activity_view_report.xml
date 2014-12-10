@@ -22,15 +22,17 @@
             />
 
         <TextView
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:background="#FFFFFF"
-            android:text="12"
+            android:text=""
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:textSize="30sp"
             android:textColor="#000000"
             android:id="@+id/totalStrengthValueTV"
@@ -39,9 +41,9 @@
 
 
         <TextView
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="0dp"
             android:layout_toLeftOf="@+id/totalStrengthValueTV"
             android:layout_weight="1"
             android:gravity="right"
@@ -55,17 +57,19 @@
             />
 
         <TextView
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:layout_weight="0.4"
             android:background="#FFFFFF"
-            android:text="12"
+            android:text=""
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:textSize="30sp"
             android:textColor="#E81B11"
             android:id="@+id/absentValueTV"
@@ -89,7 +93,7 @@
         />
 
     <View
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"

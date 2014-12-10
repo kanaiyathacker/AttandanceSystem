@@ -3,6 +3,7 @@ package com.listener;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import com.bean.User;
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.vaiotech.attendaceapp.FunctionalMainActivity;
 import com.vaiotech.attendaceapp.LoginActivity;
 import com.vaiotech.attendaceapp.MainActivity;
 import com.vaiotech.attendaceapp.MyProfileActivity;
+import com.vaiotech.attendaceapp.R;
 import com.vaiotech.attendaceapp.ViewReportActivity;
 
 /**
@@ -28,7 +30,8 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestFailure(SpiceException spiceException) {
-
+        TextView tv = (TextView)loginActivity.findViewById(R.id.loginIDTV);
+        tv.setText(spiceException.getMessage());
     }
 
 
@@ -43,17 +46,20 @@ public class LoginRequestListener implements RequestListener<Object> {
 //        admin.setCoId("1212121");
 //        intent.putExtra("ADMIN_DETAILS" , gson.toJson(admin));
 //        loginActivity.startActivity(intent);
+        TextView tv = (TextView)loginActivity.findViewById(R.id.loginIDTV);
+        tv.setText(o.toString());
         if(o != null) {
             LinkedTreeMap map = (LinkedTreeMap)o;
             Gson gson = new Gson();
             User user = new User();
+
             user.setfName(map.get("fName").toString());
             user.setlName(map.get("lName").toString());
             user.setmName(map.get("mName").toString());
             user.setUserId(map.get("userId").toString());
             user.setStatus(map.get("status").toString());
-            user.setCoName(map.get("coName").toString());
-            user.setCoId(map.get("coId").toString());
+            user.setCoName(map.get("orgName").toString());
+            user.setCoId(map.get("orgId").toString());
 
             user.setId(map.get("id").toString());
             String type = map.get("type").toString();
