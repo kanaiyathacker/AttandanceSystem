@@ -67,6 +67,9 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
         retypePasswordTV.setTypeface(font);
         retypePasswordEV.setTypeface(font);
 
+        changePasswordButton.setAlpha(.5f);
+        changePasswordButton.setEnabled(false);
+
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
@@ -109,13 +112,11 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
-        System.out.println(currentPasswordEV.getText().length());
-        System.out.println(newPasswordEV.getText().length());
-        System.out.println(retypePasswordEV.getText().length());
 
         boolean enableButton = currentPasswordEV.getText().length() > 0 && newPasswordEV.getText().length() > 0 && retypePasswordEV.getText().length() > 0;
         enableButton = enableButton ? newPasswordEV.getText().toString().equals(retypePasswordEV.getText().toString()) : enableButton;
         changePasswordButton.setEnabled(enableButton);
+        changePasswordButton.setAlpha(enableButton ? 1f : 0.5f);
 
         return false;
     }
