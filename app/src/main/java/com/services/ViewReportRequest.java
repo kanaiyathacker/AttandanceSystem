@@ -10,14 +10,17 @@ import java.io.Serializable;
 public class ViewReportRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> implements Serializable {
 
     private String adminId;
+    private String orgId;
 
-    public ViewReportRequest(String adminId) {
+    public ViewReportRequest(String adminId , String orgId) {
         super(Object.class, RestServiceInterface.class);
         this.adminId = adminId;
+        this.orgId = orgId;
     }
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception {
-        return getService().viewReport(adminId);
+
+        return  getService().viewReport(adminId , orgId);
     }
 }

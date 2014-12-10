@@ -1,19 +1,75 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.bean.User;
+import com.bean.ViewReport;
+import com.google.gson.Gson;
+import com.listcomponent.Item;
+import com.listcomponent.ItemAdapter;
+import com.listener.LoginRequestListener;
+import com.listener.ViewAbsenteeDetailsRequestListener;
+import com.listener.ViewReportRequestListener;
+import com.services.LoginRequest;
+import com.services.ViewAbsenteeDetailsRequest;
+import com.services.ViewReportRequest;
 
-public class ViewReportActivity extends Activity {
+import java.util.ArrayList;
+import java.util.List;
+
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
+
+@ContentView(R.layout.activity_view_report)
+public class ViewReportActivity extends BaseActivity {
+
+    @InjectView(R.id.vadButton) Button vadButton;
+    @InjectView(R.id.totalStrengthValueTV)   TextView totalStrengthValueTV;
+    @InjectView(R.id.absentValueTV)   TextView absentValueTV;
+    private ViewReportRequest viewReportRequest;
+    private ViewAbsenteeDetailsRequest viewAbsenteeDetailsRequest;
+    private SharedPreferences sharedPreferences;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_report);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+
+        totalStrengthValueTV.setTypeface(font);
+        absentValueTV.setTypeface(font);
+
+
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        user = gson.fromJson(val , User.class);
+        viewReportRequest = new ViewReportRequest(user.getUserId() , user.getCoId());
     }
 
+    public void viewAbsenteeDetails(View view) {
+        viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(user.getUserId() , user.getCoId());
+        spiceManager.execute(viewAbsenteeDetailsRequest ,new ViewAbsenteeDetailsRequestListener(this));
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        spiceManager.execute(viewReportRequest ,new ViewReportRequestListener(this));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

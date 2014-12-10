@@ -85,6 +85,7 @@
             android:background="#FFFFFF"
             android:textColor="#31859C"
             android:id="@+id/vadButton"
+            android:onClick="viewAbsenteeDetails"
         />
 
     <View
@@ -100,8 +101,13 @@
 
 
     <ListView
-        android:layout_below="@+id/secHLine"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView" />
+        android:id="@+id/absentResultLV"
+        android:layout_below="@+id/secHLine"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

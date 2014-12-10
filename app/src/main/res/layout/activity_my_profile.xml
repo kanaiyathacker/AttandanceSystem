@@ -97,7 +97,7 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Existing Password : "
+        android:text="Current Password : "
         android:id="@+id/existingPasswordTV"
         android:layout_below="@+id/statusTV"
         android:layout_margin="5dp" />
@@ -109,8 +109,8 @@
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/existingPasswordEV"
-        android:text="Active / Inactive"
+        android:id="@+id/currentPasswordEV"
+        android:text=""
         android:layout_alignTop="@+id/existingPasswordTV"
         android:layout_toRightOf="@+id/existingPasswordTV"
         android:layout_toEndOf="@+id/existingPasswordTV"
@@ -133,7 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newPasswordEV"
-        android:text="Active / Inactive"
+        android:text=""
         android:layout_alignTop="@+id/newPasswordTV"
         android:layout_toRightOf="@+id/newPasswordTV"
         android:layout_toEndOf="@+id/newPasswordTV"
@@ -143,7 +143,7 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retype Password : "
+        android:text="Retype New Password : "
         android:id="@+id/retypePasswordTV"
         android:layout_below="@+id/newPasswordTV"
         android:layout_margin="5dp" />
@@ -156,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/retypePasswordEV"
-        android:text="Active / Inactive"
+        android:text=""
         android:layout_alignTop="@+id/retypePasswordTV"
         android:layout_toRightOf="@+id/retypePasswordTV"
         android:layout_toEndOf="@+id/retypePasswordTV"
@@ -172,6 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:id="@+id/changePasswordButton"
         />
 
 

@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bean.User;
@@ -16,7 +20,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_my_profile)
-public class MyProfileActivity extends BaseActivity {
+public class MyProfileActivity extends BaseActivity implements View.OnKeyListener{
 
     @InjectView(R.id.idTV) TextView idTV;
     @InjectView(R.id.idValueTV) TextView idValueTV;
@@ -31,13 +35,15 @@ public class MyProfileActivity extends BaseActivity {
     @InjectView(R.id.statusValueTV) TextView statusValueTV;
 
     @InjectView(R.id.existingPasswordTV) TextView existingPasswordTV;
-    @InjectView(R.id.existingPasswordEV) TextView existingPasswordEV;
+    @InjectView(R.id.currentPasswordEV) EditText currentPasswordEV;
 
     @InjectView(R.id.newPasswordTV) TextView newPasswordTV;
-    @InjectView(R.id.newPasswordEV) TextView newPasswordEV;
+    @InjectView(R.id.newPasswordEV) EditText newPasswordEV;
 
     @InjectView(R.id.retypePasswordTV) TextView retypePasswordTV;
-    @InjectView(R.id.retypePasswordEV) TextView retypePasswordEV;
+    @InjectView(R.id.retypePasswordEV) EditText retypePasswordEV;
+    @InjectView(R.id.changePasswordButton) Button changePasswordButton;
+
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -55,7 +61,7 @@ public class MyProfileActivity extends BaseActivity {
         statusTV.setTypeface(font);
         statusValueTV.setTypeface(font);
         existingPasswordTV.setTypeface(font);
-        existingPasswordEV.setTypeface(font);
+        currentPasswordEV.setTypeface(font);
         newPasswordTV.setTypeface(font);
         newPasswordEV.setTypeface(font);
         retypePasswordTV.setTypeface(font);
@@ -72,6 +78,10 @@ public class MyProfileActivity extends BaseActivity {
             orgValueTV.setText(user.getCoName());
             statusValueTV.setText(user.getStatus());
         }
+
+        currentPasswordEV.setOnKeyListener(this);
+        newPasswordEV.setOnKeyListener(this);
+        retypePasswordEV.setOnKeyListener(this);
     }
 
 
@@ -95,5 +105,18 @@ public class MyProfileActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        System.out.println(currentPasswordEV.getText().length());
+        System.out.println(newPasswordEV.getText().length());
+        System.out.println(retypePasswordEV.getText().length());
+
+        boolean enableButton = currentPasswordEV.getText().length() > 0 && newPasswordEV.getText().length() > 0 && retypePasswordEV.getText().length() > 0;
+        enableButton = enableButton ? newPasswordEV.getText().toString().equals(retypePasswordEV.getText().toString()) : enableButton;
+        changePasswordButton.setEnabled(enableButton);
+
+        return false;
     }
 }
