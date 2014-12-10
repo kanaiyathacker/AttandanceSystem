@@ -12,16 +12,16 @@ public class AttandanceTransaction implements Serializable{
     private String date;
     private String time;
     private String type;
-    private String trasTable;
+    private String orgId;
     private String latitude;
     private String longitude;
 
-    public String getTrasTable() {
-        return trasTable;
+    public String getOrgId() {
+        return orgId;
     }
 
-    public void setTrasTable(String trasTable) {
-        this.trasTable = trasTable;
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
     }
 
     public String getType() {

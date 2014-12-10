@@ -7,10 +7,101 @@
     android:background="#31859C"
     tools:context="com.vaiotech.attendaceapp.ViewReportActivity">
 
-    <TextView
-        android:gravity="center"
-        android:text="View Report"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
 
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="right"
+            android:text="Total Strength :"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/totalStrengthTV"
+            />
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            android:text="12"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="30sp"
+            android:textColor="#000000"
+            android:id="@+id/totalStrengthValueTV"
+            android:layout_toRightOf="@+id/totalStrengthTV"
+            />
+
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toLeftOf="@+id/totalStrengthValueTV"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Absent :"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/absentTV"
+            android:layout_below="@+id/totalStrengthTV"
+            />
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_weight="0.4"
+            android:background="#FFFFFF"
+            android:text="12"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="30sp"
+            android:textColor="#E81B11"
+            android:id="@+id/absentValueTV"
+            android:layout_below="@+id/totalStrengthValueTV"
+            android:layout_toRightOf="@+id/absentTV"
+            />
+
+        <Button
+            android:textSize="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/absentTV"
+            android:text="View Absentee Details"
+            android:background="#FFFFFF"
+            android:textColor="#31859C"
+            android:id="@+id/vadButton"
+        />
+
+    <View
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/vadButton"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:id="@+id/secHLine"
+        android:background="#080807"/>
+
+
+    <ListView
+        android:layout_below="@+id/secHLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView" />
 </RelativeLayout>

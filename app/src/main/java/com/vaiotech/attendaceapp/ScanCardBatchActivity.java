@@ -310,7 +310,7 @@ public class ScanCardBatchActivity extends BaseActivity {
         t.setCardId(list);
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
-        t.setTrasTable(user.getTranTable());
+        t.setOrgId(user.getCoId());
         t.setType(type);
         if(lm != null) {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);

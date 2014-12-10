@@ -140,7 +140,7 @@ public class HomeActivity extends BaseActivity {
         t.setCardId(Arrays.asList(cardId));
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
-        t.setTrasTable(user.getTranTable());
+        t.setOrgId(user.getCoId());
         t.setType(type);
         return t;
     }

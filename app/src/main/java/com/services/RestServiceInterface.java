@@ -18,22 +18,27 @@ public interface RestServiceInterface {
 //                @Path("mName") String mName,@Path("lName") String lName,@Path("date") String date,
 //                @Path("time") String time,@Path("desc") String desc );
 
-    @POST("/ScanAttandanceApp/saveDetails")
-    Object save(@Body AttandanceTransaction attandanceTransaction);
-
-    @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
-    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
-
-    @GET("/ScanAttandanceApp/getUserInfo/{cardId}")
-    Object getUserInfo(@Path("cardId") String cardId);
-
-//    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")
+//    @POST("/ScanAttandanceApp/saveDetails")
 //    Object save(@Body AttandanceTransaction attandanceTransaction);
-
-
-//    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
+//
+//    @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
 //    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
 //
-//    @GET("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/getUserInfo/{cardId}")
+//    @GET("/ScanAttandanceApp/getUserInfo/{cardId}")
 //    Object getUserInfo(@Path("cardId") String cardId);
+
+    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")
+    Object save(@Body AttandanceTransaction attandanceTransaction);
+
+
+    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
+    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
+
+    @GET("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/getUserInfo/{cardId}")
+    Object getUserInfo(@Path("cardId") String cardId);
+
+    @GET("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/viewReport/{adminId}")
+    Object viewReport(@Path("adminId") String adminId);
+
+
 }
