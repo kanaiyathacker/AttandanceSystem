@@ -15,6 +15,7 @@ public class AttandanceTransaction implements Serializable{
     private String orgId;
     private String latitude;
     private String longitude;
+    private String userId;
 
     public String getOrgId() {
         return orgId;
@@ -81,5 +82,13 @@ public class AttandanceTransaction implements Serializable{
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

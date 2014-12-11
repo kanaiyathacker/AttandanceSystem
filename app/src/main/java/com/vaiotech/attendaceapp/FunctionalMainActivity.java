@@ -27,6 +27,7 @@ public class FunctionalMainActivity extends BaseActivity {
     @InjectView(R.id.contactUsButton) TextView contactUsButton;
     private SharedPreferences sharedPreferences;
     boolean isLogin;
+    boolean isUserAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +48,18 @@ public class FunctionalMainActivity extends BaseActivity {
         Gson gson = new Gson();
         User user = gson.fromJson(val , User.class);
         isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("Admin"));
     }
 
     public void smartScan(View view) {
-        Intent intent = null;
+        Intent intent =     null;
         if(isLogin) {
             intent = new Intent(this, MainActivity.class);
         } else {
-             intent = new Intent(this, LoginActivity.class);
-             intent.putExtra("ACTIVITY_SELECTED" , "SMART_SCAN");
+            if(isUserAdmin) {
+                intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("ACTIVITY_SELECTED", "SMART_SCAN");
+            }
         }
         startActivity(intent);
     }
@@ -81,8 +85,10 @@ public class FunctionalMainActivity extends BaseActivity {
         if(isLogin) {
             intent = new Intent(this, ViewReportActivity.class);
         } else {
-            intent = new Intent(this, LoginActivity.class);
-            intent.putExtra("ACTIVITY_SELECTED" , "VIEW_REPORT");
+            if(isUserAdmin) {
+                intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("ACTIVITY_SELECTED", "VIEW_REPORT");
+            }
         }
         startActivity(intent);
     }

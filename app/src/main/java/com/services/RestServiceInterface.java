@@ -1,6 +1,7 @@
 package com.services;
 
 import com.bean.AttandanceTransaction;
+import com.bean.ChangePassword;
 import com.bean.User;
 
 import retrofit.http.Body;
@@ -33,6 +34,9 @@ public interface RestServiceInterface {
     @GET("/ScanAttandanceApp/viewAbsenteeDetails/{adminId}/{orgId}")
     Object viewAbsenteeDetailsRequest(@Path("adminId") String adminId  , @Path("orgId") String orgId);
 
+    @POST("/ScanAttandanceApp/changePassword")
+    Object changePassword(@Body ChangePassword changePassword);
+
 
 
 //    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")
@@ -49,6 +53,9 @@ public interface RestServiceInterface {
 //
 //    @GET("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/viewAbsenteeDetails/{adminId}/{orgId}")
 //    Object viewAbsenteeDetailsRequest(@Path("adminId") String adminId  , @Path("orgId") String orgId);
+
+//    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/changePassword")
+//    Object changePassword(@Body ChangePassword changePassword);
 
 
 }

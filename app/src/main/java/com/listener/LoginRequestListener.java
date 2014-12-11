@@ -87,7 +87,7 @@ public class LoginRequestListener implements RequestListener<Object> {
                 intent = new Intent(loginActivity, FunctionalMainActivity.class);
             }
         } else {
-
+            intent = new Intent(loginActivity, FunctionalMainActivity.class);
         }
         return intent;
     }
