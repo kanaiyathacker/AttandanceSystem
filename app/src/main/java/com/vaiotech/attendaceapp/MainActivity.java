@@ -70,4 +70,9 @@ public class MainActivity extends RoboActivity {
         Intent intent = new Intent(this , HomeActivity.class);
         startActivity(intent);
     }
+
+    public void manualEntry(View view) {
+        Intent intent = new Intent(this , ManualEntryActivity.class);
+        startActivity(intent);
+    }
 }
