@@ -47,7 +47,6 @@
         android:background="#080807"/>
 
     <TextView
-
         android:textSize="30sp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
@@ -72,7 +71,7 @@
         android:id="@+id/hhET"
         android:maxLength="2"
         android:layout_below="@+id/firstHLine"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/seperateTimeTV"
         />
 
     <TextView
@@ -85,7 +84,7 @@
         android:text=":"
         android:layout_below="@+id/firstHLine"
         android:id="@+id/seperateTimeTV"
-        android:layout_toRightOf="@+id/hhET"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
     <EditText
@@ -131,7 +130,7 @@
         android:id="@+id/ddET"
         android:maxLength="2"
         android:layout_below="@+id/timeTV"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/seperateDateTV"
         />
 
     <TextView
@@ -145,7 +144,7 @@
         android:text="/"
         android:layout_below="@+id/timeTV"
         android:id="@+id/seperateDateTV"
-        android:layout_toRightOf="@+id/hhET"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
     <EditText
@@ -253,7 +252,7 @@
         android:text="Scanning..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="#F3ED00"
         android:textSize="20sp"
         android:layout_above="@+id/secHLine"
         android:layout_centerHorizontal="true"

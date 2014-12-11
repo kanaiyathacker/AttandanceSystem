@@ -46,7 +46,6 @@
 
 
     <TextView
-
         android:textSize="30sp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
         android:id="@+id/hhET"
         android:maxLength="2"
         android:layout_below="@+id/firstHLine"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/seperateTimeTV"
         />
 
     <TextView
@@ -84,7 +83,7 @@
         android:text=":"
         android:layout_below="@+id/firstHLine"
         android:id="@+id/seperateTimeTV"
-        android:layout_toRightOf="@+id/hhET"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
     <EditText
@@ -130,7 +129,7 @@
         android:id="@+id/ddET"
         android:maxLength="2"
         android:layout_below="@+id/timeTV"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/seperateDateTV"
         />
 
     <TextView
@@ -144,7 +143,7 @@
         android:text="/"
         android:layout_below="@+id/timeTV"
         android:id="@+id/seperateDateTV"
-        android:layout_toRightOf="@+id/hhET"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
     <EditText
@@ -211,7 +210,7 @@
         />
 
     <TextView
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="70dp"
         android:text="Count"
         android:textSize="25sp"
         android:gravity="center"
@@ -219,8 +218,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/counterLableTV"
-        android:layout_below="@+id/counterValTV"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@+id/counterValTV"
+        android:layout_below="@+id/dateTV"
+        android:layout_marginRight="20dp"
         />
 
     <com.romainpiel.shimmer.ShimmerTextView
@@ -228,7 +228,7 @@
         android:text="Scanning..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#080807"
+        android:textColor="#F3ED00"
         android:textSize="20sp"
         android:layout_above="@+id/secondHLine"
         android:layout_centerHorizontal="true"
@@ -241,7 +241,7 @@
         android:layout_height="1dp"
         android:id="@+id/secondHLine"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="#000000"/>
 
     <Button
