@@ -62,7 +62,7 @@
                 android:onClick="smartScan"
                 android:textSize="25sp"
                 android:textColor="#DCE0E5"
-                android:background="#595959"
+                android:background="#009655"
                 android:text="Smart Scan"
                 android:layout_margin="3dp"
                 android:layout_width="fill_parent"
