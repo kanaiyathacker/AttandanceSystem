@@ -1,7 +1,10 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -45,6 +48,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
     @InjectView(R.id.changePasswordButton) Button changePasswordButton;
 
     private SharedPreferences sharedPreferences;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
         if(val != null) {
-            User user = gson.fromJson(val, User.class);
+             user = gson.fromJson(val, User.class);
 
             idValueTV.setText(user.getUserId());
             nameValueTV.setText(user.getfName() + " " + user.getmName() + " " + user.getlName());
@@ -119,5 +123,31 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
         changePasswordButton.setAlpha(enableButton ? 1f : 0.5f);
 
         return false;
+    }
+
+    public void save(View view) {
+        String password = user.getPassword();
+        if(!password.equals(currentPasswordEV.getText())) {
+            dialog(password +"Wrong current password" + currentPasswordEV.getText());
+        } else {
+
+        }
+    }
+
+    public void dialog(String msg) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder.setMessage(msg);
+        alertDialogBuilder.setPositiveButton("OK",
+
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

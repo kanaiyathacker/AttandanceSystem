@@ -106,7 +106,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="Start QR Scan"
-                                    android:lines="@integer/viewfinder_border_width" />
+                                    />
 
                                <Button
                                    android:layout_margin="3dp"
@@ -119,7 +119,7 @@
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
                                    android:text="Start Card Scan"
-                                   android:lines="@integer/viewfinder_border_length" />
+                                   />
                     </LinearLayout>
                <LinearLayout
                    android:layout_margin="1dp"

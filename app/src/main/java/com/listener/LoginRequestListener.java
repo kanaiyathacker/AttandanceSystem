@@ -60,6 +60,7 @@ public class LoginRequestListener implements RequestListener<Object> {
             user.setStatus(map.get("status").toString());
             user.setCoName(map.get("orgName").toString());
             user.setCoId(map.get("orgId").toString());
+            user.setPassword(map.get("password").toString());
 
             user.setId(map.get("id").toString());
             String type = map.get("type").toString();

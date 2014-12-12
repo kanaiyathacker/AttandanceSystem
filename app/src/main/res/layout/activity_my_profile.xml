@@ -173,6 +173,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/changePasswordButton"
+        android:onClick="save"
         />
 
 
