@@ -1,4 +1,6 @@
 package com.util;
+import android.widget.EditText;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,5 +17,9 @@ public class Util {
 
     public static void main(String [] str) {
         System.out.println("Util..... " + convertDateToString(new Date()));
+    }
+
+    public static String getEditViewText(EditText editText) {
+        return editText.getText().toString();
     }
 }

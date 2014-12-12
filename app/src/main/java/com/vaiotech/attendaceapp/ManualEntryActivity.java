@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bean.AttandanceTransaction;
 import com.bean.User;
 import com.google.gson.Gson;
+import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
 import com.services.GetInfoRequest;
 import com.services.SaveAttandanceRequest;
@@ -32,6 +33,8 @@ import java.util.Date;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+
+import static com.util.Util.getEditViewText;
 
 @ContentView(R.layout.activity_manual_entry)
 public class ManualEntryActivity extends BaseActivity {
@@ -49,6 +52,7 @@ public class ManualEntryActivity extends BaseActivity {
     @InjectView(R.id.ddET) EditText ddET;
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;
+    @InjectView(R.id.userIdValueET) EditText userIdValueET;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
 
     @InjectView(R.id.outBUTTON) Button outBUTTON;
@@ -175,5 +179,10 @@ public class ManualEntryActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getInfo(View view) {
+        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
+        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 }

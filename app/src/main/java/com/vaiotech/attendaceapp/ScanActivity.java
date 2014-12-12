@@ -47,8 +47,8 @@ public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCode
         scanBUTTON.setTypeface(font);
         String adminDetails = getIntent().getStringExtra("ADMIN_DETAILS");
         Gson gson = new Gson();
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
-        dialog.show(getFragmentManager(), "cameraPreview");
+//        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
+//        dialog.show(getFragmentManager(), "cameraPreview");
 
     }
 
@@ -103,14 +103,14 @@ public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCode
 
     public void scan(View view) {
 //        onQRCodeScan("");
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
-        dialog.show(getFragmentManager(), "dialogScanner");
+//        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
+//        dialog.show(getFragmentManager(), "dialogScanner");
     }
 
     @Override
-    public void onQRCodeScan(String contents) {
+    public void onQRCodeScan(Object contents) {
         Intent intent = new Intent(this,ScanQRCodeSingleActivity.class);
-        intent.putExtra("SCAN_CONTENT" , contents);
+//        intent.putExtra("SCAN_CONTENT" , contents);
         startActivity(intent);
     }
 }

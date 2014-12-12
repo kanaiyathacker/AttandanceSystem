@@ -31,32 +31,32 @@ public class ZBarScannerView extends BarcodeScannerView
 	private List<BarcodeFormat> mFormats;
 	private ResultHandler mResultHandler;
 
-	public ZBarScannerView(Context context, CameraFace cameraFacing, int width, int height, int padding)
+	public ZBarScannerView(Context context, CameraFace cameraFacing, int width, int height, int padding , int singleOrBatchFlag)
 	{
-		super(context, cameraFacing, width, height, padding);
+		super(context, cameraFacing, width, height, padding , singleOrBatchFlag);
 		setupScanner();
 	}
 
-	public ZBarScannerView(Context context, AttributeSet attributeSet, CameraFace cameraFacing, int width, int height, int padding)
+	public ZBarScannerView(Context context, AttributeSet attributeSet, CameraFace cameraFacing, int width, int height, int padding , int singleOrBatchFlag)
 	{
-		super(context, attributeSet, cameraFacing, width, height, padding);
+		super(context, attributeSet, cameraFacing, width, height, padding , singleOrBatchFlag);
 		setupScanner();
 	}
 
 	// Default cameraFacing to BACK if none is specified
-	public ZBarScannerView(Context context, AttributeSet attributeSet)
+	public ZBarScannerView(Context context, AttributeSet attributeSet , int singleOrBatchFlag)
 	{
-		this(context, attributeSet, CameraFace.BACK, DEFAULT_SCANNER_WIDTH, DEFAULT_SCANNER_HEIGHT, DEFAULT_VIEWFINDER_PADDING);
+		this(context, attributeSet, CameraFace.BACK, DEFAULT_SCANNER_WIDTH, DEFAULT_SCANNER_HEIGHT, DEFAULT_VIEWFINDER_PADDING , singleOrBatchFlag);
 	}
 
-	public ZBarScannerView(Context context)
+	public ZBarScannerView(Context context , int singleOrBatchFlag)
 	{
-		this(context, CameraFace.BACK, DEFAULT_SCANNER_WIDTH, DEFAULT_SCANNER_HEIGHT, DEFAULT_VIEWFINDER_PADDING);
+		this(context, CameraFace.BACK, DEFAULT_SCANNER_WIDTH, DEFAULT_SCANNER_HEIGHT, DEFAULT_VIEWFINDER_PADDING , singleOrBatchFlag);
 	}
 
-	public ZBarScannerView(Context context, CameraFace facing)
+	public ZBarScannerView(Context context, CameraFace facing , int singleOrBatchFlag)
 	{
-		this(context, facing, DEFAULT_SCANNER_WIDTH, DEFAULT_SCANNER_HEIGHT, DEFAULT_VIEWFINDER_PADDING);
+		this(context, facing, DEFAULT_SCANNER_WIDTH, DEFAULT_SCANNER_HEIGHT, DEFAULT_VIEWFINDER_PADDING , singleOrBatchFlag);
 	}
 
 	public interface ResultHandler {
@@ -120,7 +120,9 @@ public class ZBarScannerView extends BarcodeScannerView
 		int result = mScanner.scanImage(barcode);
 
 		if (result != 0) {
-			stopCamera();
+            if(singleOrBatchFlag == 0)
+			    stopCamera();
+
 			if(mResultHandler != null) {
 				SymbolSet syms = mScanner.getResults();
 				Result rawResult = new Result();

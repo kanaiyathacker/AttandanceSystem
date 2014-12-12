@@ -230,7 +230,7 @@ public class ScanCardSingleActivity extends BaseActivity {
     }
 
     public void getInfo(View view) {
-        getInfoRequest = new GetInfoRequest(cardId);
+        getInfoRequest = new GetInfoRequest("CARD_ID" , cardId);
         spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 

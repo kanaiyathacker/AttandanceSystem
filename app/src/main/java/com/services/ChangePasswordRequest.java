@@ -7,11 +7,11 @@ import com.octo.android.robospice.retrofit.RetrofitGsonSpiceService;
 /**
  * Created by kanaiyalalt on 11/12/2014.
  */
-public class ChangePasswordService extends RetrofitSpiceRequest<Object, RestServiceInterface> {
+public class ChangePasswordRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> {
 
    private ChangePassword changePassword;
 
-    public ChangePasswordService(ChangePassword changePassword) {
+    public ChangePasswordRequest(ChangePassword changePassword) {
         super(Object.class, RestServiceInterface.class);
         this.changePassword = changePassword;
     }

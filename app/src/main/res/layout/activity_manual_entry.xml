@@ -209,12 +209,12 @@
     <EditText
         android:layout_marginTop="10dp"
         android:textSize="22sp"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="eqweqweqw"
+        android:text=""
         android:background="#ffffff"
-        android:id="@+id/idValueTV"
+        android:id="@+id/userIdValueET"
         android:layout_toRightOf="@+id/idLableTV"
         android:layout_below="@+id/seperateDateMMTV"
         />

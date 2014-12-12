@@ -28,8 +28,9 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
 	int mScannerWidth;
 	int mScannerHeight;
 	int mScannerPadding;
+    int singleOrBatchFlag;
 
-	public BarcodeScannerView(Context context, CameraFace cameraFacing, int width, int height, int padding)
+	public BarcodeScannerView(Context context, CameraFace cameraFacing, int width, int height, int padding , int singleOrBatchFlag)
 	{
 		super(context);
 
@@ -37,11 +38,12 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
 		mScannerWidth = width;
 		mScannerHeight = height;
 		mScannerPadding = padding;
+        this.singleOrBatchFlag = singleOrBatchFlag;
 
 		setupLayout();
 	}
 
-	public BarcodeScannerView(Context context, AttributeSet attributeSet, CameraFace cameraFacing, int width, int height, int padding)
+	public BarcodeScannerView(Context context, AttributeSet attributeSet, CameraFace cameraFacing, int width, int height, int padding , int singleOrBatchFlag)
 	{
 		super(context, attributeSet);
 
@@ -49,7 +51,7 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
 		mScannerWidth = width;
 		mScannerHeight = height;
 		mScannerPadding = padding;
-
+        this.singleOrBatchFlag = singleOrBatchFlag;
 		setupLayout();
 	}
 

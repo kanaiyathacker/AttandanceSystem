@@ -70,14 +70,14 @@ public class ScanQRCodeActivity extends RoboActivity implements DialogScanner.On
 
     public void scan(View view) {
 //        onQRCodeScan("");
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
-        dialog.show(getFragmentManager(), "dialogScanner");
+//        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
+//        dialog.show(getFragmentManager(), "dialogScanner");
     }
 
     @Override
-    public void onQRCodeScan(String contents) {
+    public void onQRCodeScan(Object contents) {
         Intent intent = new Intent(this,HomeActivity.class);
-        intent.putExtra("SCAN_CONTENT" , contents);
+//        intent.putExtra("SCAN_CONTENT" , contents);
         startActivity(intent);
     }
 }

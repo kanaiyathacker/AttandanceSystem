@@ -124,7 +124,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
 
 
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
+        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK , 1);
         dialog.show(getFragmentManager(), "cameraPreview");
     }
 
@@ -153,18 +153,20 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
 
 
     @Override
-    public void onQRCodeScan(String contents) {
-        idValueTV.setText(contents);
-        this.cardId = contents;
+    public void onQRCodeScan(Object contents) {
+        if(contents != null) {
+            idValueTV.setText((String) contents);
+            this.cardId = (String) contents;
 
-        inBUTTON.setEnabled(true);
-        outBUTTON.setEnabled(true);
-        getInfoBUTTON.setEnabled(true);
+            inBUTTON.setEnabled(true);
+            outBUTTON.setEnabled(true);
+            getInfoBUTTON.setEnabled(true);
 
 
-        inBUTTON.setAlpha(1f);
-        outBUTTON.setAlpha(1f);
-        getInfoBUTTON.setAlpha(1f);
+            inBUTTON.setAlpha(1f);
+            outBUTTON.setAlpha(1f);
+            getInfoBUTTON.setAlpha(1f);
+        }
 
 //        Intent intent = new Intent(this,ScanQRCodeSingleActivity.class);
 //        intent.putExtra("SCAN_CONTENT" , contents);
@@ -179,7 +181,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     }
 
     public void getInfo(View view) {
-        getInfoRequest = new GetInfoRequest(cardId);
+        getInfoRequest = new GetInfoRequest("CARD_ID" , cardId);
         spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 

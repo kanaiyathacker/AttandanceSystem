@@ -11,15 +11,17 @@ import java.io.Serializable;
  */
 public class GetInfoRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> implements Serializable {
 
-    private String cardId;
+    private String searchType;
+    private String searchValue;
 
-    public GetInfoRequest(String cardId) {
+    public GetInfoRequest(String searchType , String  searchValue) {
         super(Object.class, RestServiceInterface.class);
-        this.cardId = cardId;
+        this.searchType = searchType;
+        this.searchValue = searchValue;
     }
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception {
-        return getService().getUserInfo(cardId);
+        return getService().getUserInfo(searchType , searchValue);
     }
 }

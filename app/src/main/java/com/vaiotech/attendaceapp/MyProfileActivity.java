@@ -16,11 +16,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bean.ChangePassword;
 import com.bean.User;
 import com.google.gson.Gson;
+import com.listener.ChangePasswordRequestListener;
+import com.services.ChangePasswordRequest;
+import com.services.LoginRequest;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+
+import static com.util.Util.getEditViewText;
 
 @ContentView(R.layout.activity_my_profile)
 public class MyProfileActivity extends BaseActivity implements View.OnKeyListener{
@@ -49,6 +55,8 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
 
     private SharedPreferences sharedPreferences;
     private User user;
+
+    private ChangePasswordRequest changePasswordRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,9 +138,12 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
         if(!password.equals(currentPasswordEV.getText())) {
             dialog(password +"Wrong current password" + currentPasswordEV.getText());
         } else {
-
+            changePasswordRequest = new ChangePasswordRequest(new ChangePassword(user.getUserId() , getEditViewText(currentPasswordEV) , getEditViewText(newPasswordEV) , getEditViewText(retypePasswordEV)));
+            spiceManager.execute(changePasswordRequest , new ChangePasswordRequestListener(this));
         }
     }
+
+
 
     public void dialog(String msg) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

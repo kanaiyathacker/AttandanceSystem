@@ -98,17 +98,17 @@ public class HomeActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void launchScanBack(View view)
-    {
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
-        dialog.show(getFragmentManager(), "dialogScanner");
-    }
-
-    public void launchScanFront(View view)
-    {
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.FRONT);
-        dialog.show(getFragmentManager(), "dialogScanner");
-    }
+//    public void launchScanBack(View view)
+//    {
+//        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK);
+//        dialog.show(getFragmentManager(), "dialogScanner");
+//    }
+//
+//    public void launchScanFront(View view)
+//    {
+//        DialogScanner dialog = DialogScanner.newInstance(CameraFace.FRONT);
+//        dialog.show(getFragmentManager(), "dialogScanner");
+//    }
 
     public void setData()
     {
