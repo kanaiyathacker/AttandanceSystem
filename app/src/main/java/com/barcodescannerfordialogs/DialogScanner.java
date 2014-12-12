@@ -24,11 +24,15 @@ import android.widget.TextView;
 
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.barcodescannerfordialogs.qrscanner.ZBarScannerView;
+import com.vaiotech.attendaceapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.dm7.barcodescanner.core.DisplayUtils;
+
+import static com.util.Util.getEditViewText;
+import static com.util.Util.getTextViewText;
 
 public class DialogScanner extends DialogFragment implements ZBarScannerView.ResultHandler
 {
@@ -48,6 +52,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
     int mViewFinderPadding = 0;
     int singleOrBatchFlag =0;
     List<String> scanResult;
+    TextView countTv;
 
 	static final String BUNDLE_CAMERA_FACE = "cameraFace";
 	static final String BUNDLE_SINGLE_OR_BATCH = "singleOrBatch";
@@ -140,13 +145,14 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
                     RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
             tvLay.setMargins(0, 0, 0, 0);
-            TextView tv = new TextView(getDialog().getContext());
-            tv.setText("Hello World");
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
-            tv.setTextColor(Color.parseColor("#FFFFFF"));
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(tvLay);
-            mScannerView.addView(tv);
+            countTv = new TextView(getDialog().getContext());
+            countTv.setText("0");
+            countTv.setId(R.id.counterValTV);
+            countTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+            countTv.setTextColor(Color.parseColor("#FFFFFF"));
+            countTv.setGravity(Gravity.CENTER);
+            countTv.setLayoutParams(tvLay);
+            mScannerView.addView(countTv);
             scanResult = new ArrayList<String>();
         }
 
@@ -216,7 +222,10 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
                 scanListener.onQRCodeScan(result.getContents());
                 getDialog().dismiss();
             } else {
-                scanResult.add("123"+result.getContents());
+                int count = Integer.parseInt(getTextViewText(countTv));
+                count++;
+                countTv.setText(""+count);
+                scanResult.add(result.getContents());
             }
 		}
 	}

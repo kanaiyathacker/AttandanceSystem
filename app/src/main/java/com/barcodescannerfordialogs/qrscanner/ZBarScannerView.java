@@ -1,12 +1,18 @@
 package com.barcodescannerfordialogs.qrscanner;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.barcodescannerfordialogs.helpers.CameraFace;
+import com.vaiotech.attendaceapp.MainActivity;
+import com.vaiotech.attendaceapp.R;
 
 import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Image;
@@ -118,7 +124,7 @@ public class ZBarScannerView extends BarcodeScannerView
 		barcode.setData(data);
 
 		int result = mScanner.scanImage(barcode);
-
+        openDialog(this);
 		if (result != 0) {
             if(singleOrBatchFlag == 0)
 			    stopCamera();
@@ -140,5 +146,20 @@ public class ZBarScannerView extends BarcodeScannerView
 			camera.setOneShotPreviewCallback(this);
 		}
 	}
+
+    public void openDialog(View view){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+
+        alertDialogBuilder.setMessage("Hello ");
+        alertDialogBuilder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
 }
