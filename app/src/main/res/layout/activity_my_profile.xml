@@ -359,7 +359,7 @@
         android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
-        android:background="#ffffff"
+        android:background="@drawable/view_absentee_button"
         android:textColor="#000000"
         android:text="Change Password"
         android:layout_width="wrap_content"

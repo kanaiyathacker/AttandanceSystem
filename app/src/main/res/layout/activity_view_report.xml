@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/absentTV"
             android:text="View Absentee Details"
-            android:background="#FFFFFF"
+            android:background="@drawable/view_absentee_button"
             android:textColor="#000000"
             android:id="@+id/vadButton"
             android:onClick="viewAbsenteeDetails"
