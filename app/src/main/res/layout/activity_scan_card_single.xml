@@ -203,10 +203,23 @@
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID : "
+        android:text="ID"
         android:id="@+id/idLableTV"
         android:layout_below="@+id/seperateDateMMTV"
         />
+
+    <TextView
+
+        android:layout_toEndOf="@+id/userNameLableTV"
+        android:textSize="19sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" : "
+        android:id="@+id/idColonTV"
+        android:layout_alignTop="@+id/idLableTV"
+        android:layout_toRightOf="@+id/userNameLableTV" />
+
 
     <TextView
         android:layout_marginTop="10dp"
@@ -216,8 +229,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/idValueTV"
-        android:layout_toRightOf="@+id/idLableTV"
-        android:layout_toEndOf="@+id/idLableTV"
+        android:layout_toRightOf="@+id/idColonTV"
+        android:layout_toEndOf="@+id/idColonTV"
         android:layout_below="@+id/seperateDateMMTV"
         />
 
@@ -229,10 +242,22 @@
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name : "
+        android:text="Name"
         android:id="@+id/userNameLableTV"
         android:layout_below="@+id/idLableTV"
         />
+
+    <TextView
+
+        android:layout_toEndOf="@+id/userNameLableTV"
+        android:textSize="19sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" : "
+        android:id="@+id/userNameColonTV"
+        android:layout_alignTop="@+id/userNameLableTV"
+        android:layout_toRightOf="@+id/userNameLableTV" />
 
     <TextView
         android:layout_marginTop="10dp"
@@ -242,8 +267,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/userNameValueTV"
-        android:layout_toRightOf="@+id/userNameLableTV"
-        android:layout_toEndOf="@+id/userNameLableTV"
+        android:layout_toRightOf="@+id/userNameColonTV"
+        android:layout_toEndOf="@+id/userNameColonTV"
         android:layout_below="@+id/idLableTV"
         />
 
@@ -289,7 +314,7 @@
         android:layout_margin="20dp"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:background="#109C0C"
+        android:background="@drawable/in_time_button"
         android:width="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -304,7 +329,7 @@
         android:layout_margin="20dp"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:background="#A02E2B"
+        android:background="@drawable/out_time_button"
         android:width="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
