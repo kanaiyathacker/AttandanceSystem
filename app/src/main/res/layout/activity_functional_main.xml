@@ -25,10 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-
             <Button
+                android:paddingBottom="20dp"
+                android:gravity="bottom|center"
+                android:drawableBottom="@drawable/user_profile1"
                 android:onClick="myProfile"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#DCE0E5"
                 android:background="#604A7B"
                 android:layout_margin="3dp"
@@ -39,8 +41,11 @@
                 android:id="@+id/myProfileButton" />
 
             <Button
+                android:paddingBottom="20dp"
+                android:gravity="bottom|center"
+                android:drawableBottom="@drawable/about_info"
                 android:onClick="aboutIPresence"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#DCE0E5"
                 android:background="#143153"
                 android:layout_margin="3dp"
@@ -59,8 +64,11 @@
             android:layout_gravity="center_horizontal">
 
             <Button
+                android:paddingBottom="20dp"
+                android:gravity="bottom|center"
+                android:drawableBottom="@drawable/smart_card2"
                 android:onClick="smartScan"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#DCE0E5"
                 android:background="#E46C0A"
                 android:text="Smart Scan"
@@ -80,8 +88,11 @@
             android:layout_gravity="center_horizontal">
 
             <Button
+                android:paddingBottom="20dp"
+                android:gravity="bottom|center"
+                android:drawableBottom="@drawable/data_information1"
                 android:onClick="viewReport"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#DCE0E5"
                 android:background="#1C5EBB"
                 android:layout_margin="3dp"
@@ -92,8 +103,11 @@
                 android:id="@+id/viewReportButton" />
 
             <Button
+                android:paddingBottom="20dp"
+                android:gravity="bottom|center"
+                android:drawableBottom="@drawable/contact1"
                 android:onClick="contactUs"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="#DCE0E5"
                 android:background="#009856"
                 android:layout_margin="3dp"

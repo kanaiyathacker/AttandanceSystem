@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -21,7 +22,12 @@ public class MainActivity extends RoboActivity {
     @InjectView(R.id.button1) Button button1;
     @InjectView(R.id.button2) Button button2;
     @InjectView(R.id.button3) Button button3;
+    @InjectView(R.id.button4) Button button4;
     @InjectView(R.id.modeRadioGroup) RadioGroup modeRadioGroup;
+
+    @InjectView(R.id.singleModeRB)   RadioButton singleModeRB;
+    @InjectView(R.id.batchModeRB) RadioButton batchModeRB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,7 @@ public class MainActivity extends RoboActivity {
         button1.setTypeface(font);
         button2.setTypeface(font);
         button3.setTypeface(font);
+        button4.setTypeface(font);
     }
 
     @Override

@@ -88,9 +88,12 @@
            android:layout_height="0dp"
            >
                                 <Button
+                                    android:padding="20dp"
+                                    android:drawablePadding="30dp"
+                                    android:drawableLeft="@drawable/qr_code1"
                                     android:layout_margin="3dp"
                                     android:layout_weight="1"
-                                    android:textSize="25sp"
+                                    android:textSize="20sp"
                                     android:textColor="#FFF5EC"
                                     android:background="#43464b"
                                     android:onClick="scanQRCode"
@@ -98,12 +101,16 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="Start QR Scan"
+                                    android:gravity="left|center"
                                     />
 
                                 <Button
+                                   android:padding="20dp"
+                                   android:drawablePadding="30dp"
+                                   android:drawableLeft="@drawable/card1"
                                    android:layout_margin="3dp"
                                    android:layout_weight="1"
-                                   android:textSize="25sp"
+                                   android:textSize="20sp"
                                    android:textColor="#FFF5EC"
                                    android:background="#43464b"
                                    android:onClick="scanCard"
@@ -111,31 +118,42 @@
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
                                    android:text="Start Card Scan"
+                                    android:gravity="left|center"
                                    />
 
-                        <Button
-                            android:layout_margin="3dp"
-                            android:layout_weight="1"
-                            android:textSize="25sp"
-                            android:textColor="#FFF5EC"
-                            android:background="#43464b"
-                            android:onClick="scanVoice"
-                            android:id="@+id/button3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Start Voice Scan"/>
+                            <Button
+                                android:padding="20dp"
+                                android:drawablePadding="30dp"
+                                android:drawableLeft="@drawable/voice1"
+                                android:layout_margin="3dp"
+                                android:layout_weight="1"
+                                android:textSize="20sp"
+                                android:textColor="#FFF5EC"
+                                android:background="#43464b"
+                                android:onClick="scanVoice"
+                                android:id="@+id/button3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Start Voice Scan"
+                                android:gravity="left|center"
+                                />
 
-                       <Button
-                           android:layout_margin="3dp"
-                           android:layout_weight="1"
-                           android:textSize="25sp"
-                           android:textColor="#FFF5EC"
-                           android:background="#43464b"
-                           android:onClick="manualEntry"
-                           android:id="@+id/button4"
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:text="Manual Entry"/>
+                           <Button
+                               android:padding="20dp"
+                               android:drawablePadding="30dp"
+                               android:drawableLeft="@drawable/manual_entry1"
+                               android:layout_margin="3dp"
+                               android:layout_weight="1"
+                               android:textSize="20sp"
+                               android:textColor="#FFF5EC"
+                               android:background="#43464b"
+                               android:onClick="manualEntry"
+                               android:id="@+id/button4"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:text="Manual Entry"
+                               android:gravity="left|center"
+                               />
 
                <!--android:background="#92D050" -->
        </LinearLayout>

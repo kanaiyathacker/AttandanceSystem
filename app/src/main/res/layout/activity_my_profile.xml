@@ -23,17 +23,29 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:gravity="right"
+            android:gravity="left"
+            android:textColor="#ffffff"
             android:layout_weight="0.6"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="User Id : "
+            android:text="User Id"
             android:id="@+id/idTV"
             />
 
         <TextView
-            android:layout_weight="1.4"
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/idColon"
+            />
+
+        <TextView
+            android:layout_weight="1.3"
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
@@ -57,18 +69,30 @@
         >
 
         <TextView
-            android:gravity="right"
+            android:textColor="#ffffff"
+            android:gravity="left"
             android:layout_weight="0.6"
             android:layout_width="0dp"
             android:textSize="18sp"
             android:layout_height="wrap_content"
-            android:text="Name : "
+            android:text="Name"
             android:id="@+id/nameTV"
             android:layout_below="@+id/idLinear"
         />
 
+        <TextView
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/nameColon"
+            />
+
          <TextView
-            android:layout_weight="1.4"
+            android:layout_weight="1.3"
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
@@ -90,18 +114,31 @@
 
 
         <TextView
-            android:gravity="right"
+            android:textColor="#ffffff"
+            android:gravity="left"
             android:layout_weight="0.6"
             android:layout_width="0dp"
             android:textSize="18sp"
             android:layout_height="wrap_content"
-            android:text="Org Name : "
+            android:text="Org Name"
             android:id="@+id/orgTV"
             android:layout_below="@+id/nameLinear"
             />
 
         <TextView
-            android:layout_weight="1.4"
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/orgNameColon"
+            />
+
+
+        <TextView
+            android:layout_weight="1.3"
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
@@ -125,18 +162,30 @@
     >
 
         <TextView
-            android:gravity="right"
+            android:textColor="#ffffff"
+            android:gravity="left"
             android:layout_weight="0.6"
             android:layout_width="0dp"
             android:textSize="18sp"
             android:layout_height="wrap_content"
-            android:text="Status : "
+            android:text="Status"
             android:id="@+id/statusTV"
             android:layout_below="@+id/orgNameLinear"
             />
 
         <TextView
-            android:layout_weight="1.4"
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/statusColon"
+            />
+
+        <TextView
+            android:layout_weight="1.3"
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
@@ -176,17 +225,29 @@
         >
 
         <TextView
-            android:gravity="right"
+            android:textColor="#ffffff"
+            android:gravity="left"
             android:layout_weight="1"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Current Password : "
+            android:text="Current Password"
             android:id="@+id/existingPasswordTV"
             />
 
+        <TextView
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/currentPasswordColon"
+            />
+
         <EditText
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:inputType="textPassword"
             android:textSize="18sp"
             android:textColor="#ffffff"
@@ -203,23 +264,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/currLinear"
-        android:layout_margin="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:weightSum="2"
         android:orientation="horizontal"
         >
 
         <TextView
-            android:gravity="right"
+            android:textColor="#ffffff"
+            android:gravity="left"
             android:layout_weight="1"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="New Password : "
+            android:text="New Password "
             android:id="@+id/newPasswordTV"
             />
 
+        <TextView
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/newPasswordColon"
+            />
+
         <EditText
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:inputType="textPassword"
             android:textSize="18sp"
             android:textColor="#ffffff"
@@ -235,8 +311,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newLinear"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:weightSum="2"
@@ -244,16 +320,29 @@
         >
 
         <TextView
-            android:gravity="right"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:gravity="left"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Retype Password : "
+            android:text="Retype Password"
             android:id="@+id/retypePasswordTV"
             />
 
+        <TextView
+            android:textColor="#ffffff"
+            android:gravity="left"
+            android:layout_weight="0.1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            android:id="@+id/retypePasswordColon"
+            />
+
         <EditText
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:inputType="textPassword"
             android:textSize="18sp"
             android:textColor="#ffffff"

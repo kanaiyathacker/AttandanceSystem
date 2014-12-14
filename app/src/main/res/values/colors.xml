@@ -2,4 +2,5 @@
 <resources>
     <color name="border_color">#FFFF22</color>
     <color name="back_color">#CCC296</color>
+    <color name="apptheme_color">#000000</color>
 </resources>

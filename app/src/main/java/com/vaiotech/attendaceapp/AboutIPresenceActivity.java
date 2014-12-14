@@ -1,17 +1,28 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
-public class AboutIPresenceActivity extends Activity {
+@ContentView(R.layout.activity_about_ipresence)
+public class AboutIPresenceActivity extends BaseActivity {
+
+    @InjectView(R.id.aboutiPresenceTV) TextView aboutiPresenceTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_ipresence);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+        aboutiPresenceTV.setTypeface(font);
     }
 
 

@@ -7,10 +7,35 @@
     android:background="#143153"
     tools:context="com.vaiotech.attendaceapp.AboutIPresenceActivity">
 
-    <TextView
-        android:gravity="center"
-        android:text="About IPresence"
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logoImage"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ipresence_logo"
+        />
+
+    <ScrollView
+        android:layout_margin="10dp"
+        android:layout_below="@+id/logoImage"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This apps aims at providing low cost solution to your attendance tracking and monitoring owes.This app integrates three most popular scanning formats under one screen enabling you to choose the one that suits best for your business. Equipped with QR code scanner to scan user details and register attendance record Equipped with smart card scanner to scan RF cards and register attendance Equipped with voice scanner to scan voice code and register attendance Generates quick view of daily attendance. Detailed attendance analytics and reporting are available on request. "
+            android:id="@+id/aboutiPresenceTV"
+            />
+
+        </ScrollView>
+
+
+
 
 </RelativeLayout>
