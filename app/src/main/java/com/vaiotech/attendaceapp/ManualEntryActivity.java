@@ -40,9 +40,15 @@ import static com.util.Util.getEditViewText;
 public class ManualEntryActivity extends BaseActivity {
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
-    @InjectView(R.id.idValueTV) TextView idValueTV;
+    @InjectView(R.id.userIdValueET) TextView userIdValueET;
+
     @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
+
+    @InjectView(R.id.userNameLableTV) TextView userNameLableTV;
+    @InjectView(R.id.userNameValueTV) TextView userNameValueTV;
+
+
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
@@ -52,7 +58,6 @@ public class ManualEntryActivity extends BaseActivity {
     @InjectView(R.id.ddET) EditText ddET;
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;
-    @InjectView(R.id.userIdValueET) EditText userIdValueET;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
 
     @InjectView(R.id.outBUTTON) Button outBUTTON;
@@ -69,10 +74,16 @@ public class ManualEntryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_entry);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+
         idLableTV.setTypeface(font);
-        idValueTV.setTypeface(font);
+        userIdValueET.setTypeface(font);
+
         adminNameLableTV.setTypeface(font);
         adminValueLableTV.setTypeface(font);
+
+        userNameLableTV.setTypeface(font);
+        userNameValueTV.setTypeface(font);
+
 
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
@@ -125,7 +136,7 @@ public class ManualEntryActivity extends BaseActivity {
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
         t.setDate(Util.convertDateToString(new Date()));
-        t.setUserId(idValueTV.getText().toString());
+        t.setUserId(userIdValueET.getText().toString());
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setOrgId(user.getCoId());
         t.setType(type);
@@ -149,7 +160,7 @@ public class ManualEntryActivity extends BaseActivity {
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + idValueTV.getText() + " noted as " + hhET.getText() + ":" + mmET.getText());
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + userIdValueET.getText() + " noted as " + hhET.getText() + ":" + mmET.getText());
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -182,7 +193,7 @@ public class ManualEntryActivity extends BaseActivity {
     }
 
     public void getInfo(View view) {
-        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
-        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
+//        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
+//        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 }

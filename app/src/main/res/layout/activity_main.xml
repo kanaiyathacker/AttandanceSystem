@@ -6,7 +6,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:background="#89AC3F"
+        android:background="#E46C0A"
         tools:context="com.vaiotech.attendaceapp.MainActivity">
 
        <LinearLayout
@@ -46,7 +46,7 @@
                            <RadioButton
                                android:id="@+id/singleModeRB"
                                android:textSize="20sp"
-                               android:textColor="#FFF5EC"
+                               android:textColor="#000000"
                                android:layout_weight="1"
                                android:text="Single Mode"
                                android:layout_width="0dp"
@@ -56,7 +56,7 @@
                            <RadioButton
                                android:id="@+id/batchModeRB"
                                android:textSize="20sp"
-                               android:textColor="#FFF5EC"
+                               android:textColor="#000000"
                                android:layout_weight="1"
                                android:text="Batch Mode"
                                android:layout_width="0dp"
@@ -82,25 +82,17 @@
            </LinearLayout>
        <LinearLayout
            android:layout_weight="3.2"
-           android:weightSum="2"
+           android:weightSum="4"
            android:orientation="vertical"
            android:layout_width="match_parent"
            android:layout_height="0dp"
            >
-               <LinearLayout
-                   android:weightSum="2"
-                   android:layout_margin="1dp"
-                   android:layout_weight="1"
-                   android:orientation="horizontal"
-                   android:layout_width="match_parent"
-                   android:layout_height="0dp"
-                   android:layout_gravity="center_horizontal">
                                 <Button
                                     android:layout_margin="3dp"
                                     android:layout_weight="1"
                                     android:textSize="25sp"
                                     android:textColor="#FFF5EC"
-                                    android:background="#75001A"
+                                    android:background="#43464b"
                                     android:onClick="scanQRCode"
                                     android:id="@+id/button1"
                                     android:layout_width="match_parent"
@@ -108,33 +100,25 @@
                                     android:text="Start QR Scan"
                                     />
 
-                               <Button
+                                <Button
                                    android:layout_margin="3dp"
                                    android:layout_weight="1"
                                    android:textSize="25sp"
                                    android:textColor="#FFF5EC"
-                                   android:background="#75001A"
+                                   android:background="#43464b"
                                    android:onClick="scanCard"
                                    android:id="@+id/button2"
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
                                    android:text="Start Card Scan"
                                    />
-                    </LinearLayout>
-               <LinearLayout
-                   android:layout_margin="1dp"
-                   android:weightSum="2"
-                   android:layout_weight="1"
-                   android:orientation="horizontal"
-                   android:layout_width="match_parent"
-                   android:layout_height="0dp"
-                   android:layout_gravity="center_horizontal">
+
                         <Button
                             android:layout_margin="3dp"
                             android:layout_weight="1"
                             android:textSize="25sp"
                             android:textColor="#FFF5EC"
-                            android:background="#75001A"
+                            android:background="#43464b"
                             android:onClick="scanVoice"
                             android:id="@+id/button3"
                             android:layout_width="match_parent"
@@ -146,14 +130,13 @@
                            android:layout_weight="1"
                            android:textSize="25sp"
                            android:textColor="#FFF5EC"
-                           android:background="#75001A"
+                           android:background="#43464b"
                            android:onClick="manualEntry"
                            android:id="@+id/button4"
                            android:layout_width="match_parent"
                            android:layout_height="match_parent"
                            android:text="Manual Entry"/>
 
-                    </LinearLayout>
                <!--android:background="#92D050" -->
        </LinearLayout>
        </LinearLayout>

@@ -47,9 +47,10 @@ public class ViewReportActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_report);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+        Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
-        totalStrengthValueTV.setTypeface(font);
-        absentValueTV.setTypeface(font);
+        totalStrengthValueTV.setTypeface(digital);
+        absentValueTV.setTypeface(digital);
 
 
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
@@ -57,6 +58,7 @@ public class ViewReportActivity extends BaseActivity {
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         viewReportRequest = new ViewReportRequest(user.getUserId() , user.getCoId());
+        absentValueTV.setText(""+user.getUserId() + "-"+ user.getCoId());
     }
 
     public void viewAbsenteeDetails(View view) {

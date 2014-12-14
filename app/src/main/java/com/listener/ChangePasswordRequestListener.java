@@ -52,6 +52,7 @@ public class ChangePasswordRequestListener implements RequestListener<Object> {
             String type = map.get("type").toString();
             user.setType(type);
             String userDetail = gson.toJson(user);
+
             SharedPreferences.Editor editor = myProfileActivity.getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE).edit();
             editor.putString("USER_DETAILS", userDetail).apply();
             dialog("Password updated Successfully");

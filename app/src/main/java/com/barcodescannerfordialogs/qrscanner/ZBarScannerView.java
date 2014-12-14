@@ -21,7 +21,9 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import me.dm7.barcodescanner.core.DisplayUtils;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
@@ -36,6 +38,7 @@ public class ZBarScannerView extends BarcodeScannerView
 	private ImageScanner mScanner;
 	private List<BarcodeFormat> mFormats;
 	private ResultHandler mResultHandler;
+    private Set<String> stringSet;
 
 	public ZBarScannerView(Context context, CameraFace cameraFacing, int width, int height, int padding , int singleOrBatchFlag)
 	{
@@ -124,7 +127,7 @@ public class ZBarScannerView extends BarcodeScannerView
 		barcode.setData(data);
 
 		int result = mScanner.scanImage(barcode);
-        openDialog(this);
+
 		if (result != 0) {
             if(singleOrBatchFlag == 0)
 			    stopCamera();
@@ -140,8 +143,19 @@ public class ZBarScannerView extends BarcodeScannerView
 						break;
 					}
 				}
-				mResultHandler.handleResult(rawResult);
-			}
+                if(singleOrBatchFlag == 1) {
+                    if(stringSet == null) {
+                        stringSet = new HashSet<String>();
+                    }
+                    if(!stringSet.contains(rawResult.getContents())) {
+                        mResultHandler.handleResult(rawResult);
+                        stringSet.add(rawResult.getContents());
+                    }
+                    camera.setOneShotPreviewCallback(this);
+                } else {
+                    mResultHandler.handleResult(rawResult);
+                }
+            }
 		} else {
 			camera.setOneShotPreviewCallback(this);
 		}

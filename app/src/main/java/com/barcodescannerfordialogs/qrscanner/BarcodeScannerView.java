@@ -22,6 +22,10 @@ public class BarcodeScannerView extends FrameLayout implements Camera.PreviewCal
 	private ViewFinderView mViewFinderView;
 	private Rect mFramingRectInPreview;
 
+    public CameraPreview getCameraPreview() {
+        return  mPreview;
+    }
+
 	CameraFace mCameraFace;
 
 	// Size of scanner window

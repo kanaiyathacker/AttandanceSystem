@@ -46,6 +46,11 @@ public class ScanCardSingleActivity extends BaseActivity {
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
     @InjectView(R.id.idValueTV) TextView idValueTV;
+
+    @InjectView(R.id.userNameLableTV) TextView userNameLableTV;
+    @InjectView(R.id.userNameValueTV) TextView userNameValueTV;
+
+
     @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
@@ -84,6 +89,10 @@ public class ScanCardSingleActivity extends BaseActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         idLableTV.setTypeface(font);
         idValueTV.setTypeface(font);
+
+        userNameLableTV.setTypeface(font);
+        userNameValueTV.setTypeface(font);
+
         adminNameLableTV.setTypeface(font);
         adminValueLableTV.setTypeface(font);
 

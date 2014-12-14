@@ -54,7 +54,7 @@ public class MainActivity extends RoboActivity {
 
     public void scanQRCode(View view) {
         Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
-                new Intent(this, ScanQRCodeSingleActivity.class) : new Intent(this, ScanCardBatchActivity.class);
+                new Intent(this, ScanQRCodeSingleActivity.class) : new Intent(this, ScanQRCodeBatchActivity.class);
 
         startActivity(intent);
     }

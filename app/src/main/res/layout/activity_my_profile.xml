@@ -7,174 +7,279 @@
     android:background="#604A7B"
     tools:context="com.vaiotech.attendaceapp.MyProfileActivity">
 
-
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:padding="2dp"
+        android:id="@+id/idLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Id : "
-        android:id="@+id/idTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="5dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:gravity="right"
+            android:layout_weight="0.6"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="User Id : "
+            android:id="@+id/idTV"
+            />
 
-    <TextView
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/idValueTV"
-        android:text="1234567890"
-        android:layout_alignTop="@+id/idTV"
-        android:layout_toRightOf="@+id/idTV"
-        android:layout_toEndOf="@+id/idTV" />
+        <TextView
+            android:layout_weight="1.4"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/idValueTV"
+            android:text="1234567890"
+            android:layout_alignTop="@+id/idTV"
+            android:layout_toRightOf="@+id/idTV"
+            android:layout_toEndOf="@+id/idTV" />
+    </LinearLayout>
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:padding="2dp"
+        android:id="@+id/nameLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name : "
-        android:id="@+id/nameTV"
-        android:layout_below="@+id/idTV"
-        android:layout_margin="5dp" />
+        android:layout_below="@+id/idLinear"
+        android:layout_margin="5dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nameValueTV"
-        android:text="first middle last name"
-        android:layout_alignTop="@+id/nameTV"
-        android:layout_toRightOf="@+id/nameTV"
-        android:layout_toEndOf="@+id/nameTV"
+        <TextView
+            android:gravity="right"
+            android:layout_weight="0.6"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:id="@+id/nameTV"
+            android:layout_below="@+id/idLinear"
         />
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Org Name : "
-        android:id="@+id/orgTV"
-        android:layout_below="@+id/nameTV"
-        android:layout_margin="5dp" />
+         <TextView
+            android:layout_weight="1.4"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameValueTV"
+            android:text="first middle last name"
+        />
+    </LinearLayout>
 
-    <TextView
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/orgNameLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/orgValueTV"
-        android:text="org name"
-        android:layout_alignTop="@+id/orgTV"
-        android:layout_toRightOf="@+id/orgTV"
-        android:layout_toEndOf="@+id/orgTV"
+        android:layout_below="@+id/nameLinear"
+        android:layout_margin="5dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+    >
+
+
+        <TextView
+            android:gravity="right"
+            android:layout_weight="0.6"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="Org Name : "
+            android:id="@+id/orgTV"
+            android:layout_below="@+id/nameLinear"
+            />
+
+        <TextView
+            android:layout_weight="1.4"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/orgValueTV"
+            android:text="org name"
+            android:layout_alignTop="@+id/orgTV"
+            android:layout_toRightOf="@+id/orgTV"
+            android:layout_toEndOf="@+id/orgTV"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/statusLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orgNameLinear"
+        android:layout_margin="5dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+    >
+
+        <TextView
+            android:gravity="right"
+            android:layout_weight="0.6"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="Status : "
+            android:id="@+id/statusTV"
+            android:layout_below="@+id/orgNameLinear"
+            />
+
+        <TextView
+            android:layout_weight="1.4"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/statusValueTV"
+            android:text="Active / Inactive"
+            android:layout_alignTop="@+id/statusTV"
+            android:layout_toRightOf="@+id/statusTV"
+            android:layout_toEndOf="@+id/statusTV"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/statusLinear"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:id="@+id/secHLine"
+        android:background="#080807"
         />
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/currLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Status : "
-        android:id="@+id/statusTV"
-        android:layout_below="@+id/orgTV"
-        android:layout_margin="5dp" />
+        android:layout_below="@+id/secHLine"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/statusValueTV"
-        android:text="Active / Inactive"
-        android:layout_alignTop="@+id/statusTV"
-        android:layout_toRightOf="@+id/statusTV"
-        android:layout_toEndOf="@+id/statusTV"
-        />
+        <TextView
+            android:gravity="right"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Current Password : "
+            android:id="@+id/existingPasswordTV"
+            />
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Password : "
-        android:id="@+id/existingPasswordTV"
-        android:layout_below="@+id/statusTV"
-        android:layout_margin="5dp" />
+        <EditText
+            android:layout_weight="1"
+            android:inputType="textPassword"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/currentPasswordEV"
+            android:text=""
 
-    <EditText
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/currentPasswordEV"
-        android:text=""
-        android:layout_alignTop="@+id/existingPasswordTV"
-        android:layout_toRightOf="@+id/existingPasswordTV"
-        android:layout_toEndOf="@+id/existingPasswordTV"
-        />
+            />
+    </LinearLayout>
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/newLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Password : "
-        android:id="@+id/newPasswordTV"
-        android:layout_below="@+id/existingPasswordTV"
-        android:layout_margin="5dp" />
+        android:layout_below="@+id/currLinear"
+        android:layout_margin="1dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
 
-    <EditText
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/newPasswordEV"
-        android:text=""
-        android:layout_alignTop="@+id/newPasswordTV"
-        android:layout_toRightOf="@+id/newPasswordTV"
-        android:layout_toEndOf="@+id/newPasswordTV"
-        />
+        <TextView
+            android:gravity="right"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="New Password : "
+            android:id="@+id/newPasswordTV"
+            />
 
-    <TextView
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retype New Password : "
-        android:id="@+id/retypePasswordTV"
-        android:layout_below="@+id/newPasswordTV"
-        android:layout_margin="5dp" />
+        <EditText
+            android:layout_weight="1"
+            android:inputType="textPassword"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/newPasswordEV"
+            android:text=""
+            />
+    </LinearLayout>
 
-    <EditText
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/retypeLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/retypePasswordEV"
-        android:text=""
-        android:layout_alignTop="@+id/retypePasswordTV"
-        android:layout_toRightOf="@+id/retypePasswordTV"
-        android:layout_toEndOf="@+id/retypePasswordTV"
-        />
+        android:layout_below="@+id/newLinear"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:gravity="right"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Retype Password : "
+            android:id="@+id/retypePasswordTV"
+            />
+
+        <EditText
+            android:layout_weight="1"
+            android:inputType="textPassword"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/retypePasswordEV"
+            android:text=""
+            />
+
+    </LinearLayout>
 
     <Button
-        android:layout_margin="20dp"
-        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="18sp"
         android:background="#ffffff"
         android:textColor="#604A7B"
         android:text="Change Password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/changePasswordButton"
         android:onClick="save"
+        android:layout_alignParentBottom="true"
         />
-
 
 </RelativeLayout>

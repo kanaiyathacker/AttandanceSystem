@@ -9,12 +9,12 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
-import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,71 +33,83 @@ import com.util.Util;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_scan_qrcode_single)
-public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener {
+@ContentView(R.layout.activity_scan_qrcode_batch)
+public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener {
 
-    @InjectView(R.id.idLableTV) TextView idLableTV;
-    @InjectView(R.id.idValueTV) TextView idValueTV;
-    @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
-    @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
-    @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
-    @InjectView(R.id.timeTV) TextView timeTV;
-    @InjectView(R.id.hhET) EditText hhET;
-    @InjectView(R.id.mmET) EditText mmET;
+    private static final String TAG = ScanQRCodeBatchActivity.class.getName();
 
-    @InjectView(R.id.dateTV) TextView dateTV;
-    @InjectView(R.id.ddET) EditText ddET;
-    @InjectView(R.id.MMET) EditText MMET;
-    @InjectView(R.id.yyET) EditText yyET;
+    @InjectView(R.id.adminNameLableTV)
+    TextView adminNameLableTV;
+    @InjectView(R.id.adminValueLableTV)
+    TextView adminValueLableTV;
+    @InjectView(R.id.seperateTimeTV)
+    TextView seperateTimeTV;
+    @InjectView(R.id.timeTV)
+    TextView timeTV;
+    @InjectView(R.id.hhET)
+    EditText hhET;
+    @InjectView(R.id.mmET)
+    EditText mmET;
+    @InjectView(R.id.dateTV)
+    TextView dateTV;
+    @InjectView(R.id.ddET)
+    EditText ddET;
+    @InjectView(R.id.MMET)
+    EditText MMET;
+    @InjectView(R.id.yyET)
+    EditText yyET;
 
-    @InjectView(R.id.inBUTTON)  Button inBUTTON;
-    @InjectView(R.id.outBUTTON) Button outBUTTON;
-    @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
+    @InjectView(R.id.counterLableTV)
+    TextView counterLableTV;
 
-    private SaveAttandanceRequest saveAttandanceRequest;
-    private GetInfoRequest getInfoRequest;
+
+    @InjectView(R.id.counterValTV)
+    TextView counterValTV;
+    @InjectView(R.id.inBUTTON)
+    Button inBUTTON;
+    @InjectView(R.id.outBUTTON)
+    Button outBUTTON;
+    private List<String> list;
+    private User user;
     private LocationManager lm;
     private Location location;
-    private User user;
-    private String cardId;
+    private SaveAttandanceRequest saveAttandanceRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_qrcode_single);
+        setContentView(R.layout.activity_scan_qrcode_batch);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
-        idLableTV.setTypeface(font);
-        idValueTV.setTypeface(font);
-        adminNameLableTV.setTypeface(font);
-        adminValueLableTV.setTypeface(font);
-
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
         seperateTimeTV.setTypeface(digital);
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
+        counterLableTV.setTypeface(digital);
 
         ddET.setTypeface(digital);
         MMET.setTypeface(digital);
         yyET.setTypeface(digital);
         dateTV.setTypeface(digital);
 
+        counterValTV.setTypeface(digital);
+
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
-        getInfoBUTTON.setTypeface(font);
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.AM_PM, Calendar.PM);
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int min = cal.get(Calendar.MINUTE);
-        hhET.setText(""+hour);
-        mmET.setText(""+(min < 10 ? "0"+ min : min));
+        hhET.setText("" + hour);
+        mmET.setText("" + (min < 10 ? "0" + min : min));
 
         int date = cal.get(Calendar.DATE);
         int month = cal.get(Calendar.MONTH);
@@ -109,68 +121,34 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
 
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
-        getInfoBUTTON.setEnabled(false);
 
         inBUTTON.setAlpha(.5f);
         outBUTTON.setAlpha(.5f);
-        getInfoBUTTON.setAlpha(.5f);
 
-        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
+        String val = sharedPreferences.getString("USER_DETAILS", null);
         Gson gson = new Gson();
-        user = gson.fromJson(val , User.class);
-        adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
+        user = gson.fromJson(val, User.class);
+        adminValueLableTV.setText(user.getfName() + " " + user.getlName());
 
-
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK , 0);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK, 1);
         dialog.show(getFragmentManager(), "cameraPreview");
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scan_qrcode_single, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
     public void onQRCodeScan(Object contents) {
-        if(contents != null) {
-            idValueTV.setText((String) contents);
-            this.cardId = (String) contents;
+        if (contents != null) {
+            list = (List)contents;
+            counterValTV.setText(""+list.size());
 
             inBUTTON.setEnabled(true);
             outBUTTON.setEnabled(true);
-            getInfoBUTTON.setEnabled(true);
-
 
             inBUTTON.setAlpha(1f);
             outBUTTON.setAlpha(1f);
-            getInfoBUTTON.setAlpha(1f);
         }
-
-//        Intent intent = new Intent(this,ScanQRCodeSingleActivity.class);
-//        intent.putExtra("SCAN_CONTENT" , contents);
-//        startActivity(intent);
     }
 
     public void save(View view) {
@@ -178,11 +156,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
         openDialog(view);
-    }
-
-    public void getInfo(View view) {
-        getInfoRequest = new GetInfoRequest("CARD_ID" , cardId);
-        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
@@ -193,7 +166,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
 
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
-        t.setCardId(Arrays.asList(cardId));
+        t.setCardId(list);
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setOrgId(user.getCoId());
@@ -211,7 +184,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     public void openDialog(View view){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + cardId + " noted as " + hhET.getText() + ":" + mmET.getText());
+        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText());
         alertDialogBuilder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -222,5 +195,12 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void vibrate() {
+        Log.d(TAG, "vibrate");
+
+        Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
+        vibe.vibrate(500);
     }
 }
