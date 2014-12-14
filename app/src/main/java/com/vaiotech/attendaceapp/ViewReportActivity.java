@@ -58,7 +58,6 @@ public class ViewReportActivity extends BaseActivity {
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         viewReportRequest = new ViewReportRequest(user.getUserId() , user.getCoId());
-        absentValueTV.setText(""+user.getUserId() + "-"+ user.getCoId());
     }
 
     public void viewAbsenteeDetails(View view) {
