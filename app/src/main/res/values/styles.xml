@@ -2,22 +2,11 @@
 
     <!-- Base application theme. -->ss
     <style name="AppTheme" parent="android:Theme.Holo.Light">
-        <item name="android:radioButtonStyle">@style/RadioButtonAppTheme</item>
     </style>
 
 
     <style name="MyApp.NumberPicker" parent="android:Widget.DatePicker">
         <item name="android:divider">@color/border_color</item>
-    </style>
-
-
-    <style name="buttonStyle" >
-        <item name="android:layout_width" >fill_parent</item>
-        <item name="android:layout_height" >wrap_content</item>
-        <item name="android:gravity" >center</item>
-        <item name="android:layout_margin" >3dp</item>
-        <item name="android:textSize" >20dp</item>
-        <item name="android:shadowRadius" >2</item>
     </style>
 
     <style name="RadioButtonAppTheme" parent="android:Widget.CompoundButton.RadioButton">
