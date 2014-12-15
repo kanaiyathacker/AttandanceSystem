@@ -7,10 +7,75 @@
     android:background="#009856"
     tools:context="com.vaiotech.attendaceapp.ContactUsActivity">
 
-    <TextView
-        android:gravity="center"
-        android:text="@string/hello_world"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:id="@+id/emailLinear"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Id : "
+            android:textSize="19sp"
+            android:id="@+id/emailTV"
+        />
+
+        <EditText
+            android:padding="5dp"
+            android:background="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailET"
+        />
+    </LinearLayout>
+
+
+        <TextView
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:layout_below="@+id/emailLinear"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PLEASE ENTER THE DETAILS :"
+            android:textSize="19sp"
+            android:id="@+id/detailsTV"
+        />
+
+        <EditText
+            android:id="@+id/detailsET"
+            android:layout_below="@+id/detailsTV"
+            android:padding="5dp"
+            android:background="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/submitButton"
+            android:layout_marginBottom="10dp"
+        />
+        <Button
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/view_absentee_button"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:id="@+id/submitButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+        />
 </RelativeLayout>

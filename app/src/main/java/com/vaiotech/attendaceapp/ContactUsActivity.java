@@ -4,9 +4,20 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
-public class ContactUsActivity extends Activity {
+@ContentView(R.layout.activity_contact_us)
+public class ContactUsActivity extends BaseActivity {
+
+    @InjectView(R.id.emailTV) TextView emailTV;
+    @InjectView(R.id.emailET) EditText emailET;
+    @InjectView(R.id.detailsTV) TextView detailsTV;
+    @InjectView(R.id.detailsET) EditText detailsET;
+    @InjectView(R.id.passwordTV)  TextView passwordTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
