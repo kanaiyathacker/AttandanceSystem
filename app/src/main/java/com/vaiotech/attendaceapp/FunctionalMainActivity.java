@@ -87,10 +87,8 @@ public class FunctionalMainActivity extends BaseActivity {
         if(isLogin) {
             intent = new Intent(this, ViewReportActivity.class);
         } else {
-            if(isUserAdmin) {
-                intent = new Intent(this, LoginActivity.class);
-                intent.putExtra("ACTIVITY_SELECTED", "VIEW_REPORT");
-            }
+            intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("ACTIVITY_SELECTED", "VIEW_REPORT");
         }
         startActivity(intent);
     }
@@ -114,11 +112,16 @@ public class FunctionalMainActivity extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
+        //noinspection SimplifiableIfStatement
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

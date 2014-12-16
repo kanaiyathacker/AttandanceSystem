@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.barcodescannerfordialogs.DialogScanner;
@@ -43,37 +45,22 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
 
     private static final String TAG = ScanQRCodeBatchActivity.class.getName();
 
-    @InjectView(R.id.adminNameLableTV)
-    TextView adminNameLableTV;
-    @InjectView(R.id.adminValueLableTV)
-    TextView adminValueLableTV;
-    @InjectView(R.id.seperateTimeTV)
-    TextView seperateTimeTV;
-    @InjectView(R.id.timeTV)
-    TextView timeTV;
-    @InjectView(R.id.hhET)
-    EditText hhET;
-    @InjectView(R.id.mmET)
-    EditText mmET;
-    @InjectView(R.id.dateTV)
-    TextView dateTV;
-    @InjectView(R.id.ddET)
-    EditText ddET;
-    @InjectView(R.id.MMET)
-    EditText MMET;
-    @InjectView(R.id.yyET)
-    EditText yyET;
+    @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
+    @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
+    @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
+    @InjectView(R.id.timeTV) TextView timeTV;
+    @InjectView(R.id.hhET) EditText hhET;
+    @InjectView(R.id.mmET) EditText mmET;
+    @InjectView(R.id.dateTV) TextView dateTV;
+    @InjectView(R.id.ddET) EditText ddET;
+    @InjectView(R.id.MMET) EditText MMET;
+    @InjectView(R.id.yyET) EditText yyET;
+    @InjectView(R.id.progressBar) ProgressBar progressBar;
+    @InjectView(R.id.counterLableTV) TextView counterLableTV;
 
-    @InjectView(R.id.counterLableTV)
-    TextView counterLableTV;
-
-
-    @InjectView(R.id.counterValTV)
-    TextView counterValTV;
-    @InjectView(R.id.inBUTTON)
-    Button inBUTTON;
-    @InjectView(R.id.outBUTTON)
-    Button outBUTTON;
+    @InjectView(R.id.counterValTV) TextView counterValTV;
+    @InjectView(R.id.inBUTTON) Button inBUTTON;
+    @InjectView(R.id.outBUTTON) Button outBUTTON;
     private List<String> list;
     private User user;
     private LocationManager lm;
@@ -132,8 +119,25 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         adminValueLableTV.setText(user.getfName() + " " + user.getlName());
 
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK, 1);
-        dialog.show(getFragmentManager(), "cameraPreview");
+        new  HeavyTask(this).execute();
+    }
+
+    private class HeavyTask extends AsyncTask<String, Void, Void> {
+
+        private ScanQRCodeBatchActivity scanQRCodeBatchActivity;
+        private DialogScanner dialog;
+        public HeavyTask(ScanQRCodeBatchActivity scanQRCodeBatchActivity) {
+            this.scanQRCodeBatchActivity = scanQRCodeBatchActivity;
+        }
+
+        protected Void doInBackground(String... args) {
+            dialog = DialogScanner.newInstance(CameraFace.BACK , 0 , progressBar);
+            return null;
+        }
+
+        protected void onPostExecute(Void results) {
+            dialog.show(scanQRCodeBatchActivity.getFragmentManager(), "cameraPreview");
+        }
     }
 
 
@@ -155,6 +159,9 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        if(list != null)
+            list.clear();
+        counterValTV.setText("0");
         openDialog(view);
     }
 

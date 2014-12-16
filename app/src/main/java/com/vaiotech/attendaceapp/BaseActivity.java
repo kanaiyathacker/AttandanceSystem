@@ -1,5 +1,8 @@
 package com.vaiotech.attendaceapp;
 
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+
 import com.octo.android.robospice.SpiceManager;
 import com.services.AttandanceRestService;
 
@@ -11,6 +14,11 @@ import roboguice.activity.RoboActivity;
 public class BaseActivity extends RoboActivity {
     SpiceManager spiceManager = new SpiceManager(AttandanceRestService.class);
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
     @Override
     protected void onStop() {
         super.onStop();

@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class ScanCardSelectionActivity extends Activity {
+public class ScanCardSelectionActivity extends BaseActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

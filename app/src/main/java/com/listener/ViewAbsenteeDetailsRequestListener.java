@@ -2,6 +2,7 @@ package com.listener;
 
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.listcomponent.Item;
@@ -45,6 +46,7 @@ public class ViewAbsenteeDetailsRequestListener implements RequestListener<Objec
         ListView listView = (ListView)viewReportActivity.findViewById(R.id.absentResultLV);
         ItemAdapter adapter = new ItemAdapter(viewReportActivity , R.layout.list_item, result);
         listView.setAdapter(adapter);
-        viewReportActivity.getProgressDialog().hide();
+        ProgressBar progressBar = (ProgressBar) viewReportActivity.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

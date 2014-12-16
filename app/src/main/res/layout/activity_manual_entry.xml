@@ -201,50 +201,89 @@
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User ID : "
+        android:text="User ID"
         android:id="@+id/idLableTV"
         android:layout_below="@+id/seperateDateMMTV"
         />
 
-    <EditText
-        android:layout_marginTop="10dp"
+    <TextView
+
+        android:layout_toEndOf="@+id/userNameLableTV"
         android:textSize="19sp"
-        android:textColor="#000000"
-        android:layout_width="200dp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" : "
+        android:id="@+id/userIdColonTV"
+        android:layout_alignTop="@+id/idLableTV"
+        android:layout_toRightOf="@+id/idLableTV" />
+
+    <EditText
+        android:textCursorDrawable="@drawable/cursor_drawable"
+        android:inputType="text"
+        android:textSize="19sp"
+        android:textColor="#ffffff"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:background="#ffffff"
         android:id="@+id/userIdValueET"
-        android:layout_toRightOf="@+id/idLableTV"
+        android:layout_alignTop="@+id/idLableTV"
+        android:layout_toRightOf="@+id/userIdColonTV"
         android:layout_below="@+id/seperateDateMMTV"
+        android:focusable="true"
         />
 
     <TextView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="0dp"
         android:textSize="19sp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name : "
+        android:text="Name"
         android:id="@+id/userNameLableTV"
         android:layout_below="@+id/idLableTV"
         />
 
     <TextView
-        android:layout_marginTop="10dp"
+
+        android:layout_toEndOf="@+id/userNameLableTV"
+        android:textSize="19sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" : "
+        android:id="@+id/userNameColonTV"
+        android:layout_alignTop="@+id/userNameLableTV"
+        android:layout_toRightOf="@+id/idLableTV" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"
         android:textSize="19sp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/userNameValueTV"
-        android:layout_toRightOf="@+id/userNameLableTV"
-        android:layout_toEndOf="@+id/userNameLableTV"
+        android:layout_toRightOf="@+id/userNameColonTV"
+        android:layout_toEndOf="@+id/userNameColonTV"
         android:layout_below="@+id/idLableTV"
         />
 
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:background="@xml/progress_bar"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 
     <View
         android:layout_above="@+id/getInfoBUTTON"

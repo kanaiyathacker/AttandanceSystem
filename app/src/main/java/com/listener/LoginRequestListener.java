@@ -46,8 +46,6 @@ public class LoginRequestListener implements RequestListener<Object> {
 //        admin.setCoId("1212121");
 //        intent.putExtra("ADMIN_DETAILS" , gson.toJson(admin));
 //        loginActivity.startActivity(intent);
-        TextView tv = (TextView)loginActivity.findViewById(R.id.loginIDTV);
-        tv.setText(o.toString());
         if(o != null) {
             LinkedTreeMap map = (LinkedTreeMap)o;
             Gson gson = new Gson();

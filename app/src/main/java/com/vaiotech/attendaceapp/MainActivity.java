@@ -17,7 +17,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends RoboActivity {
+public class MainActivity extends BaseActivity {
 
     @InjectView(R.id.button1) Button button1;
     @InjectView(R.id.button2) Button button2;

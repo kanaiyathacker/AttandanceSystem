@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ScanCardActivity extends Activity {
+public class ScanCardActivity extends BaseActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

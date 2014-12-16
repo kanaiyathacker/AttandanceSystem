@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,10 +38,10 @@ import roboguice.inject.InjectView;
 import static com.util.Util.getEditViewText;
 
 @ContentView(R.layout.activity_manual_entry)
-public class ManualEntryActivity extends BaseActivity {
+public class ManualEntryActivity extends BaseActivity implements View.OnKeyListener{
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
-    @InjectView(R.id.userIdValueET) TextView userIdValueET;
+    @InjectView(R.id.userIdValueET) EditText userIdValueET;
 
     @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
@@ -77,6 +78,7 @@ public class ManualEntryActivity extends BaseActivity {
 
         idLableTV.setTypeface(font);
         userIdValueET.setTypeface(font);
+        userIdValueET.requestFocus();
 
         adminNameLableTV.setTypeface(font);
         adminValueLableTV.setTypeface(font);
@@ -130,6 +132,7 @@ public class ManualEntryActivity extends BaseActivity {
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
+        userIdValueET.setOnKeyListener(this);
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
@@ -193,7 +196,25 @@ public class ManualEntryActivity extends BaseActivity {
     }
 
     public void getInfo(View view) {
-//        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
-//        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
+        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
+        spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
+    }
+
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        boolean enableButton = getEditViewText(userIdValueET).length() > 0 ;
+        if(enableButton) {
+            getInfoBUTTON.setEnabled(true);
+            getInfoBUTTON.setAlpha(1f);
+        } else {
+            inBUTTON.setEnabled(false);
+            outBUTTON.setEnabled(false);
+            getInfoBUTTON.setEnabled(false);
+
+            inBUTTON.setAlpha(.5f);
+            outBUTTON.setAlpha(.5f);
+            getInfoBUTTON.setAlpha(.5f);
+        }
+        return false;
     }
 }

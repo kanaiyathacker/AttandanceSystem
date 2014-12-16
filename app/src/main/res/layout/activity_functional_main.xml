@@ -32,7 +32,7 @@
                 android:onClick="myProfile"
                 android:textSize="20sp"
                 android:textColor="#DCE0E5"
-                android:background="@drawable/myprofile_button"
+                android:background="@drawable/apptheme_btn_default_holo_light"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"

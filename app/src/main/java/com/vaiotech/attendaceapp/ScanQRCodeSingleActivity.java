@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,14 +8,14 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
-import android.nfc.NfcAdapter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.barcodescannerfordialogs.DialogScanner;
@@ -57,6 +56,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
+    @InjectView(R.id.progressBar) ProgressBar progressBar;
 
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
@@ -122,13 +122,27 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
-
-
-        DialogScanner dialog = DialogScanner.newInstance(CameraFace.BACK , 0);
-        dialog.show(getFragmentManager(), "cameraPreview");
+        progressBar.setVisibility(View.VISIBLE);
+        new  HeavyTask(this).execute();
     }
 
+    private class HeavyTask extends AsyncTask<String, Void, Void> {
 
+        private ScanQRCodeSingleActivity scanQRCodeSingleActivity;
+        private DialogScanner dialog;
+        public HeavyTask(ScanQRCodeSingleActivity scanQRCodeSingleActivity) {
+            this.scanQRCodeSingleActivity = scanQRCodeSingleActivity;
+        }
+
+        protected Void doInBackground(String... args) {
+            dialog = DialogScanner.newInstance(CameraFace.BACK , 0 , progressBar);
+            return null;
+        }
+
+        protected void onPostExecute(Void results) {
+            dialog.show(scanQRCodeSingleActivity.getFragmentManager(), "cameraPreview");
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -138,12 +152,8 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -168,15 +178,13 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
             getInfoBUTTON.setAlpha(1f);
         }
 
-//        Intent intent = new Intent(this,ScanQRCodeSingleActivity.class);
-//        intent.putExtra("SCAN_CONTENT" , contents);
-//        startActivity(intent);
     }
 
     public void save(View view) {
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        cardId = null;
         openDialog(view);
     }
 
@@ -186,11 +194,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
-//        String val = sharedPreferences.getString("USER_DETAILS" , null);
-//        Gson gson = new Gson();
-//        User user = gson.fromJson(val , User.class);
-
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
         t.setCardId(Arrays.asList(cardId));

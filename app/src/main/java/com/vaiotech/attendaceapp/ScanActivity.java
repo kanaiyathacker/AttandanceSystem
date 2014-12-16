@@ -33,7 +33,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_scan)
-public class ScanActivity extends RoboActivity implements DialogScanner.OnQRCodeScanListener {
+public class ScanActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener {
 
     @InjectView(R.id.scanBUTTON) Button scanBUTTON;
     Bitmap bitmap;

@@ -1,7 +1,11 @@
 package com.listener;
 
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.vaiotech.attendaceapp.R;
 import com.vaiotech.attendaceapp.ViewReportActivity;
 
 /**
@@ -22,6 +26,7 @@ public class SendMessageRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
-
+        ProgressBar progressBar = (ProgressBar) viewReportActivity.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

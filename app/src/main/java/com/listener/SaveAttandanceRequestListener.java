@@ -14,6 +14,6 @@ public class SaveAttandanceRequestListener implements com.octo.android.robospice
 
     @Override
     public void onRequestSuccess(Object o) {
-
+        System.out.println("SaveAttandanceRequestListener... " + o);
     }
 }

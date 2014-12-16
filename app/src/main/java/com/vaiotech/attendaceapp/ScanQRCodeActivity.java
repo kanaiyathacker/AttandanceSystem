@@ -29,7 +29,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_scan_qrcode)
-public class ScanQRCodeActivity extends RoboActivity implements DialogScanner.OnQRCodeScanListener {
+public class ScanQRCodeActivity extends BaseActivity  implements DialogScanner.OnQRCodeScanListener {
 
 //    @InjectView(R.id.companyAdminNameTV) TextView companyAdminNameTV;
 //    @InjectView(R.id.companyAdminCodeTV) TextView companyAdminCodeTV;

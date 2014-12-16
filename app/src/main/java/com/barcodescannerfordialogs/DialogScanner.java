@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,19 +59,20 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 	static final String BUNDLE_SINGLE_OR_BATCH = "singleOrBatch";
 
 	OnQRCodeScanListener scanListener;
-
+    ProgressBar progressBar;
 	public interface OnQRCodeScanListener
 	{
 		public void onQRCodeScan(Object contents);
 	}
 
-	public static DialogScanner newInstance(CameraFace camera , int singleOrbatch)
+	public static DialogScanner newInstance(CameraFace camera , int singleOrbatch , ProgressBar progressBar)
 	{
 		DialogScanner dialog = new DialogScanner();
 		Bundle args = new Bundle();
 		args.putInt(BUNDLE_CAMERA_FACE, camera.ordinal());
 		args.putInt(BUNDLE_SINGLE_OR_BATCH, singleOrbatch);
 		dialog.setArguments(args);
+        dialog.progressBar = progressBar;
 		return dialog;
 	}
 
@@ -103,7 +105,6 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 		{
 			cameraFace = CameraFace.BACK;
 		}
-
 	}
 
 	@Override
@@ -188,7 +189,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 
 		mScannerView.setResultHandler(this);
 		mScannerView.startCamera();
-
+        progressBar.setVisibility(View.INVISIBLE);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ public class GetInfoRequestListener implements com.octo.android.robospice.reques
     public GetInfoRequestListener(BaseActivity baseActivity) {
         this.baseActivity = baseActivity;
     }
+
     @Override
     public void onRequestFailure(SpiceException spiceException) {
 
@@ -30,7 +31,11 @@ public class GetInfoRequestListener implements com.octo.android.robospice.reques
         String contactNo = valueOf(map.get("contactNumber"));
         TextView nameValueTV = (TextView)baseActivity.findViewById(R.id.userNameValueTV);
         nameValueTV.setText(name);
-
-        System.out.print(name);
+        if(name != null && name.trim().length() > 0) {
+            baseActivity.findViewById(R.id.inBUTTON).setEnabled(true);
+            baseActivity.findViewById(R.id.inBUTTON).setAlpha(1f);
+            baseActivity.findViewById(R.id.outBUTTON).setEnabled(true);
+            baseActivity.findViewById(R.id.outBUTTON).setAlpha(1f);
+        }
     }
 }

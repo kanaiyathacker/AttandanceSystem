@@ -286,25 +286,18 @@ public class ScanCardBatchActivity extends BaseActivity {
         return result;
     }
 
-//    @Override
-//    public void onNewIntent(Intent intent) {
-//        setIntent(intent);
-//        resolveIntent(intent);
-//    }
-
     public void save(View view) {
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        if(list != null)
+            list.clear();
+        counterValTV.setText("0");
+
         openDialog(view);
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
-//        String val = sharedPreferences.getString("USER_DETAILS" , null);
-//        Gson gson = new Gson();
-//        User user = gson.fromJson(val , User.class);
-
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
         t.setCardId(list);
