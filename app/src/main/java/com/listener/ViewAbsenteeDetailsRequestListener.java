@@ -1,5 +1,6 @@
 package com.listener;
 
+import android.view.View;
 import android.widget.ListView;
 
 import com.google.gson.internal.LinkedTreeMap;
@@ -44,5 +45,6 @@ public class ViewAbsenteeDetailsRequestListener implements RequestListener<Objec
         ListView listView = (ListView)viewReportActivity.findViewById(R.id.absentResultLV);
         ItemAdapter adapter = new ItemAdapter(viewReportActivity , R.layout.list_item, result);
         listView.setAdapter(adapter);
+        viewReportActivity.getProgressDialog().hide();
     }
 }

@@ -37,6 +37,9 @@ public interface RestServiceInterface {
     @POST("/ScanAttandanceApp/changePassword")
     Object changePassword(@Body ChangePassword changePassword);
 
+    @POST("/ScanAttandanceApp/sendMessage/{adminId}")
+    Object sendMessage(@Path("adminId") String adminId );
+
 
 
 //    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")

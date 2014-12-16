@@ -1,6 +1,7 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bean.User;
@@ -19,9 +21,11 @@ import com.google.gson.Gson;
 import com.listcomponent.Item;
 import com.listcomponent.ItemAdapter;
 import com.listener.LoginRequestListener;
+import com.listener.SendMessageRequestListener;
 import com.listener.ViewAbsenteeDetailsRequestListener;
 import com.listener.ViewReportRequestListener;
 import com.services.LoginRequest;
+import com.services.SendMessageRequest;
 import com.services.ViewAbsenteeDetailsRequest;
 import com.services.ViewReportRequest;
 
@@ -37,11 +41,17 @@ public class ViewReportActivity extends BaseActivity {
     @InjectView(R.id.vadButton) Button vadButton;
     @InjectView(R.id.totalStrengthValueTV)   TextView totalStrengthValueTV;
     @InjectView(R.id.absentValueTV)   TextView absentValueTV;
+
+    private SendMessageRequest sendMessageRequest;
     private ViewReportRequest viewReportRequest;
     private ViewAbsenteeDetailsRequest viewAbsenteeDetailsRequest;
     private SharedPreferences sharedPreferences;
     private User user;
+    private ProgressDialog progressDialog;
 
+    public ProgressDialog getProgressDialog() {
+        return progressDialog;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +68,22 @@ public class ViewReportActivity extends BaseActivity {
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         viewReportRequest = new ViewReportRequest(user.getUserId() , user.getCoId());
+        progressDialog = new ProgressDialog(this);
     }
 
     public void viewAbsenteeDetails(View view) {
+        progressDialog.show();
         viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(user.getUserId() , user.getCoId());
         spiceManager.execute(viewAbsenteeDetailsRequest ,new ViewAbsenteeDetailsRequestListener(this));
     }
+
+    public void sendMessage(View view) {
+        progressDialog.show();
+        sendMessageRequest = new SendMessageRequest(user.getUserId());
+        spiceManager.execute(sendMessageRequest ,new SendMessageRequestListener(this));
+    }
+
+
 
 
     @Override

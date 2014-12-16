@@ -9,7 +9,7 @@
 
 
         <TextView
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="20dp"
             android:gravity="right"
@@ -27,7 +27,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:background="#FFFFFF"
             android:text="0"
@@ -41,7 +41,7 @@
 
 
         <TextView
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginBottom="0dp"
             android:layout_toLeftOf="@+id/totalStrengthValueTV"
@@ -61,7 +61,7 @@
             android:paddingRight="5dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
@@ -77,27 +77,51 @@
             android:layout_toRightOf="@+id/absentTV"
             />
 
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_below="@+id/absentTV"
+        android:id="@+id/linearButton"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
         <Button
+            android:layout_margin="1dp"
+            android:layout_weight="1"
             android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/absentTV"
-            android:text="View Absentee Details"
+            android:text="View Details"
             android:background="@drawable/view_absentee_button"
             android:textColor="#000000"
             android:id="@+id/vadButton"
             android:onClick="viewAbsenteeDetails"
         />
 
+        <Button
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/absentTV"
+            android:text="Send Message"
+            android:background="@drawable/view_absentee_button"
+            android:textColor="#000000"
+            android:id="@+id/sendMSGButton"
+            android:onClick="sendMessage"
+            />
+    </LinearLayout>
     <View
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_below="@+id/vadButton"
+        android:layout_below="@+id/linearButton"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:id="@+id/secHLine"
