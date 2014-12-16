@@ -1,4 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.vaiotech.attendaceapp.MyProfileActivity">
+    <item android:id="@+id/logout"
+        android:title=""
+        android:showAsAction="always"
+        />
+
 </menu>

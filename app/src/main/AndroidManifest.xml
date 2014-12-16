@@ -31,7 +31,7 @@
     <application
         android:allowBackup="true"
         android:clearTaskOnLaunch="true"
-        android:icon="@drawable/manual_entry1"
+        android:icon="@drawable/ipresence_icon"
         android:label="@string/app_name"
         android:launchMode="singleTop"
         android:theme="@style/AppTheme"
@@ -118,6 +118,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.vaiotech.attendaceapp.MyProfileActivity"
             android:label="@string/title_activity_my_profile" >

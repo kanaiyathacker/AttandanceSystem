@@ -1,5 +1,6 @@
 package com.vaiotech.attendaceapp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ public class FunctionalMainActivity extends BaseActivity {
     @InjectView(R.id.smartScanButton) TextView smartScanButton;
     @InjectView(R.id.viewReportButton) TextView viewReportButton;
     @InjectView(R.id.contactUsButton) TextView contactUsButton;
+
     private SharedPreferences sharedPreferences;
     boolean isLogin;
     boolean isUserAdmin;
@@ -100,8 +102,8 @@ public class FunctionalMainActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_functional_main, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
         return true;
     }
 

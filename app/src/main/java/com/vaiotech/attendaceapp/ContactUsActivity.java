@@ -1,9 +1,11 @@
 package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -17,12 +19,19 @@ public class ContactUsActivity extends BaseActivity {
     @InjectView(R.id.emailET) EditText emailET;
     @InjectView(R.id.detailsTV) TextView detailsTV;
     @InjectView(R.id.detailsET) EditText detailsET;
-    @InjectView(R.id.passwordTV)  TextView passwordTV;
+    @InjectView(R.id.submitButton) Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
+
+        emailTV.setTypeface(font);
+        emailET.setTypeface(font);
+        detailsTV.setTypeface(font);
+        detailsET.setTypeface(font);
+        submitButton.setTypeface(font);
     }
 
 
