@@ -120,7 +120,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 		mScannerView.setAutoFocus(false);
 
 		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        getDialog().setTitle("Hello*********************");
+
 
 		return mScannerView;
 	}
@@ -214,7 +214,6 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 	@Override
 	public void handleResult(me.dm7.barcodescanner.zbar.Result result)
 	{
-
 		if(result.getBarcodeFormat() == me.dm7.barcodescanner.zbar.BarcodeFormat.QRCODE)
 		{
 			playSound(RingtoneManager.TYPE_NOTIFICATION);

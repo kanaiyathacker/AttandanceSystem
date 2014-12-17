@@ -18,6 +18,7 @@ public class User implements Serializable{
     private String status;
     private String tranTable;
     private String type;
+    private String dateTime;
 
     public String getId() {
         return id;
@@ -121,5 +122,13 @@ public class User implements Serializable{
 
     public void setTranTable(String tranTable) {
         this.tranTable = tranTable;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 }

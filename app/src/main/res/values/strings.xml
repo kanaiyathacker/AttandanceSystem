@@ -27,5 +27,6 @@
     <string name="title_activity_scan_qrcode_single">Scan QRCode Single</string>
     <string name="title_activity_manual_entry">Manual Entry</string>
     <string name="title_activity_scan_qrcode_batch">Scan QRCode Batch</string>
+    <string name="title_activity_user_main">UserMainActivity</string>
 
 </resources>

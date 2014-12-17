@@ -1,7 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -94,7 +92,7 @@ public class FunctionalMainActivity extends BaseActivity {
     }
 
     public void contactUs(View view) {
-        Intent intent = new Intent(this, ContactUsActivity.class);
+        Intent intent = new Intent(this, UserMainActivity.class);
         startActivity(intent);
     }
 
@@ -111,7 +109,6 @@ public class FunctionalMainActivity extends BaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
         //noinspection SimplifiableIfStatement
         if ("Log Out" == item.getTitle()) {
