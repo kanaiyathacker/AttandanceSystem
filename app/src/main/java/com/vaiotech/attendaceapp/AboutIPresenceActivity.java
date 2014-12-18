@@ -3,6 +3,7 @@ package com.vaiotech.attendaceapp;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class AboutIPresenceActivity extends BaseActivity {
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         aboutiPresenceTV.setTypeface(font);
+        aboutiPresenceTV.setText(Html.fromHtml(aboutiPresenceTV.getText().toString()));
     }
 
 

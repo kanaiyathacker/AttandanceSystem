@@ -16,6 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:src="@drawable/ipresence_logo"
+        android:layout_centerInParent="true"
         />
 
     <ScrollView
@@ -24,18 +25,78 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <TextView
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This apps aims at providing low cost solution to your attendance tracking and monitoring owes.This app integrates three most popular scanning formats under one screen enabling you to choose the one that suits best for your business. Equipped with QR code scanner to scan user details and register attendance record Equipped with smart card scanner to scan RF cards and register attendance Equipped with voice scanner to scan voice code and register attendance Generates quick view of daily attendance. Detailed attendance analytics and reporting are available on request. "
+            android:text="This apps aims at providing low cost solution to your attendance tracking and monitoring owes.This app integrates three most popular scanning formats under one screen enabling you to choose the one that suits best for your business."
             android:id="@+id/aboutiPresenceTV"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="left"
             />
 
-        </ScrollView>
+         <TextView
+             android:paddingLeft="20dp"
+             android:paddingTop="5dp"
+             android:textColor="#ffffff"
+             android:layout_below="@+id/aboutiPresenceTV"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/ipresenceOne"
+             android:text="Equipped with QR code scanner to scan user details and register attendance record"
+          />
 
+        <TextView
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/ipresenceOne"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ipresenceTwo"
+            android:text="Equipped with smart card scanner to scan RF cards and register attendance"
+            />
 
+        <TextView
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/ipresenceTwo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ipresenceThree"
+            android:text="Equipped with smart card scanner to scan RF cards and register attendance"
+            />
 
+        <TextView
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/ipresenceThree"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ipresenceFour"
+            android:text="Equipped with smart card scanner to scan RF cards and register attendance"
+            />
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/ipresenceFour"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ipresenceFive"
+            android:text="Detailed attendance analytics and reporting are available on request. "
+            />
+
+    </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -44,6 +44,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
+    @InjectView(R.id.seperateDateTV) TextView seperateDateTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
@@ -79,6 +80,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
         seperateTimeTV.setTypeface(digital);
+        seperateDateTV.setTypeface(digital);
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
