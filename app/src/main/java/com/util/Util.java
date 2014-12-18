@@ -54,10 +54,10 @@ public class Util {
         user.setDateTime(convertDateTimeToString(dateTime));
         try {
             QRCodeWriter writer = new QRCodeWriter();
-            BitMatrix bitMatrix = writer.encode(gson.toJson(user), BarcodeFormat.QR_CODE, 512 , 512);
+            BitMatrix bitMatrix = writer.encode(gson.toJson(user), BarcodeFormat.QR_CODE, 450 , 450);
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
-            retVal = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            retVal = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 //            retVal = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {

@@ -157,10 +157,25 @@
         />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/dateTV"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/qrCodeimageView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/generateQrCodeButton"
+        />
 
+    <Button
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/out_time_button"
+        android:width="100dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Out Time"
+        android:onClick="save"
+        android:id="@+id/generateQrCodeButton"
+        android:layout_alignParentBottom="true"
+     />
 </RelativeLayout>
