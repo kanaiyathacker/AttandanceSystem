@@ -131,7 +131,7 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         }
 
         protected Void doInBackground(String... args) {
-            dialog = DialogScanner.newInstance(CameraFace.BACK , 0 , progressBar);
+            dialog = DialogScanner.newInstance(CameraFace.BACK , 1 , progressBar);
             return null;
         }
 

@@ -54,9 +54,11 @@ public class FunctionalMainActivity extends BaseActivity {
     public void smartScan(View view) {
         Intent intent =     null;
         if(isLogin) {
-//            if(isUserAdmin) {
+            if(isUserAdmin) {
                 intent = new Intent(this, MainActivity.class);
-//            }
+            } else {
+                intent = new Intent(this, UserMainActivity.class);
+            }
         } else {
                 intent = new Intent(this, LoginActivity.class);
                 intent.putExtra("ACTIVITY_SELECTED", "SMART_SCAN");
@@ -92,7 +94,7 @@ public class FunctionalMainActivity extends BaseActivity {
     }
 
     public void contactUs(View view) {
-        Intent intent = new Intent(this, UserMainActivity.class);
+        Intent intent = new Intent(this, ContactUsActivity.class);
         startActivity(intent);
     }
 

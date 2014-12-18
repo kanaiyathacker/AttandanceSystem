@@ -6,18 +6,82 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#E46C0A"
     tools:context="com.vaiotech.attendaceapp.UserMainActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:weightSum="4"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <View
+            android:padding="20dp"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/qr_code1"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="#FFF5EC"
+            android:background="#E46C0A"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Start QR Scan"
+            android:gravity="left|center"
+            />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        <View
+            android:padding="20dp"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/card1"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="#FFF5EC"
+            android:background="#E46C0A"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Start Card Scan"
+            android:gravity="left|center"
+            />
+
+        <Button
+            android:padding="20dp"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/qr_code1"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="#FFF5EC"
+            android:background="@drawable/button_border"
+            android:onClick="qrScan"
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="QR Scan"
+            android:gravity="left|center"
+            />
+
+
+        <Button
+            android:padding="20dp"
+            android:drawablePadding="30dp"
+            android:drawableLeft="@drawable/voice1"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="#FFF5EC"
+            android:background="@drawable/button_border"
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Voice Scan"
+            android:gravity="left|center"
+            />
+
+
+
+        <!--android:background="#92D050" -->
+    </LinearLayout>
 
 </RelativeLayout>

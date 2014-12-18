@@ -1,0 +1,166 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#353639"
+    tools:context="com.vaiotech.attendaceapp.QRCodeGeneratorActivity">
+
+    <TextView
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:id="@+id/timeTV"
+        android:layout_toLeftOf="@+id/hhET"
+        android:layout_below="@+id/firstHLine"
+        android:layout_marginRight="15dp"
+        />
+
+    <EditText
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hhET"
+        android:maxLength="2"
+        android:layout_below="@+id/firstHLine"
+        android:layout_toLeftOf="@+id/seperateTimeTV"
+        />
+
+    <TextView
+        android:textSize="30sp"
+        android:textColor="#080807"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:layout_below="@+id/firstHLine"
+        android:id="@+id/seperateTimeTV"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+    <EditText
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:maxLength="2"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mmET"
+        android:layout_below="@+id/firstHLine"
+        android:layout_toRightOf="@+id/seperateTimeTV"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/dateTV"
+        android:layout_toLeftOf="@+id/hhET"
+        android:layout_below="@+id/timeTV"
+        android:layout_marginRight="15dp"
+        />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ddET"
+        android:maxLength="2"
+        android:layout_below="@+id/timeTV"
+        android:layout_toLeftOf="@+id/seperateDateTV"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:textColor="#080807"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:layout_below="@+id/timeTV"
+        android:id="@+id/seperateDateTV"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:maxLength="2"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MMET"
+        android:layout_below="@+id/timeTV"
+        android:layout_toRightOf="@+id/seperateTimeTV"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:textColor="#080807"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:layout_below="@+id/timeTV"
+        android:id="@+id/seperateDateMMTV"
+        android:layout_toRightOf="@+id/MMET"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:maxLength="2"
+        android:gravity="center"
+        android:width="40dp"
+        android:textColor="#E81B11"
+        android:background="#080807"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yyET"
+        android:layout_below="@+id/timeTV"
+        android:layout_toRightOf="@+id/seperateDateMMTV"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/qrCodeimageView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
