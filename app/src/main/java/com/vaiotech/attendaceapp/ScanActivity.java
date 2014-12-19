@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,23 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.barcodescannerfordialogs.DialogScanner;
-import com.barcodescannerfordialogs.helpers.CameraFace;
-import com.bean.Admin;
-import com.bean.Person;
 import com.google.gson.Gson;
-import com.loopj.android.image.SmartImageView;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
