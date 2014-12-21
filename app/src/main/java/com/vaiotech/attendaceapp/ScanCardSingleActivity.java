@@ -251,7 +251,6 @@ public class ScanCardSingleActivity extends BaseActivity {
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
-        cardId = null;
         openDialog(view);
     }
 
@@ -292,6 +291,7 @@ public class ScanCardSingleActivity extends BaseActivity {
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+        cardId = null;
     }
 
 

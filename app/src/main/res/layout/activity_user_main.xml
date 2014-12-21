@@ -15,25 +15,125 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <View
-            android:padding="20dp"
-            android:drawablePadding="30dp"
-            android:drawableLeft="@drawable/qr_code1"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textColor="#FFF5EC"
-            android:background="#E46C0A"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Start QR Scan"
-            android:gravity="left|center"
-            />
 
+        <LinearLayout
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:background="#E46C0A"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:orientation="vertical"
+         >
+
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+
+                <TextView
+                    android:layout_weight="0.7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="20sp"
+                    android:id="@+id/nameTV"
+                    android:textColor="#FFFFFF"
+                />
+
+                <TextView
+                    android:layout_weight="0.1"
+                    android:layout_toEndOf="@+id/nameTV"
+                    android:textSize="19sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:id="@+id/idColonTV"
+                    android:layout_alignTop="@+id/nameTV"
+                    android:layout_toRightOf="@+id/nameTV"
+                    android:textColor="#FFFFFF"
+                />
+
+                <TextView
+                    android:layout_weight="1.2"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="20sp"
+                    android:id="@+id/nameValueTV"
+                    android:textColor="#FFFFFF"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+
+                <TextView
+                    android:layout_weight="0.7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Org Name"
+                    android:textSize="20sp"
+                    android:id="@+id/orgNameTV"
+                    android:textColor="#FFFFFF"
+                    />
+
+                <TextView
+                    android:layout_weight="0.1"
+                    android:layout_toEndOf="@+id/nameTV"
+                    android:textSize="19sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:id="@+id/orgNameColonTV"
+                    android:layout_alignTop="@+id/nameTV"
+                    android:layout_toRightOf="@+id/nameTV"
+                    android:textColor="#FFFFFF"
+                    />
+
+                <TextView
+                    android:layout_weight="1.2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Org name"
+                    android:textSize="20sp"
+                    android:id="@+id/orgNameValueTV"
+                    android:textColor="#FFFFFF"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <View
+                    android:layout_above="@+id/getInfoBUTTON"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/secHLine"
+                    android:background="#43464b"/>
+            </LinearLayout>
+        </LinearLayout>
         <View
             android:padding="20dp"
             android:drawablePadding="30dp"
-            android:drawableLeft="@drawable/card1"
             android:layout_margin="3dp"
             android:layout_weight="1"
             android:textSize="20sp"
@@ -41,7 +141,6 @@
             android:background="#E46C0A"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Start Card Scan"
             android:gravity="left|center"
             />
 
@@ -51,14 +150,14 @@
             android:drawableLeft="@drawable/qr_code1"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="#FFF5EC"
             android:background="@drawable/apptheme_btn_scan_selection_holo_light"
             android:onClick="qrScan"
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="QR Scan"
+            android:text="Generate QR Code"
             android:gravity="left|center"
             />
 
@@ -69,17 +168,15 @@
             android:drawableLeft="@drawable/voice1"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="#FFF5EC"
             android:background="@drawable/apptheme_btn_scan_selection_holo_light"
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Voice Scan"
+            android:text="Generate Voice Code"
             android:gravity="left|center"
             />
-
-
 
         <!--android:background="#92D050" -->
     </LinearLayout>

@@ -44,8 +44,10 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -85,7 +87,7 @@ public class ScanCardBatchActivity extends BaseActivity {
     @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
-    private List<String> list;
+    private Set<String> cardList;
 
 
     protected NfcAdapter nfcAdapter;
@@ -170,7 +172,7 @@ public class ScanCardBatchActivity extends BaseActivity {
         // initialize NFC
         shimmer = new Shimmer();
         shimmer.start(shimmer_tv);
-        list = new ArrayList<String>();
+        cardList = new HashSet<String>();
     }
 
     public void enableForegroundMode() {
@@ -194,20 +196,22 @@ public class ScanCardBatchActivity extends BaseActivity {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             byte[] id =tag.getId();
             long cardId = getReversed(id);
-            this.cardId = ""+cardId;
-            String count =counterValTV.getText().toString();
-            int cnt = Integer.parseInt(count);
-            ++cnt;
-            counterValTV.setText(""+cnt);
-            list.add(this.cardId);
-            if(cnt > 0 ) {
-                inBUTTON.setEnabled(true);
-                outBUTTON.setEnabled(true);
+            if(!cardList.contains((""+cardId))) {
+                this.cardId = ""+cardId;
+                String count = counterValTV.getText().toString();
+                int cnt = Integer.parseInt(count);
+                ++cnt;
+                counterValTV.setText("" + cnt);
+                cardList.add(this.cardId);
+                if (cnt > 0) {
+                    inBUTTON.setEnabled(true);
+                    outBUTTON.setEnabled(true);
 
-                inBUTTON.setAlpha(1f);
-                outBUTTON.setAlpha(1f);
-                shimmer.cancel();
-                shimmer_tv.setText("");
+                    inBUTTON.setAlpha(1f);
+                    outBUTTON.setAlpha(1f);
+                    shimmer.cancel();
+                    shimmer_tv.setText("");
+                }
             }
         }
     }
@@ -263,7 +267,7 @@ public class ScanCardBatchActivity extends BaseActivity {
             int cnt = Integer.parseInt(count);
             ++cnt;
             counterValTV.setText(""+cnt);
-            list.add(this.cardId);
+            cardList.add(this.cardId);
             if(cnt > 0 ) {
                 inBUTTON.setEnabled(true);
                 outBUTTON.setEnabled(true);
@@ -292,17 +296,13 @@ public class ScanCardBatchActivity extends BaseActivity {
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
-        if(list != null)
-            list.clear();
-        counterValTV.setText("0");
-
         openDialog(view);
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
-        t.setCardId(list);
+        t.setCardId(new ArrayList<String>(cardList));
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setOrgId(user.getCoId());
@@ -331,6 +331,9 @@ public class ScanCardBatchActivity extends BaseActivity {
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+        if(cardList != null)
+            cardList.clear();
+        counterValTV.setText("0");
     }
 
     private void vibrate() {

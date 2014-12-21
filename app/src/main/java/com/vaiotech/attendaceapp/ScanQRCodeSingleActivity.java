@@ -167,8 +167,11 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @Override
     public void onQRCodeScan(Object contents) {
         if(contents != null) {
-            idValueTV.setText((String) contents);
-            this.cardId = (String) contents;
+            Gson gson = new Gson();
+            User user = gson.fromJson("" + contents, User.class);
+            idValueTV.setText(user.getCardId());
+
+            this.cardId = user.getCardId();
 
             inBUTTON.setEnabled(true);
             outBUTTON.setEnabled(true);
@@ -186,7 +189,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
-        cardId = null;
         openDialog(view);
     }
 
@@ -227,5 +229,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+        cardId = null;
     }
 }

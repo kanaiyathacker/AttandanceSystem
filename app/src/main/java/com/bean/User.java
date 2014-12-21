@@ -19,6 +19,8 @@ public class User implements Serializable{
     private String tranTable;
     private String type;
     private String dateTime;
+    private String cardId;
+
 
     public String getId() {
         return id;
@@ -130,5 +132,30 @@ public class User implements Serializable{
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!cardId.equals(user.cardId)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return cardId.hashCode();
     }
 }

@@ -5,6 +5,7 @@ import android.widget.TextView;
 import com.google.gson.internal.LinkedTreeMap;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.vaiotech.attendaceapp.BaseActivity;
+import com.vaiotech.attendaceapp.ManualEntryActivity;
 import com.vaiotech.attendaceapp.R;
 
 import static java.lang.String.valueOf;
@@ -36,6 +37,10 @@ public class GetInfoRequestListener implements com.octo.android.robospice.reques
             baseActivity.findViewById(R.id.inBUTTON).setAlpha(1f);
             baseActivity.findViewById(R.id.outBUTTON).setEnabled(true);
             baseActivity.findViewById(R.id.outBUTTON).setAlpha(1f);
+
+            if(baseActivity instanceof ManualEntryActivity) {
+                ((ManualEntryActivity)baseActivity).setCardId(""+map.get("cardId"));
+            }
         }
     }
 }

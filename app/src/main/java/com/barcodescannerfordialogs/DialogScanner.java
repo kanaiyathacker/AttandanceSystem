@@ -25,10 +25,14 @@ import android.widget.TextView;
 
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.barcodescannerfordialogs.qrscanner.ZBarScannerView;
+import com.bean.User;
+import com.google.gson.Gson;
 import com.vaiotech.attendaceapp.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import me.dm7.barcodescanner.core.DisplayUtils;
 
@@ -52,7 +56,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
     int mWindowHeight = 600;
     int mViewFinderPadding = 0;
     int singleOrBatchFlag =0;
-    List<String> scanResult;
+    Set<User> scanResult;
     TextView countTv;
 
 	static final String BUNDLE_CAMERA_FACE = "cameraFace";
@@ -154,7 +158,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
             countTv.setGravity(Gravity.CENTER);
             countTv.setLayoutParams(tvLay);
             mScannerView.addView(countTv);
-            scanResult = new ArrayList<String>();
+            scanResult = new HashSet<User>();
         }
 
         FrameLayout.LayoutParams lay = new FrameLayout.LayoutParams(
@@ -224,7 +228,10 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
                 int count = Integer.parseInt(getTextViewText(countTv));
                 count++;
                 countTv.setText(""+count);
-                scanResult.add(result.getContents());
+                String con = result.getContents();
+                Gson gson = new Gson();
+                User user= gson.fromJson(con, User.class);
+                scanResult.add(user);
             }
 		}
 	}

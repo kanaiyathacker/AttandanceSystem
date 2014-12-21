@@ -5,9 +5,15 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.listener.ContactUsRequestListener;
+import com.listener.ViewReportRequestListener;
+import com.services.ContactUsRequest;
+import com.services.GetInfoRequest;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -20,6 +26,8 @@ public class ContactUsActivity extends BaseActivity {
     @InjectView(R.id.detailsTV) TextView detailsTV;
     @InjectView(R.id.detailsET) EditText detailsET;
     @InjectView(R.id.submitButton) Button submitButton;
+
+    private ContactUsRequest contactUsRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,5 +63,10 @@ public class ContactUsActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void save(View view) {
+        contactUsRequest = new ContactUsRequest(emailET.getText().toString() , detailsET.getText().toString());
+        spiceManager.execute(contactUsRequest ,new ContactUsRequestListener(this));
     }
 }

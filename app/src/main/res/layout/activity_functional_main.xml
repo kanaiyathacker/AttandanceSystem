@@ -26,7 +26,8 @@
             android:layout_gravity="center_horizontal">
 
             <Button
-                android:paddingBottom="20dp"
+                android:paddingBottom="10dp"
+                android:drawablePadding="10dp"
                 android:gravity="bottom|center"
                 android:drawableBottom="@drawable/user_profile1"
                 android:onClick="myProfile"
@@ -41,7 +42,8 @@
                 android:id="@+id/myProfileButton" />
 
             <Button
-                android:paddingBottom="20dp"
+                android:paddingBottom="10dp"
+                android:drawablePadding="10dp"
                 android:gravity="bottom|center"
                 android:drawableBottom="@drawable/about_info"
                 android:onClick="aboutIPresence"
@@ -64,7 +66,8 @@
             android:layout_gravity="center_horizontal">
 
             <Button
-                android:paddingBottom="20dp"
+                android:paddingBottom="10dp"
+                android:drawablePadding="10dp"
                 android:gravity="bottom|center"
                 android:drawableBottom="@drawable/smart_card2"
                 android:onClick="smartScan"
@@ -88,7 +91,8 @@
             android:layout_gravity="center_horizontal">
 
             <Button
-                android:paddingBottom="20dp"
+                android:paddingBottom="10dp"
+                android:drawablePadding="10dp"
                 android:gravity="bottom|center"
                 android:drawableBottom="@drawable/data_information1"
                 android:onClick="viewReport"
@@ -103,7 +107,8 @@
                 android:id="@+id/viewReportButton" />
 
             <Button
-                android:paddingBottom="20dp"
+                android:paddingBottom="10dp"
+                android:drawablePadding="10dp"
                 android:gravity="bottom|center"
                 android:drawableBottom="@drawable/contact1"
                 android:onClick="contactUs"

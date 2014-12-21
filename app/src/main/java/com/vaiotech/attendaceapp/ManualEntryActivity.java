@@ -69,6 +69,15 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
     private LocationManager lm;
     private Location location;
     private User user;
+    private String cardId;
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,10 +148,10 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
         t.setDate(Util.convertDateToString(new Date()));
-        t.setUserId(userIdValueET.getText().toString());
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setOrgId(user.getCoId());
         t.setType(type);
+        t.setCardId(Arrays.asList(getCardId()));
         if(lm != null) {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(location != null) {

@@ -64,6 +64,7 @@ public class FunctionalMainActivity extends BaseActivity {
                 intent.putExtra("ACTIVITY_SELECTED", "SMART_SCAN");
         }
         startActivity(intent);
+//        finish();
     }
 
     public void myProfile(View view) {
@@ -75,22 +76,25 @@ public class FunctionalMainActivity extends BaseActivity {
             intent.putExtra("ACTIVITY_SELECTED" , "MY_PROFILE");
         }
         startActivity(intent);
+//        finish();
     }
 
     public void aboutIPresence(View view) {
         Intent intent = new Intent(this, AboutIPresenceActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     public void viewReport(View view) {
         Intent intent = null;
         if(isLogin) {
-            intent = new Intent(this, ViewReportActivity.class);
+            intent = new Intent(this, ViewUserReportActivity.class);
         } else {
             intent = new Intent(this, LoginActivity.class);
             intent.putExtra("ACTIVITY_SELECTED", "VIEW_REPORT");
         }
         startActivity(intent);
+//        finish();
     }
 
     public void contactUs(View view) {

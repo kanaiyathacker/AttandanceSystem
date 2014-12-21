@@ -47,7 +47,7 @@
             android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PLEASE ENTER THE DETAILS :"
+            android:text="Please Enter The Details :"
             android:textSize="19sp"
             android:id="@+id/detailsTV"
         />
@@ -59,7 +59,7 @@
             android:padding="5dp"
             android:background="#FFFFFF"
             android:textColor="#000000"
-            android:textSize="19sp"
+            android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="fill_parent"
@@ -71,14 +71,16 @@
         <Button
             android:textSize="19sp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/view_absentee_button"
+            android:background="@drawable/apptheme_btn_scan_selection_holo_light"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:id="@+id/submitButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Submit"
+            android:textColor="#ffffff"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
+            android:onClick="save"
         />
 </RelativeLayout>

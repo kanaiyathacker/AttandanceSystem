@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.listener.ChangePasswordRequestListener;
 import com.services.ChangePasswordRequest;
 import com.services.LoginRequest;
+import com.util.Util;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -135,9 +136,10 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
 
     public void save(View view) {
         String password = user.getPassword();
-        if(!password.equals(currentPasswordEV.getText())) {
-            dialog(password +"Wrong current password" + currentPasswordEV.getText());
+        if(!password.equals(Util.getEditViewText(currentPasswordEV))) {
+            dialog(" Wrong current password " + Util.getEditViewText(currentPasswordEV));
         } else {
+
             changePasswordRequest = new ChangePasswordRequest(new ChangePassword(user.getUserId() , getEditViewText(currentPasswordEV) , getEditViewText(newPasswordEV) , getEditViewText(retypePasswordEV)));
             spiceManager.execute(changePasswordRequest , new ChangePasswordRequestListener(this));
         }

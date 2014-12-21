@@ -35,8 +35,7 @@
         android:label="@string/app_name"
         android:launchMode="singleTop"
         android:theme="@style/AppTheme"
-        tools:replace="android:label, android:icon"
-        >
+        tools:replace="android:label, android:icon" >
         <activity
             android:name="com.vaiotech.attendaceapp.HomeActivity"
             android:label="@string/app_name" >
@@ -154,6 +153,18 @@
         <activity
             android:name="com.vaiotech.attendaceapp.QRCodeGeneratorActivity"
             android:label="@string/title_activity_qrcode_generator" >
+        </activity>
+        <activity
+            android:name="com.vaiotech.attendaceapp.ScanVoiceCodeSingleActivity"
+            android:label="@string/title_activity_scan_voice_code_single" >
+        </activity>
+        <activity
+            android:name="com.vaiotech.attendaceapp.ScanVoiceCodeBatchActivity"
+            android:label="@string/title_activity_scan_voice_code_batch" >
+        </activity>
+        <activity
+            android:name="com.vaiotech.attendaceapp.ViewUserReportActivity"
+            android:label="@string/title_activity_view_user_report" >
         </activity>
     </application>
 

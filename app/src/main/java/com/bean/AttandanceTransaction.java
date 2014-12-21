@@ -91,4 +91,19 @@ public class AttandanceTransaction implements Serializable{
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "AttandanceTransaction{" +
+                "cardId=" + cardId +
+                ", adminId='" + adminId + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", type='" + type + '\'' +
+                ", orgId='" + orgId + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
+    }
 }

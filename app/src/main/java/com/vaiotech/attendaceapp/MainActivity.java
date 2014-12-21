@@ -74,7 +74,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void scanVoice(View view) {
-        Intent intent = new Intent(this , HomeActivity.class);
+        Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
+                new Intent(this, ScanVoiceCodeSingleActivity.class) : new Intent(this, ScanVoiceCodeBatchActivity.class);
+
         startActivity(intent);
     }
 

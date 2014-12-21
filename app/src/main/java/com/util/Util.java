@@ -58,10 +58,8 @@ public class Util {
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
             retVal = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-//            retVal = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-//                    retVal.setPixel(x, y, bitMatrix.get(x, y) ? Color.WHITE : Color.parseColor("#353639"));
                     retVal.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
             }
