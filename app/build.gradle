@@ -35,7 +35,7 @@ dependencies {
     compile 'com.android.support:support-v13:21.0.0'
     compile 'com.romainpiel.shimmer:library:1.2.0@aar'
     compile 'com.google.zxing:core:2.0'
-
+    compile 'com.roomorama:caldroid:1.1.7'
     compile files('libs/ndeftools-1.2.3.jar')
     //compile 'eu.livotov.labs:zxscanlib:2.0.0-SNAPSHOT@aar'
     //compile 'eu.livotov.labs:camview:1.0.0@aar'

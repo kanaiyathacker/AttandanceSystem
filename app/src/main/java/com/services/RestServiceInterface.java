@@ -43,6 +43,8 @@ public interface RestServiceInterface {
     @POST("/ScanAttandanceApp/contact/{emailId}/{contactUsDetails}")
     Object submitEnquiry(@Path("emailId") String emailId , @Path("contactUsDetails") String contactUsDetails );
 
+    @POST("/getUserAbsenteeReport/{cardId}/{month}")
+    Object getUserAbsenteeReport(@Path("cardId") String cardId ,@Path("month") String month );
 
 
 //    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")

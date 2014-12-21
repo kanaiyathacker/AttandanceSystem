@@ -30,13 +30,31 @@ public class Util {
         return new SimpleDateFormat(DATE_FORMAT).format(date);
     }
 
+    public static Date convertStringToDate(String date) {
+        Date retVal = null;
+        SimpleDateFormat f = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            retVal = f.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return retVal;
+    }
+
     public static String convertDateTimeToString(long dateTime) {
         Date date = new Date(dateTime);
         return new SimpleDateFormat(DATETIME_FORMAT).format(date);
     }
 
     public static void main(String [] str) {
-        System.out.println("Util..... " + convertDateTimeToString(Calendar.getInstance().getTimeInMillis()));
+        SimpleDateFormat f = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            Date date = f.parse("01/12/2014");
+            System.out.println("Util..... " + date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static String getEditViewText(EditText editText) {

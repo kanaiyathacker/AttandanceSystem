@@ -116,18 +116,6 @@ public class ScanCardSingleActivity extends BaseActivity {
         getInfoBUTTON.setTypeface(font);
         Calendar cal = Calendar.getInstance();
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        String str  = "T";
-        if(lm != null) {
-            str += " - lm ";
-            Location local = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (local != null) {
-                long time = local.getTime();
-                cal.setTimeInMillis(time);
-//                str += " - l " + cal.get(Calendar.MINUTE);
-            }
-        }
-//        idValueTV.setText(str);
-
         cal.set(Calendar.AM_PM, Calendar.PM);
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int min = cal.get(Calendar.MINUTE);
