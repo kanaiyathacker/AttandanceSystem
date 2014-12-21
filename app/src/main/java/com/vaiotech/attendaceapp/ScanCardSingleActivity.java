@@ -123,10 +123,10 @@ public class ScanCardSingleActivity extends BaseActivity {
             if (local != null) {
                 long time = local.getTime();
                 cal.setTimeInMillis(time);
-                str += " - l " + cal.get(Calendar.MINUTE);
+//                str += " - l " + cal.get(Calendar.MINUTE);
             }
         }
-        idValueTV.setText(str);
+//        idValueTV.setText(str);
 
         cal.set(Calendar.AM_PM, Calendar.PM);
         int hour = cal.get(Calendar.HOUR_OF_DAY);

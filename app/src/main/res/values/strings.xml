@@ -27,11 +27,11 @@
     <string name="title_activity_scan_qrcode_single">Scan QRCode Single</string>
     <string name="title_activity_manual_entry">Manual Entry</string>
     <string name="title_activity_scan_qrcode_batch">Scan QRCode Batch</string>
-    <string name="title_activity_user_main">UserMainActivity</string>
-    <string name="title_activity_qrcode_generator">QRCodeGeneratorActivity</string>
-    <string name="title_activity_scan_voice_code">ScanVoiceCodeActivity</string>
-    <string name="title_activity_scan_voice_code_single">ScanVoiceCodeSingleActivity</string>
-    <string name="title_activity_scan_voice_code_batch">ScanVoiceCodeBatchActivity</string>
-    <string name="title_activity_view_user_report">ViewUserReportActivity</string>
+    <string name="title_activity_user_main">Scan</string>
+    <string name="title_activity_qrcode_generator">Generate QR Code</string>
+    <string name="title_activity_scan_voice_code_single">Scan Voice Code Single</string>
+    <string name="title_activity_scan_voice_code_batch">Scan Voice Code Batch</string>
+    <string name="title_activity_view_user_report">View Report</string>
+    <string name="title_activity_voice_code_generator">VoiceCodeGeneratorActivity</string>
 
 </resources>

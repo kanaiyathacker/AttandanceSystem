@@ -1,51 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="#353639"
-    tools:context="com.vaiotech.attendaceapp.ScanCardBatchActivity">
-
-
+    tools:context="com.vaiotech.attendaceapp.VoiceCodeGeneratorActivity">
     <TextView
-        android:paddingLeft="10dp"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin Name : "
-        android:id="@+id/adminNameLableTV"
-        android:layout_alignParentTop="true"
-        />
-
-    <TextView
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="----------------"
-        android:id="@+id/adminValueLableTV"
-        android:layout_toRightOf="@+id/adminNameLableTV"
-        android:layout_below="@+id/idLableTV"
-        android:layout_alignParentTop="true"
-        />
-
-
-    <View
-        android:layout_below="@+id/adminNameLableTV"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:id="@+id/firstHLine"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:background="#080807"/>
-
-
-
-    <TextView
+        android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
@@ -57,7 +19,8 @@
         android:layout_marginRight="15dp"
         />
 
-    <EditText
+    <TextView
+        android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -74,6 +37,7 @@
         />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:textColor="#080807"
         android:layout_marginLeft="5dp"
@@ -86,7 +50,8 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
+        android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -115,7 +80,7 @@
         android:layout_marginRight="15dp"
         />
 
-    <EditText
+    <TextView
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
@@ -146,7 +111,7 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
@@ -177,15 +142,14 @@
         android:layout_toRightOf="@+id/MMET"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
         android:textSize="30sp"
         android:maxLength="2"
         android:gravity="center"
-        android:width="80dp"
-        android:enabled="false"
+        android:width="40dp"
         android:textColor="#E81B11"
         android:background="#080807"
         android:layout_width="wrap_content"
@@ -195,96 +159,41 @@
         android:layout_toRightOf="@+id/seperateDateMMTV"
         />
 
-    <TextView
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:text="0"
-        android:textSize="100sp"
-        android:gravity="center"
-        android:textColor="#E81B11"
-        android:background="#080807"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/counterValTV"
-        android:layout_below="@+id/dateTV"
-        android:layout_centerHorizontal="true"
-        />
-
-    <TextView
-        android:layout_marginTop="70dp"
-        android:text="Count"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/counterLableTV"
-        android:layout_toLeftOf="@+id/counterValTV"
-        android:layout_below="@+id/dateTV"
-        android:layout_marginRight="20dp"
-        />
-
-    <com.romainpiel.shimmer.ShimmerTextView
-        android:id="@+id/shimmer_tv"
-        android:text="Scanning..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:layout_above="@+id/secondHLine"
-        android:layout_centerHorizontal="true"
-        />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:background="@xml/progress_bar"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
-
-    <View
-        android:layout_above="@+id/inBUTTON"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:id="@+id/secondHLine"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="5dp"
-        android:background="#000000"/>
 
     <Button
-        android:layout_alignParentStart="true"
-        android:layout_margin="20dp"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/apptheme_btn_in_time_holo_light"
-        android:width="110dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="In Time"
-        android:onClick="save"
-        android:id="@+id/inBUTTON"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        />
-
-    <Button
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:background="@drawable/apptheme_btn_out_time_holo_light"
-        android:width="110dp"
-        android:layout_width="wrap_content"
+        android:width="100dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Out Time"
-        android:onClick="save"
-        android:id="@+id/outBUTTON"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:text="Generate"
+        android:onClick="refresh"
+        android:id="@+id/refreshButton"
         android:layout_alignParentBottom="true"
         />
+
+    <ProgressBar
+        android:layout_margin="10dip"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_below="@+id/progressBar"
+        android:id="@+id/progressDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:gravity="center_vertical"
+        android:text="0%"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
 
 </RelativeLayout>

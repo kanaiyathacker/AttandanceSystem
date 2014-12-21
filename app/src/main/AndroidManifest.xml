@@ -166,6 +166,10 @@
             android:name="com.vaiotech.attendaceapp.ViewUserReportActivity"
             android:label="@string/title_activity_view_user_report" >
         </activity>
+        <activity
+            android:name="com.vaiotech.attendaceapp.VoiceCodeGeneratorActivity"
+            android:label="@string/title_activity_voice_code_generator" >
+        </activity>
     </application>
 
 </manifest>

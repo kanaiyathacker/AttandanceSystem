@@ -88,7 +88,11 @@ public class FunctionalMainActivity extends BaseActivity {
     public void viewReport(View view) {
         Intent intent = null;
         if(isLogin) {
-            intent = new Intent(this, ViewUserReportActivity.class);
+            if(isUserAdmin) {
+                intent = new Intent(this, ViewReportActivity.class);
+            } else {
+                intent = new Intent(this, ViewUserReportActivity.class);
+            }
         } else {
             intent = new Intent(this, LoginActivity.class);
             intent.putExtra("ACTIVITY_SELECTED", "VIEW_REPORT");

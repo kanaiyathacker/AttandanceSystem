@@ -176,6 +176,7 @@
             android:layout_height="match_parent"
             android:text="Generate Voice Code"
             android:gravity="left|center"
+            android:onClick="voiceScan"
             />
 
         <!--android:background="#92D050" -->

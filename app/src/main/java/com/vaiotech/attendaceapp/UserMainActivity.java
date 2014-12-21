@@ -57,4 +57,9 @@ public class UserMainActivity extends BaseActivity {
         Intent intent = new Intent(this , QRCodeGeneratorActivity.class);
         startActivity(intent);
     }
+
+    public void voiceScan(View view) {
+        Intent intent = new Intent(this , VoiceCodeGeneratorActivity.class);
+        startActivity(intent);
+    }
 }
