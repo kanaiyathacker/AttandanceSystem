@@ -28,6 +28,7 @@ public class LoginActivity  extends BaseActivity {
     @InjectView(R.id.passwordTV)  TextView passwordTV;
     @InjectView(R.id.passwordET)  EditText passwordET;
     @InjectView(R.id.loginBUTTON) Button loginBUTTON;
+    @InjectView(R.id.errorTV)   TextView errorTV;
 
     private LoginRequest loginRequest;
 
@@ -41,6 +42,7 @@ public class LoginActivity  extends BaseActivity {
         passwordTV.setTypeface(font);
         passwordET.setTypeface(font);
         loginBUTTON.setTypeface(font);
+        errorTV.setTypeface(font);
     }
 
 

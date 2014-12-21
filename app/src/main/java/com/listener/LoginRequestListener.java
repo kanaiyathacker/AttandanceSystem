@@ -50,25 +50,30 @@ public class LoginRequestListener implements RequestListener<Object> {
             LinkedTreeMap map = (LinkedTreeMap)o;
             Gson gson = new Gson();
             User user = new User();
-
-            user.setfName(map.get("fName").toString());
-            user.setlName(map.get("lName").toString());
-            user.setmName(map.get("mName").toString());
-            user.setUserId(map.get("userId").toString());
-            user.setStatus(map.get("status").toString());
-            user.setCoName(map.get("orgName").toString());
-            user.setCoId(map.get("orgId").toString());
-            user.setPassword(map.get("password").toString());
-            user.setCardId(map.get("cardId").toString());
-            user.setId(map.get("id").toString());
-            String type = map.get("type").toString();
-            user.setType(type);
-            Intent intent = getIntend(type);
-            String userDetail = gson.toJson(user);
-//            intent.putExtra("USER_DETAILS", userDetail);
-            SharedPreferences.Editor editor = loginActivity.getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE).edit();
-            editor.putString("USER_DETAILS" , userDetail).apply();
-            loginActivity.startActivity(intent);
+            String userId = map.get("userId").toString();
+            if(userId == null || userId.length() == 0) {
+                user.setfName(map.get("fName").toString());
+                user.setlName(map.get("lName").toString());
+                user.setmName(map.get("mName").toString());
+                user.setUserId(map.get("userId").toString());
+                user.setStatus(map.get("status").toString());
+                user.setCoName(map.get("orgName").toString());
+                user.setCoId(map.get("orgId").toString());
+                user.setPassword(map.get("password").toString());
+                user.setCardId(map.get("cardId").toString());
+                user.setId(map.get("id").toString());
+                String type = map.get("type").toString();
+                user.setType(type);
+                Intent intent = getIntend(type);
+                String userDetail = gson.toJson(user);
+                //            intent.putExtra("USER_DETAILS", userDetail);
+                SharedPreferences.Editor editor = loginActivity.getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE).edit();
+                editor.putString("USER_DETAILS", userDetail).apply();
+                loginActivity.startActivity(intent);
+            } else {
+                TextView errorTV = (TextView)loginActivity.findViewById(R.id.errorTV);
+                errorTV.setText("Invalid Login ID OR Password");
+            }
         }
     }
 
