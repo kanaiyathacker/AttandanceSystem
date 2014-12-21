@@ -11,15 +11,17 @@ public class GetUserAbsenteeRequest extends RetrofitSpiceRequest<Object, RestSer
 
     private String cardId;
     private String month;
+    private String year;
 
-    public GetUserAbsenteeRequest(String cardId , String month) {
+    public GetUserAbsenteeRequest(String cardId , String month , String year) {
         super(Object.class, RestServiceInterface.class);
         this.cardId = cardId;
         this.month = month;
+        this.year = year;
     }
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception {
-        return  getService().getUserAbsenteeReport(cardId , month);
+        return  getService().getUserAbsenteeReport(cardId , month , year);
     }
 }

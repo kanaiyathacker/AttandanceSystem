@@ -53,7 +53,6 @@ public class ViewUserReportActivity extends FragmentActivity {
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         caldroidFragment.setArguments(args);
-        getUserAbsenteeRequest = new GetUserAbsenteeRequest(user.getUserId() , String.valueOf((cal.get(Calendar.MONTH) + 1)));
         caldroidFragment.setCaldroidListener(new CaldroidListener() {
 
             @Override
@@ -63,13 +62,18 @@ public class ViewUserReportActivity extends FragmentActivity {
 
             @Override
             public void onChangeMonth(int month, int year) {
-                String text = "month: " + month + " year: " + year;
+                String monthStr  = month < 10 ? "0"+month : ""+month;
+                String text = "month: " + monthStr + " : " + user.getCardId();
                 Toast.makeText(getApplicationContext(), text,
                         Toast.LENGTH_SHORT).show();
-                getUserAbsenteeRequest = new GetUserAbsenteeRequest(user.getUserId() , String.valueOf(month));
+                HashMap<java.util.Date, Integer> mapVal = new HashMap<java.util.Date, Integer>();
+                mapVal.put(new Date("12/12/2014") , R.color.absentee);
+                caldroidFragment.setBackgroundResourceForDates(mapVal);
+                caldroidFragment.setTextColorForDate(R.color.WHITE , new Date("12/12/2014"));
+                caldroidFragment.refreshView();
+                getUserAbsenteeRequest = new GetUserAbsenteeRequest(user.getCardId() , monthStr , ""+ year);
                 spiceManager.execute(getUserAbsenteeRequest ,new GetUserAbsenteeRequestListener(caldroidFragment));
             }
-
         });
 //        HashMap<Date, Integer> mapVal = new HashMap<java.util.Date, Integer>();
 //        mapVal.put(new Date("11/11/2014"), R.color.event_color_02);

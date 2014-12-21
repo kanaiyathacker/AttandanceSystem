@@ -32,8 +32,13 @@ public class GetUserAbsenteeRequestListener implements RequestListener<Object> {
     public void onRequestSuccess(Object o) {
         LinkedTreeMap map = (LinkedTreeMap) o;
         List dateList = (List) map.get("absentList");
-        caldroidFragment.setBackgroundResourceForDate(R.color.absentee, Util.convertStringToDate("12/12/2014"));
-        caldroidFragment.refreshView();
+//        caldroidFragment.setBackgroundResourceForDate(R.color.absentee, Util.convertStringToDate("12/12/2014"));
+//        caldroidFragment.refreshView();
+        HashMap<java.util.Date, Integer> mapVal = new HashMap<java.util.Date, Integer>();
+        mapVal.put(new Date("12/12/2014") , R.color.absentee);
 //        caldroidFragment.setTextColorForDate(R.color.white, greenDate);
+
+        caldroidFragment.setBackgroundResourceForDates(mapVal);
+        caldroidFragment.refreshView();
     }
 }
