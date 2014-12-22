@@ -66,24 +66,10 @@ public class ViewUserReportActivity extends FragmentActivity {
                 String text = "month: " + monthStr + " : " + user.getCardId();
                 Toast.makeText(getApplicationContext(), text,
                         Toast.LENGTH_SHORT).show();
-                HashMap<java.util.Date, Integer> mapVal = new HashMap<java.util.Date, Integer>();
-                mapVal.put(new Date("12/12/2014") , R.color.absentee);
-                caldroidFragment.setBackgroundResourceForDates(mapVal);
-                caldroidFragment.setTextColorForDate(R.color.WHITE , new Date("12/12/2014"));
-                caldroidFragment.refreshView();
                 getUserAbsenteeRequest = new GetUserAbsenteeRequest(user.getCardId() , monthStr , ""+ year);
                 spiceManager.execute(getUserAbsenteeRequest ,new GetUserAbsenteeRequestListener(caldroidFragment));
             }
         });
-//        HashMap<Date, Integer> mapVal = new HashMap<java.util.Date, Integer>();
-//        mapVal.put(new Date("11/11/2014"), R.color.event_color_02);
-//        caldroidFragment.setBackgroundResourceForDates(mapVal);
-//        caldroidFragment.refreshView();
-
-
-//        caldroidFragment.setBackgroundResourceForDate("#1C5EBB", greenDate);
-//        caldroidFragment.setTextColorForDate(R.color.white, greenDate);
-
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.fraContainer, caldroidFragment);
         t.commit();

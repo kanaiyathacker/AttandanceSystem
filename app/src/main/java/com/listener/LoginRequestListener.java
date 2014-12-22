@@ -17,6 +17,8 @@ import com.vaiotech.attendaceapp.MyProfileActivity;
 import com.vaiotech.attendaceapp.R;
 import com.vaiotech.attendaceapp.ViewReportActivity;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Created by kanaiyalalt on 14/11/2014.
  */
@@ -51,7 +53,7 @@ public class LoginRequestListener implements RequestListener<Object> {
             Gson gson = new Gson();
             User user = new User();
             String userId = map.get("userId").toString();
-            if(userId == null || userId.length() == 0) {
+            if(userId != null && userId.length() > 0) {
                 user.setfName(map.get("fName").toString());
                 user.setlName(map.get("lName").toString());
                 user.setmName(map.get("mName").toString());
