@@ -13,9 +13,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.barcodescannerfordialogs.DialogScanner;
@@ -59,6 +62,9 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
     @InjectView(R.id.progressBar) ProgressBar progressBar;
+    @InjectView(R.id.eventSpinner) Spinner eventSpinner;
+
+
 
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
@@ -144,6 +150,32 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
         progressBar.setVisibility(View.VISIBLE);
         new  HeavyTask(this).execute();
+        getEventData();
+    }
+
+    private void getEventData() {
+        String[] celebrities = {
+                "10 - A",
+                "10 - B",
+                "10 - C"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, R.layout.spinner_text, celebrities);
+        eventSpinner.setAdapter(adapter);
+        eventSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                               int arg2, long arg3) {
+                        int position = eventSpinner.getSelectedItemPosition();
+                        // TODO Auto-generated method stub
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                        // TODO Auto-generated method stub
+                    }
+                }
+        );
     }
 
     private class HeavyTask extends AsyncTask<String, Void, Void> {
