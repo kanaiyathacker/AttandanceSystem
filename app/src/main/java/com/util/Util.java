@@ -1,6 +1,7 @@
 package com.util;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,12 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.services.LoginRequest;
 import com.vaiotech.attendaceapp.R;
 
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.TimeInfo;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -85,5 +92,28 @@ public class Util {
             e.printStackTrace();
         }
         return retVal;
+    }
+
+    public static String query(String ntpServerHostname) throws IOException, SocketException {
+        NTPUDPClient client = new NTPUDPClient();
+        // We want to timeout if a response takes longer than 10 seconds
+        client.setDefaultTimeout(10000);
+
+        TimeInfo info = null;
+        try {
+            client.open();
+
+            InetAddress hostAddr = InetAddress.getByName(ntpServerHostname);
+            Log.d("Query", "Trying to get time from " + hostAddr.getHostName() + "/" + hostAddr.getHostAddress());
+
+            info = client.getTime(hostAddr);
+        } finally {
+            client.close();
+        }
+
+        // compute offset/delay if not already done
+        info.computeDetails();
+
+        return info.getMessage().getTransmitTimeStamp().toDateString();
     }
 }

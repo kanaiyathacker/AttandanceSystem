@@ -22,6 +22,35 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    /*
+    * To sign release build, create file gradle.properties in ~/.gradle/ with this content:
+    *
+    * signingStoreLocation=/home/key.store
+    * signingStorePassword=xxx
+    * signingKeyAlias=alias
+    * signingKeyPassword=xxx
+*/
+    if (project.hasProperty('signingStoreLocation') &&
+            project.hasProperty('signingStorePassword') &&
+            project.hasProperty('signingKeyAlias') &&
+            project.hasProperty('signingKeyPassword')) {
+        println "Found sign properties in gradle.properties! Signing build…"
+
+        signingConfigs {
+            release {
+                storeFile file(signingStoreLocation)
+                storePassword signingStorePassword
+                keyAlias signingKeyAlias
+                keyPassword signingKeyPassword
+            }
+        }
+
+        buildTypes.release.signingConfig = signingConfigs.release
+    } else {
+        buildTypes.release.signingConfig = null
+    }
 }
 
 dependencies {
@@ -37,7 +66,9 @@ dependencies {
     compile 'com.google.zxing:core:2.0'
     compile 'com.roomorama:caldroid:1.1.7'
     compile files('libs/ndeftools-1.2.3.jar')
-    //compile 'eu.livotov.labs:zxscanlib:2.0.0-SNAPSHOT@aar'
+    compile 'com.android.support:support-v4:18.0.+'
+    compile 'commons-net:commons-net:3.3'
+   //compile 'eu.livotov.labs:zxscanlib:2.0.0-SNAPSHOT@aar'
     //compile 'eu.livotov.labs:camview:1.0.0@aar'
 //    transitive = true
 }
