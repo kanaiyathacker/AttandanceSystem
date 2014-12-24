@@ -32,6 +32,8 @@ public class Util {
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String DATETIME_FORMAT = "dd/MM/yyyy hh:mm:ss";
+    public static final String NTC_DATETIME_FORMAT = "EEE, MMM dd yyyy HH:mm:sss";
+
 
     public static String convertDateToString(Date date) {
         return new SimpleDateFormat(DATE_FORMAT).format(date);
@@ -40,6 +42,17 @@ public class Util {
     public static Date convertStringToDate(String date) {
         Date retVal = null;
         SimpleDateFormat f = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            retVal = f.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return retVal;
+    }
+
+    public static Date convertStringToDate(String date , String dateFormat) {
+        Date retVal = null;
+        SimpleDateFormat f = new SimpleDateFormat(dateFormat);
         try {
             retVal = f.parse(date);
         } catch (ParseException e) {

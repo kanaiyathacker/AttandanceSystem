@@ -19,7 +19,9 @@ import com.bean.User;
 import com.google.gson.Gson;
 import com.util.Util;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -42,11 +44,43 @@ public class VoiceCodeGeneratorActivity extends BaseActivity {
     private ProgressBar progressBar ;
     private TextView progressDisplay;
 
+    private class PushRequest extends AsyncTask<String, Integer, String> {
+        protected String doInBackground(String... server) {
+            String result = null;
+            try {
+                result = Util.query("3.in.pool.ntp.org");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dateTime);
+            cal.set(Calendar.AM_PM, Calendar.PM);
+            int hour = cal.get(Calendar.HOUR_OF_DAY);
+            int min = cal.get(Calendar.MINUTE);
+            hhET.setText(""+hour);
+            mmET.setText(""+(min < 10 ? "0"+ min : min));
+
+            int date = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+
+            ddET.setText("" + date);
+            MMET.setText("" + month);
+            yyET.setText("" + year);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_code_generator);
-
+        new PushRequest().execute();
         SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
@@ -69,21 +103,6 @@ public class VoiceCodeGeneratorActivity extends BaseActivity {
         yyET.setTypeface(digital);
         dateTV.setTypeface(digital);
         refreshButton.setTypeface(font);
-
-        cal.set(Calendar.AM_PM, Calendar.PM);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
-        hhET.setText(""+hour);
-        mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-        int date = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-
-        ddET.setText("" + date);
-        MMET.setText("" + month);
-        yyET.setText("" + year);
-
 
         init();
         initData();
@@ -139,6 +158,7 @@ public class VoiceCodeGeneratorActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+
         }
     }
 

@@ -29,6 +29,7 @@ import com.services.GetInfoRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,11 +67,43 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     private User user;
     private String cardId;
 
+    private class PushRequest extends AsyncTask<String, Integer, String> {
+        protected String doInBackground(String... server) {
+            String result = null;
+            try {
+                result = Util.query("3.in.pool.ntp.org");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dateTime);
+            cal.set(Calendar.AM_PM, Calendar.PM);
+            int hour = cal.get(Calendar.HOUR_OF_DAY);
+            int min = cal.get(Calendar.MINUTE);
+            hhET.setText(""+hour);
+            mmET.setText(""+(min < 10 ? "0"+ min : min));
+
+            int date = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+
+            ddET.setText("" + date);
+            MMET.setText("" + month);
+            yyET.setText("" + year);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qrcode_single);
-
+        new PushRequest().execute();
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         idLableTV.setTypeface(font);
         idValueTV.setTypeface(font);
@@ -93,21 +126,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
         getInfoBUTTON.setTypeface(font);
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.AM_PM, Calendar.PM);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
-        hhET.setText(""+hour);
-        mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-        int date = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-
-        ddET.setText("" + date);
-        MMET.setText("" + month);
-        yyET.setText("" + year);
 
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);

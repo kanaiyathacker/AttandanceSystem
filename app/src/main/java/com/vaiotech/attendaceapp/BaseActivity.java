@@ -33,4 +33,5 @@ public class BaseActivity extends RoboActivity {
         super.onStart();
         spiceManager.start(this);
     }
+
 }

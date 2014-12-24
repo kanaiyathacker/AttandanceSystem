@@ -16,6 +16,7 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.Vibrator;
@@ -40,6 +41,7 @@ import org.ndeftools.Message;
 import org.ndeftools.Record;
 import org.ndeftools.externaltype.AndroidApplicationRecord;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -99,10 +101,44 @@ public class ScanCardBatchActivity extends BaseActivity {
     private Shimmer shimmer;
     @InjectView(R.id.shimmer_tv) ShimmerTextView shimmer_tv;
 
+    private class PushRequest extends AsyncTask<String, Integer, String> {
+        protected String doInBackground(String... server) {
+            String result = null;
+            try {
+                result = Util.query("3.in.pool.ntp.org");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dateTime);
+            cal.set(Calendar.AM_PM, Calendar.PM);
+            int hour = cal.get(Calendar.HOUR_OF_DAY);
+            int min = cal.get(Calendar.MINUTE);
+            hhET.setText(""+hour);
+            mmET.setText(""+(min < 10 ? "0"+ min : min));
+
+            int date = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+
+            ddET.setText("" + date);
+            MMET.setText("" + month);
+            yyET.setText("" + year);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_card_batch);
+        new PushRequest().execute();
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
@@ -124,20 +160,20 @@ public class ScanCardBatchActivity extends BaseActivity {
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.AM_PM, Calendar.PM);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
-        hhET.setText(""+hour);
-        mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-        int date = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-
-        ddET.setText("" + date);
-        MMET.setText("" + month);
-        yyET.setText("" + year);
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.AM_PM, Calendar.PM);
+//        int hour = cal.get(Calendar.HOUR_OF_DAY);
+//        int min = cal.get(Calendar.MINUTE);
+//        hhET.setText(""+hour);
+//        mmET.setText(""+(min < 10 ? "0"+ min : min));
+//
+//        int date = cal.get(Calendar.DATE);
+//        int month = cal.get(Calendar.MONTH);
+//        int year = cal.get(Calendar.YEAR);
+//
+//        ddET.setText("" + date);
+//        MMET.setText("" + month);
+//        yyET.setText("" + year);
 
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);

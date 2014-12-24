@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
 import android.nfc.NfcAdapter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -28,6 +29,7 @@ import com.services.GetInfoRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,6 +73,39 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
     private User user;
     private String cardId;
 
+    private class PushRequest extends AsyncTask<String, Integer, String> {
+        protected String doInBackground(String... server) {
+            String result = null;
+            try {
+                result = Util.query("3.in.pool.ntp.org");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dateTime);
+            cal.set(Calendar.AM_PM, Calendar.PM);
+            int hour = cal.get(Calendar.HOUR_OF_DAY);
+            int min = cal.get(Calendar.MINUTE);
+            hhET.setText(""+hour);
+            mmET.setText(""+(min < 10 ? "0"+ min : min));
+
+            int date = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+
+            ddET.setText("" + date);
+            MMET.setText("" + month);
+            yyET.setText("" + year);
+        }
+    }
+
+
     public String getCardId() {
         return cardId;
     }
@@ -83,6 +118,8 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_entry);
+
+        new PushRequest().execute();
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
 
         idLableTV.setTypeface(font);
@@ -112,20 +149,20 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         outBUTTON.setTypeface(font);
         getInfoBUTTON.setTypeface(font);
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.AM_PM, Calendar.PM);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int min = cal.get(Calendar.MINUTE);
-        hhET.setText(""+hour);
-        mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-        int date = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-
-        ddET.setText("" + date);
-        MMET.setText("" + month);
-        yyET.setText("" + year);
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.AM_PM, Calendar.PM);
+//        int hour = cal.get(Calendar.HOUR_OF_DAY);
+//        int min = cal.get(Calendar.MINUTE);
+//        hhET.setText(""+hour);
+//        mmET.setText(""+(min < 10 ? "0"+ min : min));
+//
+//        int date = cal.get(Calendar.DATE);
+//        int month = cal.get(Calendar.MONTH);
+//        int year = cal.get(Calendar.YEAR);
+//
+//        ddET.setText("" + date);
+//        MMET.setText("" + month);
+//        yyET.setText("" + year);
 
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);

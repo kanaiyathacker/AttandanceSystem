@@ -182,7 +182,7 @@
         android:inputType="number"
         android:textStyle="bold"
         android:textSize="30sp"
-        android:maxLength="2"
+        android:maxLength="4"
         android:gravity="center"
         android:width="80dp"
         android:enabled="false"
