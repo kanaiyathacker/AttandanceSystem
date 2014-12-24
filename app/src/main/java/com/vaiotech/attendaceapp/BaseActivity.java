@@ -2,6 +2,7 @@ package com.vaiotech.attendaceapp;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.octo.android.robospice.SpiceManager;
 import com.services.AttandanceRestService;
@@ -18,6 +19,8 @@ public class BaseActivity extends RoboActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
     }
     @Override
     protected void onStop() {
