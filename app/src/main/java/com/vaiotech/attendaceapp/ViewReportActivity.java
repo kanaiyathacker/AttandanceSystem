@@ -48,6 +48,8 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     private ViewAbsenteeDetailsRequest viewAbsenteeDetailsRequest;
     private SharedPreferences sharedPreferences;
     private User user;
+    private String searchType;
+    private String searchId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +104,7 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     }
 
     public void viewAbsenteeDetails(View view) {
-        viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(user.getUserId() , user.getCoId());
+        viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(searchType , searchId);
         spiceManager.execute(viewAbsenteeDetailsRequest ,new ViewAbsenteeDetailsRequestListener(this));
     }
 
@@ -145,27 +147,38 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
         Map<String, String> departs = user.getDeparts();
         System.out.println(activitySpinner.getSelectedItem());
         String selItem = (String) activitySpinner.getSelectedItem();
-        String[] split = selItem.split(" - ");
-        String searchType = null;
-        String key = null;
-        if(split.length > 1) {
-            for(String val : departs.keySet()) {
-                key = departs.get(val).equalsIgnoreCase(split[1]) ? val : null;
-                searchType = "DEPART";
+        if(!selItem.equals("Select")) {
+            String[] split = selItem.split(" - ");
+            String searchType = null;
+            String key = null;
+            if (split.length > 1) {
+                for (String val : departs.keySet()) {
+                    if(departs.get(val).equalsIgnoreCase(split[1])) {
+                        key = val;
+                        searchType = "DEPART";
+                        break;
+                    }
+                }
+            } else {
+                for (String val : branches.keySet()) {
+                    if(branches.get(val).equalsIgnoreCase(split[1])) {
+                        key = val;
+                        searchType = "BRANCH";
+                        break;
+                    }
+                }
             }
-        } else {
-            for(String val : branches.keySet()) {
-                key = branches.get(val).equalsIgnoreCase(split[1]) ? val : null;
-                searchType = "BRANCH";
+            if (key == null) {
+                // set the org id
+                key = "";
+                searchType = "ORG";
             }
+            this.searchType =  searchType;
+            this.searchId = key;
+
+            viewReportRequest = new ViewReportRequest(searchType, key);
+            spiceManager.execute(viewReportRequest, new ViewReportRequestListener(this));
         }
-        if(key == null) {
-            // set the org id
-            key = "";
-            searchType = "ORG";
-        }
-        viewReportRequest = new ViewReportRequest(searchType , key);
-        spiceManager.execute(viewReportRequest ,new ViewReportRequestListener(this));
     }
 
     @Override
