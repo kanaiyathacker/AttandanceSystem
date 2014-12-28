@@ -2,6 +2,8 @@ package com.bean;
 
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 public class User implements Serializable{
 
@@ -20,6 +22,10 @@ public class User implements Serializable{
     private String type;
     private String dateTime;
     private String cardId;
+    List<UserMappingBean> userMappingList;
+
+    Map<String , String> branchs;
+    Map<String , String> departs;
 
 
     public String getId() {
@@ -140,6 +146,30 @@ public class User implements Serializable{
 
     public void setCardId(String cardId) {
         this.cardId = cardId;
+    }
+
+    public List<UserMappingBean> getUserMappingList() {
+        return userMappingList;
+    }
+
+    public void setUserMappingList(List<UserMappingBean> userMappingList) {
+        this.userMappingList = userMappingList;
+    }
+
+    public Map<String, String> getBranchs() {
+        return branchs;
+    }
+
+    public void setBranchs(Map<String, String> branchs) {
+        this.branchs = branchs;
+    }
+
+    public Map<String, String> getDeparts() {
+        return departs;
+    }
+
+    public void setDeparts(Map<String, String> departs) {
+        this.departs = departs;
     }
 
     @Override

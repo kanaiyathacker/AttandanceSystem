@@ -54,8 +54,6 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
     @InjectView(R.id.ddET) EditText ddET;
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;
-    @InjectView(R.id.progressBar)
-    ProgressBar progressBar;
     @InjectView(R.id.counterLableTV) TextView counterLableTV;
 
     @InjectView(R.id.counterValTV) TextView counterValTV;
@@ -91,7 +89,7 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
             mmET.setText(""+(min < 10 ? "0"+ min : min));
 
             int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
+            int month = cal.get(Calendar.MONTH) + 1;
             int year = cal.get(Calendar.YEAR);
 
             ddET.setText("" + date);

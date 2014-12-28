@@ -96,7 +96,7 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
             mmET.setText(""+(min < 10 ? "0"+ min : min));
 
             int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
+            int month = cal.get(Calendar.MONTH) + 1;
             int year = cal.get(Calendar.YEAR);
 
             ddET.setText("" + date);

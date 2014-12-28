@@ -18,12 +18,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
@@ -33,12 +36,18 @@ import com.services.GetInfoRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -72,6 +81,7 @@ public class ScanCardSingleActivity extends BaseActivity {
     private NfcAdapter mNfcAdapter;
 
     @InjectView(R.id.shimmer_tv) ShimmerTextView shimmer_tv;
+    @InjectView(R.id.activitySpinner) Spinner activitySpinner;
     private Shimmer shimmer;
 
     private PendingIntent mPendingIntent;
@@ -108,7 +118,7 @@ public class ScanCardSingleActivity extends BaseActivity {
             mmET.setText(""+(min < 10 ? "0"+ min : min));
 
             int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
+            int month = cal.get(Calendar.MONTH) + 1;
             int year = cal.get(Calendar.YEAR);
 
             ddET.setText("" + date);
@@ -149,21 +159,8 @@ public class ScanCardSingleActivity extends BaseActivity {
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
         getInfoBUTTON.setTypeface(font);
-//        Calendar cal = Calendar.getInstance();
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-//        cal.set(Calendar.AM_PM, Calendar.PM);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int min = cal.get(Calendar.MINUTE);
-//        hhET.setText(""+hour);
-//        mmET.setText(""+(min < 10 ? "0"+ min : min));
-//
-//        int date = cal.get(Calendar.DATE);
-//        int month = cal.get(Calendar.MONTH);
-//        int year = cal.get(Calendar.YEAR);
-//
-//        ddET.setText("" + date);
-//        MMET.setText("" + month);
-//        yyET.setText("" + year);
+
 
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
@@ -193,6 +190,35 @@ public class ScanCardSingleActivity extends BaseActivity {
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
         shimmer = new Shimmer();
         shimmer.start(shimmer_tv);
+        buildActivitySpinner();
+    }
+
+    private void buildActivitySpinner() {
+        List<UserMappingBean> userMappingList = user.getUserMappingList();
+        List<String> list = new ArrayList<String>();
+
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+
+        for(UserMappingBean curr : userMappingList) {
+            String branch = curr.getBranchId();
+            String depart = curr.getDepartId();
+            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
+                String val = branches.get(branch) + " - " + departs.get(depart);
+                list.add(val);
+            }
+            if(branch != null && depart.length() > 0 && depart == null ) {
+                String val = branches.get(branch);
+                list.add(val);
+            }
+        }
+        if(list.isEmpty()) {
+            list.add("Add Org");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, list);
+        activitySpinner.setAdapter(adapter);
+//        activitySpinner
     }
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {

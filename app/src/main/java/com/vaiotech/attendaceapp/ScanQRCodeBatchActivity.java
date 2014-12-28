@@ -16,15 +16,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.bean.AttandanceTransaction;
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
@@ -38,6 +41,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import roboguice.inject.ContentView;
@@ -59,12 +63,13 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
     @InjectView(R.id.ddET) EditText ddET;
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;
-    @InjectView(R.id.progressBar) ProgressBar progressBar;
     @InjectView(R.id.counterLableTV) TextView counterLableTV;
 
     @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
+    @InjectView(R.id.activitySpinner)
+    Spinner activitySpinner;
     private Set<User> scanSet;
     private User user;
     private LocationManager lm;
@@ -94,7 +99,7 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
             mmET.setText(""+(min < 10 ? "0"+ min : min));
 
             int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
+            int month = cal.get(Calendar.MONTH) + 1;
             int year = cal.get(Calendar.YEAR);
 
             ddET.setText("" + date);
@@ -158,7 +163,37 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
 
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         new  HeavyTask(this).execute();
+        buildActivitySpinner();
     }
+
+    private void buildActivitySpinner() {
+        List<UserMappingBean> userMappingList = user.getUserMappingList();
+        List<String> list = new ArrayList<String>();
+
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+
+        for(UserMappingBean curr : userMappingList) {
+            String branch = curr.getBranchId();
+            String depart = curr.getDepartId();
+            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
+                String val = branches.get(branch) + " - " + departs.get(depart);
+                list.add(val);
+            }
+            if(branch != null && depart.length() > 0 && depart == null ) {
+                String val = branches.get(branch);
+                list.add(val);
+            }
+        }
+        if(list.isEmpty()) {
+            list.add("Add Org");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, list);
+        activitySpinner.setAdapter(adapter);
+//        activitySpinner
+    }
+
 
     private class HeavyTask extends AsyncTask<String, Void, Void> {
 
@@ -169,7 +204,7 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         }
 
         protected Void doInBackground(String... args) {
-            dialog = DialogScanner.newInstance(CameraFace.BACK , 1 , progressBar);
+            dialog = DialogScanner.newInstance(CameraFace.BACK , 1 , null);
             return null;
         }
 

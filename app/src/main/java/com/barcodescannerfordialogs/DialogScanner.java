@@ -193,7 +193,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 
 		mScannerView.setResultHandler(this);
 		mScannerView.startCamera();
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
 	}
 
 	@Override

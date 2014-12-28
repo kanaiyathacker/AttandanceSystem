@@ -23,13 +23,16 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
 import com.romainpiel.shimmer.Shimmer;
@@ -49,6 +52,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import roboguice.inject.ContentView;
@@ -89,6 +93,7 @@ public class ScanCardBatchActivity extends BaseActivity {
     @InjectView(R.id.counterValTV) TextView counterValTV;
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
+    @InjectView(R.id.activitySpinner) Spinner activitySpinner;
     private Set<String> cardList;
 
 
@@ -124,7 +129,7 @@ public class ScanCardBatchActivity extends BaseActivity {
             mmET.setText(""+(min < 10 ? "0"+ min : min));
 
             int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
+            int month = cal.get(Calendar.MONTH) + 1;
             int year = cal.get(Calendar.YEAR);
 
             ddET.setText("" + date);
@@ -160,21 +165,6 @@ public class ScanCardBatchActivity extends BaseActivity {
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
 
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.AM_PM, Calendar.PM);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int min = cal.get(Calendar.MINUTE);
-//        hhET.setText(""+hour);
-//        mmET.setText(""+(min < 10 ? "0"+ min : min));
-//
-//        int date = cal.get(Calendar.DATE);
-//        int month = cal.get(Calendar.MONTH);
-//        int year = cal.get(Calendar.YEAR);
-//
-//        ddET.setText("" + date);
-//        MMET.setText("" + month);
-//        yyET.setText("" + year);
-
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
 
@@ -198,17 +188,38 @@ public class ScanCardBatchActivity extends BaseActivity {
             isNFCSupported = false;
             Toast.makeText(this, "Smart Card Scan Not Supported In This Phone", Toast.LENGTH_SHORT).show();
         }
-//        mPendingIntent = PendingIntent.getActivity(this, 0,
-//                new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-//        mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
-//                "Message from NFC Reader :-)", Locale.ENGLISH, true) });
-
-
-
-        // initialize NFC
         shimmer = new Shimmer();
         shimmer.start(shimmer_tv);
         cardList = new HashSet<String>();
+        buildActivitySpinner();
+    }
+
+    private void buildActivitySpinner() {
+        List<UserMappingBean> userMappingList = user.getUserMappingList();
+        List<String> list = new ArrayList<String>();
+
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+
+        for(UserMappingBean curr : userMappingList) {
+            String branch = curr.getBranchId();
+            String depart = curr.getDepartId();
+            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
+                String val = branches.get(branch) + " - " + departs.get(depart);
+                list.add(val);
+            }
+            if(branch != null && depart.length() > 0 && depart == null ) {
+                String val = branches.get(branch);
+                list.add(val);
+            }
+        }
+        if(list.isEmpty()) {
+            list.add("Add Org");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, list);
+        activitySpinner.setAdapter(adapter);
+//        activitySpinner
     }
 
     public void enableForegroundMode() {

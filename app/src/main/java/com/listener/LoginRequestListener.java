@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.widget.TextView;
 
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -18,6 +19,10 @@ import com.vaiotech.attendaceapp.R;
 import com.vaiotech.attendaceapp.ViewReportActivity;
 
 import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by kanaiyalalt on 14/11/2014.
@@ -39,15 +44,6 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
-//        Intent intent = new Intent(loginActivity,ScanActivity.class);
-//        Intent intent = new Intent(loginActivity,TabActivity.class);
-//        Intent intent = new Intent(loginActivity,MainActivity.class);
-//        Gson gson = new Gson();
-//        Admin admin = new Admin();
-//        admin.setfName("Admin");
-//        admin.setCoId("1212121");
-//        intent.putExtra("ADMIN_DETAILS" , gson.toJson(admin));
-//        loginActivity.startActivity(intent);
         if(o != null) {
             LinkedTreeMap map = (LinkedTreeMap)o;
             Gson gson = new Gson();
@@ -58,13 +54,20 @@ public class LoginRequestListener implements RequestListener<Object> {
                 user.setlName(map.get("lName").toString());
                 user.setmName(map.get("mName").toString());
                 user.setUserId(map.get("userId").toString());
-                user.setStatus(map.get("status").toString());
-                user.setCoName(map.get("orgName").toString());
+                user.setStatus(map.get("userStatus").toString());
+//                user.setCoName(map.get("orgName").toString());
                 user.setCoId(map.get("orgId").toString());
                 user.setPassword(map.get("password").toString());
-                user.setCardId(map.get("cardId").toString());
+                if(map.get("cardId") != null)
+                  user.setCardId(map.get("cardId").toString());
+
                 user.setId(map.get("id").toString());
-                String type = map.get("type").toString();
+
+                user.setBranchs((java.util.Map<String, String>) map.get("branchs"));
+                user.setDeparts((java.util.Map<String, String>) map.get("departs"));
+                List<LinkedTreeMap> userMappingList = (List<LinkedTreeMap>) map.get("userMappingList");
+                user.setUserMappingList(buildUserMappingList(userMappingList));
+                String type = map.get("userType").toString();
                 user.setType(type);
                 Intent intent = getIntend(type);
                 String userDetail = gson.toJson(user);
@@ -76,7 +79,20 @@ public class LoginRequestListener implements RequestListener<Object> {
                 TextView errorTV = (TextView)loginActivity.findViewById(R.id.errorTV);
                 errorTV.setText("Invalid Login ID OR Password");
             }
+        } else {
+            TextView errorTV = (TextView)loginActivity.findViewById(R.id.errorTV);
+            errorTV.setText("Invalid Login ID OR Password");
         }
+    }
+
+    private List<UserMappingBean> buildUserMappingList(List<LinkedTreeMap> userMappingList) {
+        List<UserMappingBean> retVal = new ArrayList<UserMappingBean>();
+        for(LinkedTreeMap curr : userMappingList) {
+            String branchId = (String) curr.get("branchId");
+            String departId = (String) curr.get("departId");
+            retVal.add(new UserMappingBean(branchId , departId));
+        }
+        return retVal;
     }
 
     public Intent getIntend(String type) {

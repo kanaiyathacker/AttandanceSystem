@@ -25,6 +25,7 @@ import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.bean.AttandanceTransaction;
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
@@ -33,9 +34,12 @@ import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -61,8 +65,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     @InjectView(R.id.inBUTTON)  Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
-    @InjectView(R.id.progressBar) ProgressBar progressBar;
-    @InjectView(R.id.eventSpinner) Spinner eventSpinner;
+    @InjectView(R.id.activitySpinner) Spinner activitySpinner;
 
 
 
@@ -96,7 +99,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
             mmET.setText(""+(min < 10 ? "0"+ min : min));
 
             int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
+            int month = cal.get(Calendar.MONTH) + 1;
             int year = cal.get(Calendar.YEAR);
 
             ddET.setText("" + date);
@@ -147,35 +150,41 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
-        adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
-        progressBar.setVisibility(View.VISIBLE);
+        adminValueLableTV.setText(user.getfName() + " " + user.getlName());
         new  HeavyTask(this).execute();
         getEventData();
+        buildActivitySpinner();
+    }
+
+    private void buildActivitySpinner() {
+        List<UserMappingBean> userMappingList = user.getUserMappingList();
+        List<String> list = new ArrayList<String>();
+
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+
+        for(UserMappingBean curr : userMappingList) {
+            String branch = curr.getBranchId();
+            String depart = curr.getDepartId();
+            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
+                String val = branches.get(branch) + " - " + departs.get(depart);
+                list.add(val);
+            }
+            if(branch != null && depart.length() > 0 && depart == null ) {
+                String val = branches.get(branch);
+                list.add(val);
+            }
+        }
+        if(list.isEmpty()) {
+            list.add("Add Org");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, list);
+        activitySpinner.setAdapter(adapter);
+//        activitySpinner
     }
 
     private void getEventData() {
-        String[] celebrities = {
-                "10 - A",
-                "10 - B",
-                "10 - C"
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, R.layout.spinner_text, celebrities);
-        eventSpinner.setAdapter(adapter);
-        eventSpinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                               int arg2, long arg3) {
-                        int position = eventSpinner.getSelectedItemPosition();
-                        // TODO Auto-generated method stub
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> arg0) {
-                        // TODO Auto-generated method stub
-                    }
-                }
-        );
     }
 
     private class HeavyTask extends AsyncTask<String, Void, Void> {
@@ -187,7 +196,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         }
 
         protected Void doInBackground(String... args) {
-            dialog = DialogScanner.newInstance(CameraFace.BACK , 0 , progressBar);
+            dialog = DialogScanner.newInstance(CameraFace.BACK , 0 , null);
             return null;
         }
 

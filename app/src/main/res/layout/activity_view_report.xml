@@ -8,146 +8,177 @@
     tools:context="com.vaiotech.attendaceapp.ViewReportActivity">
 
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="right"
-            android:text="Total Strength :"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:id="@+id/totalStrengthTV"
-            />
-
-        <TextView
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:background="#FFFFFF"
-            android:text="0"
-            android:layout_height="wrap_content"
-            android:layout_width="90dp"
-            android:textSize="30sp"
-            android:textColor="#000000"
-            android:id="@+id/totalStrengthValueTV"
-            android:layout_toRightOf="@+id/totalStrengthTV"
-            />
-
-
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginBottom="0dp"
-            android:layout_toLeftOf="@+id/totalStrengthValueTV"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="Absent :"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:id="@+id/absentTV"
-            android:layout_below="@+id/totalStrengthTV"
-            />
-
-        <TextView
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:layout_weight="0.4"
-            android:background="#FFFFFF"
-            android:text="0"
-            android:layout_height="wrap_content"
-            android:layout_width="90dp"
-            android:textSize="30sp"
-            android:textColor="#E81B11"
-            android:id="@+id/absentValueTV"
-            android:layout_below="@+id/totalStrengthValueTV"
-            android:layout_toRightOf="@+id/absentTV"
-            />
-
     <LinearLayout
-        android:weightSum="2"
-        android:layout_below="@+id/absentTV"
-        android:id="@+id/linearButton"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:id="@+id/adminLinear"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:weightSum="10"
         >
-
-        <Button
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:textSize="20dp"
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/absentTV"
-            android:text="View Details"
-            android:background="@drawable/view_absentee_button"
-            android:textColor="#000000"
-            android:id="@+id/vadButton"
-            android:onClick="viewAbsenteeDetails"
-        />
-
-        <Button
-            android:layout_margin="1dp"
             android:layout_weight="1"
-            android:textSize="20dp"
+            android:layout_height="0dp"
+            >
+            <TextView
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity"
+                android:id="@+id/activityTV"
+                />
+            <TextView
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:id="@+id/activityColonTV"
+                />
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activitySpinner"
+                >
+            </Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+        >
+            <TextView
+                android:text="Total Strength :"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:id="@+id/totalStrengthTV"
+                />
+
+            <TextView
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:background="#FFFFFF"
+                android:text="0"
+                android:layout_height="wrap_content"
+                android:layout_width="90dp"
+                android:textSize="30sp"
+                android:textColor="#E81B11"
+                android:id="@+id/totalStrengthValueTV"
+                android:layout_toRightOf="@+id/totalStrengthTV"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            >
+            <TextView
+                android:text="Absent :"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:id="@+id/absentTV"
+                android:layout_below="@+id/totalStrengthTV"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:background="#FFFFFF"
+                android:text="0"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="90dp"
+                android:textSize="30sp"
+                android:textColor="#E81B11"
+                android:id="@+id/absentValueTV"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            >
+            <Button
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/absentTV"
+                android:text="View Details"
+                android:background="@drawable/view_absentee_button"
+                android:textColor="#000000"
+                android:id="@+id/vadButton"
+                android:onClick="viewAbsenteeDetails"
+                />
+
+            <Button
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/absentTV"
+                android:text="Send Message"
+                android:background="@drawable/view_absentee_button"
+                android:textColor="#000000"
+                android:id="@+id/sendMSGButton"
+                android:onClick="sendMessage"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="1dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/absentTV"
-            android:text="Send Message"
-            android:background="@drawable/view_absentee_button"
-            android:textColor="#000000"
-            android:id="@+id/sendMSGButton"
-            android:onClick="sendMessage"
-            />
-    </LinearLayout>
+            android:layout_weight="0.5"
+            android:layout_height="0dp"
+            >
+            <View
+                android:layout_above="@+id/getInfoBUTTON"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#FFFFFF"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_width="fill_parent"
+            android:layout_weight="5"
+            android:layout_height="0dp"
+            >
+            <ListView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/absentResultLV"
+                android:layout_below="@+id/secHLine"
+                android:layout_centerHorizontal="true" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:background="@xml/progress_bar"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-    />
-
-    <View
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@+id/linearButton"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:id="@+id/secHLine"
-        android:background="#000000"/>
-
-
-    <ListView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/absentResultLV"
-        android:layout_below="@+id/secHLine"
-        android:layout_centerHorizontal="true" />
+        </LinearLayout>
+     </LinearLayout>
 
 
 </RelativeLayout>

@@ -60,8 +60,6 @@ public class ScanVoiceCodeSingleActivity extends BaseActivity  {
     Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
-    @InjectView(R.id.progressBar)
-    ProgressBar progressBar;
 
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
@@ -83,22 +81,24 @@ public class ScanVoiceCodeSingleActivity extends BaseActivity  {
         }
 
         protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
+            if(result != null && result.length() > 0) {
+                Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(dateTime);
+                cal.set(Calendar.AM_PM, Calendar.PM);
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int min = cal.get(Calendar.MINUTE);
+                hhET.setText("" + hour);
+                mmET.setText("" + (min < 10 ? "0" + min : min));
 
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
-            int year = cal.get(Calendar.YEAR);
+                int date = cal.get(Calendar.DATE);
+                int month = cal.get(Calendar.MONTH) + 1;
+                int year = cal.get(Calendar.YEAR);
 
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
+                ddET.setText("" + date);
+                MMET.setText("" + month);
+                yyET.setText("" + year);
+            }
         }
     }
 
@@ -160,7 +160,6 @@ public class ScanVoiceCodeSingleActivity extends BaseActivity  {
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
-        progressBar.setVisibility(View.VISIBLE);
     }
 
     public void save(View view) {

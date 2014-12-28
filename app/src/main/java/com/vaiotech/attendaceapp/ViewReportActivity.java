@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.SendMessageRequestListener;
 import com.listener.ViewAbsenteeDetailsRequestListener;
@@ -20,11 +24,16 @@ import com.services.SendMessageRequest;
 import com.services.ViewAbsenteeDetailsRequest;
 import com.services.ViewReportRequest;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_report)
-public class ViewReportActivity extends BaseActivity {
+public class ViewReportActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     @InjectView(R.id.vadButton) Button vadButton;
     @InjectView(R.id.sendMSGButton) Button sendMSGButton;
@@ -33,8 +42,7 @@ public class ViewReportActivity extends BaseActivity {
 
     @InjectView(R.id.absentTV)   TextView absentTV;
     @InjectView(R.id.absentValueTV)   TextView absentValueTV;
-    @InjectView(R.id.progressBar)   ProgressBar progressBar;
-
+    @InjectView(R.id.activitySpinner) Spinner activitySpinner;
     private SendMessageRequest sendMessageRequest;
     private ViewReportRequest viewReportRequest;
     private ViewAbsenteeDetailsRequest viewAbsenteeDetailsRequest;
@@ -61,17 +69,44 @@ public class ViewReportActivity extends BaseActivity {
 
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
-        viewReportRequest = new ViewReportRequest(user.getUserId() , user.getCoId());
+        buildActivitySpinner();
+        activitySpinner.setOnItemSelectedListener(this);
+    }
+
+    private void buildActivitySpinner() {
+        List<UserMappingBean> userMappingList = user.getUserMappingList();
+        List<String> list = new LinkedList<String>();
+        list.add("Select");
+
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+
+        for(UserMappingBean curr : userMappingList) {
+            String branch = curr.getBranchId();
+            String depart = curr.getDepartId();
+            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
+                String val = branches.get(branch) + " - " + departs.get(depart);
+                list.add(val);
+            }
+            if(branch != null && depart.length() > 0 && depart == null ) {
+                String val = branches.get(branch);
+                list.add(val);
+            }
+        }
+        if(list.isEmpty()) {
+            list.add("Add Org");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, list);
+        activitySpinner.setAdapter(adapter);
     }
 
     public void viewAbsenteeDetails(View view) {
-        progressBar.setVisibility(View.VISIBLE);
         viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(user.getUserId() , user.getCoId());
         spiceManager.execute(viewAbsenteeDetailsRequest ,new ViewAbsenteeDetailsRequestListener(this));
     }
 
     public void sendMessage(View view) {
-        progressBar.setVisibility(View.VISIBLE);
         sendMessageRequest = new SendMessageRequest(user.getUserId());
         spiceManager.execute(sendMessageRequest ,new SendMessageRequestListener(this));
     }
@@ -79,7 +114,6 @@ public class ViewReportActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        spiceManager.execute(viewReportRequest ,new ViewReportRequestListener(this));
     }
 
     @Override
@@ -102,5 +136,40 @@ public class ViewReportActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        System.out.println(i);
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+        System.out.println(activitySpinner.getSelectedItem());
+        String selItem = (String) activitySpinner.getSelectedItem();
+        String[] split = selItem.split(" - ");
+        String searchType = null;
+        String key = null;
+        if(split.length > 1) {
+            for(String val : departs.keySet()) {
+                key = departs.get(val).equalsIgnoreCase(split[1]) ? val : null;
+                searchType = "DEPART";
+            }
+        } else {
+            for(String val : branches.keySet()) {
+                key = branches.get(val).equalsIgnoreCase(split[1]) ? val : null;
+                searchType = "BRANCH";
+            }
+        }
+        if(key == null) {
+            // set the org id
+            key = "";
+            searchType = "ORG";
+        }
+        viewReportRequest = new ViewReportRequest(searchType , key);
+        spiceManager.execute(viewReportRequest ,new ViewReportRequestListener(this));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

@@ -28,8 +28,8 @@ public interface RestServiceInterface {
     @GET("/ScanAttandanceApp/getUserInfo/{searchType}/{searchValue}")
     Object getUserInfo(@Path("searchType") String searchType , @Path("searchValue") String searchValue);
 
-    @GET("/ScanAttandanceApp/viewReport/{adminId}/{orgId}")
-    Object viewReport(@Path("adminId") String adminId , @Path("orgId") String orgId);
+    @GET("/ScanAttandanceApp/viewReport/{searchType}/{searchId}")
+    Object viewReport(@Path("searchType") String searchType , @Path("searchId") String searchId);
 
     @GET("/ScanAttandanceApp/viewAbsenteeDetails/{adminId}/{orgId}")
     Object viewAbsenteeDetailsRequest(@Path("adminId") String adminId  , @Path("orgId") String orgId);
