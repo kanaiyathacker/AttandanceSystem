@@ -46,7 +46,7 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
     private CaldroidFragment caldroidFragment;
     private SpiceManager spiceManager = new SpiceManager(AttandanceRestService.class);
     private User user;
-    @InjectView(R.id.activitySpinner) Spinner activitySpinner;
+    private Spinner activitySpinner;
     private String searchType;
     private String searchId;
     private String monthSel;
@@ -58,6 +58,7 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user_report);
         this.context = this;
+        activitySpinner = (Spinner) findViewById(R.id.activitySpinner);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         caldroidFragment = new CaldroidFragment();
         Bundle args = new Bundle();
