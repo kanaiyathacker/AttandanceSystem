@@ -18,11 +18,8 @@ import com.vaiotech.attendaceapp.MyProfileActivity;
 import com.vaiotech.attendaceapp.R;
 import com.vaiotech.attendaceapp.ViewReportActivity;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by kanaiyalalt on 14/11/2014.
@@ -97,7 +94,7 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     public Intent getIntend(String type) {
         Intent intent = null;
-        if("ADMIN".equalsIgnoreCase(type)) {
+        if("0".equalsIgnoreCase(type)) {
             String activitySelected = loginActivity.getIntent().getStringExtra("ACTIVITY_SELECTED");
             if("SMART_SCAN".equals(activitySelected)) {
                 intent = new Intent(loginActivity, MainActivity.class);

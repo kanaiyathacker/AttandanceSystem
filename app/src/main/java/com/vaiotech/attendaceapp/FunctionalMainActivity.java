@@ -61,7 +61,7 @@ public class FunctionalMainActivity extends BaseActivity {
         Gson gson = new Gson();
         User user = gson.fromJson(val , User.class);
         isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
-        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("Admin"));
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
     }
 
     public void smartScan(View view) {
