@@ -22,6 +22,8 @@ import android.os.Parcelable;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -95,7 +97,9 @@ public class ScanCardBatchActivity extends BaseActivity {
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.activitySpinner) Spinner activitySpinner;
     private Set<String> cardList;
-
+    private SharedPreferences sharedPreferences;
+    boolean isLogin;
+    boolean isUserAdmin;
 
     protected NfcAdapter nfcAdapter;
     protected PendingIntent nfcPendingIntent;
@@ -143,7 +147,8 @@ public class ScanCardBatchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_card_batch);
         new PushRequest().execute();
-
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
+        isUserLogedIn();
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
@@ -389,6 +394,40 @@ public class ScanCardBatchActivity extends BaseActivity {
 
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
         vibe.vibrate(500);
+    }
+
+    public void isUserLogedIn() {
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.scan_card_batch, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
     }
 
 }

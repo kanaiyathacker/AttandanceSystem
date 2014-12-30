@@ -215,12 +215,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -293,4 +287,5 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         alertDialog.show();
         cardId = null;
     }
+
 }

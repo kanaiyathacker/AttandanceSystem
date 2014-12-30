@@ -57,13 +57,7 @@ public class FunctionalMainActivity extends BaseActivity {
         hideProgressBar();
     }
 
-    public void isUserLogedIn() {
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
-        Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
-        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
-        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
-    }
+
 
     public void smartScan(View view) {
         Intent intent =     null;
@@ -125,6 +119,14 @@ public class FunctionalMainActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.menu_functional_main, menu);
         menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
         return true;
+    }
+
+    public void isUserLogedIn() {
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
     }
 
     @Override

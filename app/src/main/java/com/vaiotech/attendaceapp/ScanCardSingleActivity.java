@@ -94,6 +94,9 @@ public class ScanCardSingleActivity extends BaseActivity {
     private LocationManager lm;
     private Location location;
     private User user;
+    private SharedPreferences sharedPreferences;
+    boolean isLogin;
+    boolean isUserAdmin;
 
     private class PushRequest extends AsyncTask<String, Integer, String> {
         protected String doInBackground(String... server) {
@@ -132,6 +135,8 @@ public class ScanCardSingleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_card_single);
         new PushRequest().execute();
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
+        isUserLogedIn();
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         idLableTV.setTypeface(font);
         idValueTV.setTypeface(font);
@@ -348,19 +353,28 @@ public class ScanCardSingleActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.scan_card_single, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
         return true;
+    }
+
+    public void isUserLogedIn() {
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

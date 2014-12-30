@@ -294,4 +294,5 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
         vibe.vibrate(500);
     }
+
 }
