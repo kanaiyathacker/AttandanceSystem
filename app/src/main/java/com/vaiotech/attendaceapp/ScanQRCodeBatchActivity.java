@@ -56,6 +56,7 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.seperateDateTV) TextView seperateDateTV;
+    @InjectView(R.id.seperateDateMMTV) TextView seperateDateMMTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
@@ -128,6 +129,7 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         MMET.setTypeface(digital);
         yyET.setTypeface(digital);
         dateTV.setTypeface(digital);
+        seperateDateMMTV.setTypeface(digital);
 
         counterValTV.setTypeface(digital);
 
