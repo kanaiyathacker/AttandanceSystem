@@ -25,7 +25,7 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_width="fill_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.3"
             android:layout_height="0dp"
             >
             <TextView
@@ -58,29 +58,54 @@
             android:layout_weight="1"
             android:layout_height="0dp"
         >
-            <TextView
-                android:text="Total Strength :"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:id="@+id/totalStrengthTV"
-                />
-
-            <TextView
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:background="#FFFFFF"
-                android:text="0"
-                android:layout_height="wrap_content"
-                android:layout_width="90dp"
-                android:textSize="30sp"
-                android:textColor="#E81B11"
-                android:id="@+id/totalStrengthValueTV"
-                android:layout_toRightOf="@+id/totalStrengthTV"
-                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+            >
+                <TextView
+                    android:layout_weight="0.9"
+                    android:text="Total Strength"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/totalStrengthTV"
+                    />
+                <TextView
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/totalStrengthColonTV"
+                    />
+                <TextView
+                    android:layout_weight="0.5"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:background="#FFFFFF"
+                    android:text="0"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30sp"
+                    android:textColor="#E81B11"
+                    android:id="@+id/totalStrengthValueTV"
+                    android:layout_toRightOf="@+id/totalStrengthTV"
+                    />
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text=" "
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -90,27 +115,52 @@
             android:layout_weight="1"
             android:layout_height="0dp"
             >
-            <TextView
-                android:text="Absent :"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:id="@+id/absentTV"
-                android:layout_below="@+id/totalStrengthTV"
-                />
-
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:background="#FFFFFF"
-                android:text="0"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_width="90dp"
-                android:textSize="30sp"
-                android:textColor="#E81B11"
-                android:id="@+id/absentValueTV"
-                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+            >
+                <TextView
+                    android:layout_weight="0.9"
+                    android:text="Absent"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/absentTV"
+                    android:layout_below="@+id/totalStrengthTV"
+                    />
+                <TextView
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/absentColonTV"
+                    />
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:background="#FFFFFF"
+                    android:text="0"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:textSize="30sp"
+                    android:textColor="#E81B11"
+                    android:id="@+id/absentValueTV"
+                    />
+                <TextView
+                    android:layout_weight="0.5"
+                    android:text=" "
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    />
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -163,13 +213,10 @@
         <LinearLayout
             android:layout_marginTop="1dp"
             android:layout_width="fill_parent"
-            android:layout_weight="5"
+            android:layout_weight="4.7"
             android:layout_height="0dp"
             >
-
            <ListView
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/absentResultLV"

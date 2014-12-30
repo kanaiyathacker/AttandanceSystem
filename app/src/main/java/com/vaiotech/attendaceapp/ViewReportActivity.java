@@ -43,7 +43,12 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
 
     @InjectView(R.id.absentTV)   TextView absentTV;
     @InjectView(R.id.absentValueTV)   TextView absentValueTV;
+    @InjectView(R.id.activityTV)   TextView activityTV;
+    @InjectView(R.id.activityColonTV)   TextView activityColonTV;
+    @InjectView(R.id.totalStrengthColonTV)   TextView totalStrengthColonTV;
+    @InjectView(R.id.absentColonTV)   TextView absentColonTV;
     @InjectView(R.id.activitySpinner) Spinner activitySpinner;
+
     private SendMessageRequest sendMessageRequest;
     private ViewReportRequest viewReportRequest;
     private ViewAbsenteeDetailsRequest viewAbsenteeDetailsRequest;
@@ -64,10 +69,15 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
         totalStrengthValueTV.setTypeface(digital);
         absentValueTV.setTypeface(digital);
 
+
         vadButton.setTypeface(font);
         sendMSGButton.setTypeface(font);
         totalStrengthTV.setTypeface(font);
         absentTV.setTypeface(font);
+        activityTV.setTypeface(font);
+        activityColonTV.setTypeface(font);
+        totalStrengthColonTV.setTypeface(font);
+        absentColonTV.setTypeface(font);
 
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
@@ -101,8 +111,10 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
         if(list.isEmpty()) {
             list.add(user.getCoName());
         }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//                this, android.R.layout.simple_spinner_item, list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, list);
+                this, R.layout.spinner_text, list);
         activitySpinner.setAdapter(adapter);
         if(list.size() == 2) {
             activitySpinner.setSelection(1);
