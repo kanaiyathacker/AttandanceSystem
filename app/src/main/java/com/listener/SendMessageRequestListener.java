@@ -26,7 +26,6 @@ public class SendMessageRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
-        ProgressBar progressBar = (ProgressBar) viewReportActivity.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
+        viewReportActivity.hideProgressBar();
     }
 }

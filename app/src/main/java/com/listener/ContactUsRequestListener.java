@@ -21,6 +21,6 @@ public class ContactUsRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
-
+        contactUsActivity.hideProgressBar();
     }
 }

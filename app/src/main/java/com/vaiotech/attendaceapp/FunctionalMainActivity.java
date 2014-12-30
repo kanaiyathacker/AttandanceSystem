@@ -54,6 +54,7 @@ public class FunctionalMainActivity extends BaseActivity {
         contactUsButton.setTypeface(font);
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         isUserLogedIn();
+        hideProgressBar();
     }
 
     public void isUserLogedIn() {

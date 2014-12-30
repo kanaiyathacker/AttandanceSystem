@@ -42,5 +42,6 @@ public class GetInfoRequestListener implements com.octo.android.robospice.reques
                 ((ManualEntryActivity)baseActivity).setCardId(""+map.get("cardId"));
             }
         }
+        baseActivity.hideProgressBar();
     }
 }

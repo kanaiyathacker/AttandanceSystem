@@ -41,22 +41,23 @@ public class LoginRequestListener implements RequestListener<Object> {
 
     @Override
     public void onRequestSuccess(Object o) {
+        loginActivity.hideProgressBar();
         if(o != null) {
             LinkedTreeMap map = (LinkedTreeMap)o;
             Gson gson = new Gson();
             User user = new User();
-            String userId = map.get("userId").toString();
-            if(userId != null && userId.length() > 0) {
-                user.setfName(map.get("fName").toString());
-                user.setlName(map.get("lName").toString());
-                user.setmName(map.get("mName").toString());
-                user.setUserId(map.get("userId").toString());
-                user.setStatus(map.get("userStatus").toString());
-//                user.setCoName(map.get("orgName").toString());
-                user.setCoId(map.get("orgId").toString());
-                user.setPassword(map.get("password").toString());
-                if(map.get("cardId") != null)
-                  user.setCardId(map.get("cardId").toString());
+            if(map.get("userId") != null) {
+                String userId = map.get("userId").toString();
+                user.setfName(map.get("fName") != null ? map.get("fName").toString() : "");
+                user.setlName(map.get("lName") != null ? map.get("lName").toString() : "");
+                user.setmName(map.get("mName") != null ? map.get("mName").toString() : "");
+
+                user.setUserId(map.get("userId") != null ? map.get("userId").toString() : "");
+                user.setStatus(map.get("userStatus") != null ? map.get("userStatus").toString() : "");
+                user.setCoName(map.get("orgName") != null ? map.get("orgName").toString() : "");
+                user.setCoId(map.get("orgId") != null ? map.get("orgId").toString() : "");
+                user.setPassword(map.get("password") != null ? map.get("password").toString() : "");
+                user.setCardId(map.get("cardId") != null ? map.get("cardId").toString() : "");
 
                 user.setId(map.get("id").toString());
 
@@ -73,8 +74,16 @@ public class LoginRequestListener implements RequestListener<Object> {
                 editor.putString("USER_DETAILS", userDetail).apply();
                 loginActivity.startActivity(intent);
             } else {
+                String errorMsg = "Invalid Login ID OR Password";
+                if(map.get("msgField") != null) {
+                    String erroMsg = (String) map.get("msgField");
+                    String[] split = erroMsg.split("-");
+                    if(split.length == 2) {
+                        errorMsg = split[1];
+                    }
+                }
                 TextView errorTV = (TextView)loginActivity.findViewById(R.id.errorTV);
-                errorTV.setText("Invalid Login ID OR Password");
+                errorTV.setText(errorMsg);
             }
         } else {
             TextView errorTV = (TextView)loginActivity.findViewById(R.id.errorTV);

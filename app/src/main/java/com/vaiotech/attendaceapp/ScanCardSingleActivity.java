@@ -297,13 +297,15 @@ public class ScanCardSingleActivity extends BaseActivity {
     }
 
     public void save(View view) {
+        showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
-        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         openDialog(view);
     }
 
     public void getInfo(View view) {
+        showProgressBar();
         getInfoRequest = new GetInfoRequest("CARD_ID" , cardId);
         spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }

@@ -85,6 +85,7 @@ public class LoginActivity  extends BaseActivity {
     }
 
     public void login(View view) {
+        showProgressBar();
         loginRequest = new LoginRequest(loginIDET.getText().toString() , passwordET.getText().toString() , "DEV ID");
         spiceManager.execute(loginRequest ,new LoginRequestListener(this));
     }

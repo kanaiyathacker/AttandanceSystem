@@ -35,6 +35,6 @@ public class ViewReportRequestListener implements RequestListener<Object> {
         LinkedTreeMap map = (LinkedTreeMap)o;
         totalStrengthValueTV.setText(map.get("totalStrength").toString());
         absentValueTV.setText(map.get("totalAbsent").toString());
-
+        viewReportActivity.hideProgressBar();
     }
 }

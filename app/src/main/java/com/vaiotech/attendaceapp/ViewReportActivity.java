@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,8 +52,10 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     private String searchType;
     private String searchId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_report);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
@@ -96,19 +99,24 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
             }
         }
         if(list.isEmpty()) {
-            list.add("Add Org");
+            list.add(user.getCoName());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, list);
         activitySpinner.setAdapter(adapter);
+        if(list.size() == 2) {
+            activitySpinner.setSelection(1);
+        }
     }
 
     public void viewAbsenteeDetails(View view) {
+        showProgressBar();
         viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(searchType , searchId);
         spiceManager.execute(viewAbsenteeDetailsRequest ,new ViewAbsenteeDetailsRequestListener(this));
     }
 
     public void sendMessage(View view) {
+        showProgressBar();
         sendMessageRequest = new SendMessageRequest(user.getUserId());
         spiceManager.execute(sendMessageRequest ,new SendMessageRequestListener(this));
     }
@@ -170,12 +178,12 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
             }
             if (key == null) {
                 // set the org id
-                key = "";
+                key = user.getCoId();
                 searchType = "ORG";
             }
             this.searchType =  searchType;
             this.searchId = key;
-
+            showProgressBar();
             viewReportRequest = new ViewReportRequest(searchType, key);
             spiceManager.execute(viewReportRequest, new ViewReportRequestListener(this));
         }

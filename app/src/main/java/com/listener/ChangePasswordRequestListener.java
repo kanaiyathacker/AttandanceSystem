@@ -55,6 +55,7 @@ public class ChangePasswordRequestListener implements RequestListener<Object> {
 
             SharedPreferences.Editor editor = myProfileActivity.getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE).edit();
             editor.putString("USER_DETAILS", userDetail).apply();
+            myProfileActivity.hideProgressBar();
             dialog("Password updated Successfully");
         }
     }

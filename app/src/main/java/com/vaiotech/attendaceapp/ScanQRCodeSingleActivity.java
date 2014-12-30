@@ -245,9 +245,10 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     }
 
     public void save(View view) {
+        showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
-        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         openDialog(view);
     }
 

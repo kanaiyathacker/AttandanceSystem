@@ -66,6 +66,7 @@ public class ContactUsActivity extends BaseActivity {
     }
 
     public void save(View view) {
+        showProgressBar();
         contactUsRequest = new ContactUsRequest(emailET.getText().toString() , detailsET.getText().toString());
         spiceManager.execute(contactUsRequest ,new ContactUsRequestListener(this));
     }

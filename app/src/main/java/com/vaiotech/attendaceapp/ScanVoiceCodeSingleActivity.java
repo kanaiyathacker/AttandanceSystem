@@ -130,21 +130,6 @@ public class ScanVoiceCodeSingleActivity extends BaseActivity  {
         outBUTTON.setTypeface(font);
         getInfoBUTTON.setTypeface(font);
 
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.AM_PM, Calendar.PM);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int min = cal.get(Calendar.MINUTE);
-//        hhET.setText(""+hour);
-//        mmET.setText(""+(min < 10 ? "0"+ min : min));
-//
-//        int date = cal.get(Calendar.DATE);
-//        int month = cal.get(Calendar.MONTH);
-//        int year = cal.get(Calendar.YEAR);
-//
-//        ddET.setText("" + date);
-//        MMET.setText("" + month);
-//        yyET.setText("" + year);
-
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
         getInfoBUTTON.setEnabled(false);
@@ -163,9 +148,10 @@ public class ScanVoiceCodeSingleActivity extends BaseActivity  {
     }
 
     public void save(View view) {
+        showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
-        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener());
+        spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         openDialog(view);
     }
 
