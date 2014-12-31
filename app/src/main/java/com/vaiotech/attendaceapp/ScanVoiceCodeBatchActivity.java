@@ -123,20 +123,6 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
 
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.AM_PM, Calendar.PM);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int min = cal.get(Calendar.MINUTE);
-//        hhET.setText("" + hour);
-//        mmET.setText("" + (min < 10 ? "0" + min : min));
-//
-//        int date = cal.get(Calendar.DATE);
-//        int month = cal.get(Calendar.MONTH);
-//        int year = cal.get(Calendar.YEAR);
-//
-//        ddET.setText("" + date);
-//        MMET.setText("" + month);
-//        yyET.setText("" + year);
 
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
@@ -217,6 +203,21 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_functional_main, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
     }
 }

@@ -1,10 +1,14 @@
 package com.vaiotech.attendaceapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.bean.User;
+import com.google.gson.Gson;
 import com.octo.android.robospice.SpiceManager;
 import com.services.AttandanceRestService;
 
@@ -15,6 +19,9 @@ import roboguice.activity.RoboActivity;
  */
 public class BaseActivity extends RoboActivity {
     SpiceManager spiceManager = new SpiceManager(AttandanceRestService.class);
+    SharedPreferences sharedPreferences;
+    boolean isLogin;
+    boolean isUserAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,8 @@ public class BaseActivity extends RoboActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
         hideProgressBar();
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
+        isUserLogedIn();
     }
     @Override
     protected void onStop() {
@@ -45,5 +54,12 @@ public class BaseActivity extends RoboActivity {
         setProgressBarIndeterminateVisibility(false);
     }
 
+    public void isUserLogedIn() {
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
+    }
 
 }

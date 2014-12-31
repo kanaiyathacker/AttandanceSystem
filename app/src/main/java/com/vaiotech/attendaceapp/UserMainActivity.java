@@ -55,11 +55,13 @@ public class UserMainActivity extends BaseActivity {
 
     public void qrScan(View view) {
         Intent intent = new Intent(this , QRCodeGeneratorActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void voiceScan(View view) {
         Intent intent = new Intent(this , VoiceCodeGeneratorActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

@@ -208,19 +208,6 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         alertDialog.show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.manual_entry, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void getInfo(View view) {
         showProgressBar();
         getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
@@ -243,5 +230,25 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
             getInfoBUTTON.setAlpha(.5f);
         }
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.manual_entry, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -52,6 +53,9 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
     private String monthSel;
     private String yearSel;
     private Context context;
+    SharedPreferences sharedPreferences;
+    boolean isLogin;
+    boolean isUserAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
         args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
         args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
         args.putBoolean(CaldroidFragment.ENABLE_CLICK_ON_DISABLED_DATES, true);
-        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
@@ -98,6 +102,8 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
         t.commit();
         buildActivitySpinner();
         activitySpinner.setOnItemSelectedListener(this);
+        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
+        isUserLogedIn();
     }
 
     private void buildActivitySpinner() {
@@ -138,19 +144,6 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
     protected void onStart() {
         super.onStart();
         spiceManager.start(this);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_user_report, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -197,4 +190,33 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_view_user_report, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void isUserLogedIn() {
+        String val = sharedPreferences.getString("USER_DETAILS" , null);
+        Gson gson = new Gson();
+        User user = gson.fromJson(val , User.class);
+        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
+        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
+    }
+
 }

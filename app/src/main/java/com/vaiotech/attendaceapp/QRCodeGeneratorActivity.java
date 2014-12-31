@@ -2,6 +2,7 @@ package com.vaiotech.attendaceapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -124,15 +125,23 @@ public class QRCodeGeneratorActivity extends BaseActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_qrcode_generator, menu);
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_functional_main, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
     }
 
     public void refresh(View view) {

@@ -94,9 +94,6 @@ public class ScanCardSingleActivity extends BaseActivity {
     private LocationManager lm;
     private Location location;
     private User user;
-    private SharedPreferences sharedPreferences;
-    boolean isLogin;
-    boolean isUserAdmin;
 
     private class PushRequest extends AsyncTask<String, Integer, String> {
         protected String doInBackground(String... server) {
@@ -175,10 +172,6 @@ public class ScanCardSingleActivity extends BaseActivity {
         outBUTTON.setAlpha(.5f);
         getInfoBUTTON.setAlpha(.5f);
 
-
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
@@ -356,14 +349,6 @@ public class ScanCardSingleActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.scan_card_single, menu);
         menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
         return true;
-    }
-
-    public void isUserLogedIn() {
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
-        Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
-        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
-        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
     }
 
     @Override

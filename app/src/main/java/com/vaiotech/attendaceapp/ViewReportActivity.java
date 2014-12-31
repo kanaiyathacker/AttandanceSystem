@@ -1,6 +1,7 @@
 package com.vaiotech.attendaceapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -139,18 +140,6 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_report, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         System.out.println(i);
         Map<String, String> branches = user.getBranchs();
@@ -194,5 +183,25 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_view_report, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

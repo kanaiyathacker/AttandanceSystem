@@ -206,18 +206,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
             dialog.show(scanQRCodeSingleActivity.getFragmentManager(), "cameraPreview");
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scan_qrcode_single, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public void onQRCodeScan(Object contents) {
@@ -286,6 +274,26 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
         cardId = null;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.scan_card_single, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

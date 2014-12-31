@@ -36,10 +36,6 @@ public class FunctionalMainActivity extends BaseActivity {
     @InjectView(R.id.smartScanButton) TextView smartScanButton;
     @InjectView(R.id.viewReportButton) TextView viewReportButton;
     @InjectView(R.id.contactUsButton) TextView contactUsButton;
-    private SharedPreferences sharedPreferences;
-    boolean isLogin;
-    boolean isUserAdmin;
-
     Context context ;
 
     @Override
@@ -52,8 +48,6 @@ public class FunctionalMainActivity extends BaseActivity {
         smartScanButton.setTypeface(font);
         viewReportButton.setTypeface(font);
         contactUsButton.setTypeface(font);
-        sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
-        isUserLogedIn();
         hideProgressBar();
     }
 
@@ -71,6 +65,7 @@ public class FunctionalMainActivity extends BaseActivity {
                 intent = new Intent(this, LoginActivity.class);
                 intent.putExtra("ACTIVITY_SELECTED", "SMART_SCAN");
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 //        finish();
     }
@@ -83,12 +78,14 @@ public class FunctionalMainActivity extends BaseActivity {
             intent = new Intent(this, LoginActivity.class);
             intent.putExtra("ACTIVITY_SELECTED" , "MY_PROFILE");
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 //        finish();
     }
 
     public void aboutIPresence(View view) {
         Intent intent = new Intent(this, AboutIPresenceActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 //        finish();
     }
@@ -105,12 +102,14 @@ public class FunctionalMainActivity extends BaseActivity {
             intent = new Intent(this, LoginActivity.class);
             intent.putExtra("ACTIVITY_SELECTED", "VIEW_REPORT");
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 //        finish();
     }
 
     public void contactUs(View view) {
         Intent intent = new Intent(this, ContactUsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -121,28 +120,15 @@ public class FunctionalMainActivity extends BaseActivity {
         return true;
     }
 
-    public void isUserLogedIn() {
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
-        Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
-        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
-        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if ("Log Out" == item.getTitle()) {
             sharedPreferences.edit().remove("USER_DETAILS").commit();
             isUserLogedIn();
             item.setTitle("Log In");
         } else {
             Intent intent = new Intent(this , LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -56,26 +56,27 @@ public class MainActivity extends BaseActivity {
     public void scanQRCode(View view) {
         Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
                 new Intent(this, ScanQRCodeSingleActivity.class) : new Intent(this, ScanQRCodeBatchActivity.class);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void scanCard(View view) {
         Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
                 new Intent(this, ScanCardSingleActivity.class) : new Intent(this, ScanCardBatchActivity.class);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void scanVoice(View view) {
         Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
                 new Intent(this, ScanVoiceCodeSingleActivity.class) : new Intent(this, ScanVoiceCodeBatchActivity.class);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void manualEntry(View view) {
         Intent intent = new Intent(this , ManualEntryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

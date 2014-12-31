@@ -396,14 +396,6 @@ public class ScanCardBatchActivity extends BaseActivity {
         vibe.vibrate(500);
     }
 
-    public void isUserLogedIn() {
-        String val = sharedPreferences.getString("USER_DETAILS" , null);
-        Gson gson = new Gson();
-        User user = gson.fromJson(val , User.class);
-        isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
-        isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

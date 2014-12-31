@@ -72,6 +72,7 @@ public class LoginRequestListener implements RequestListener<Object> {
                 //            intent.putExtra("USER_DETAILS", userDetail);
                 SharedPreferences.Editor editor = loginActivity.getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE).edit();
                 editor.putString("USER_DETAILS", userDetail).apply();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 loginActivity.startActivity(intent);
             } else {
                 String errorMsg = "Invalid Login ID OR Password";
