@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,10 +10,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,23 +20,17 @@ import com.bean.User;
 import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.GetUserAbsenteeRequestListener;
-import com.listener.ViewAbsenteeDetailsRequestListener;
-import com.listener.ViewReportRequestListener;
 import com.octo.android.robospice.SpiceManager;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.services.AttandanceRestService;
 import com.services.GetUserAbsenteeRequest;
-import com.services.ViewReportRequest;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import roboguice.inject.InjectView;
 
 
 public class ViewUserReportActivity extends FragmentActivity implements AdapterView.OnItemSelectedListener {
@@ -59,8 +51,10 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user_report);
+        hideProgressBar();
         this.context = this;
         activitySpinner = (Spinner) findViewById(R.id.activitySpinner);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -86,8 +80,8 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
             public void onChangeMonth(int month, int year) {
                 String monthStr  = month < 10 ? "0"+month : ""+month;
                 String text = "month: " + monthStr + " : " + user.getCardId();
-                Toast.makeText(getApplicationContext(), text,
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), text,
+//                        Toast.LENGTH_SHORT).show();
 
                 monthSel = monthStr;
                 yearSel = ""+year;
@@ -180,7 +174,7 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
             }
             this.searchType =  searchType;
             this.searchId = key;
-
+            showProgressBar();
             getUserAbsenteeRequest = new GetUserAbsenteeRequest(searchType , searchId ,user.getCardId() , monthSel , ""+ yearSel);
             spiceManager.execute(getUserAbsenteeRequest ,new GetUserAbsenteeRequestListener(caldroidFragment));
         }
@@ -217,6 +211,14 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
         User user = gson.fromJson(val , User.class);
         isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
         isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
+    }
+
+    public void showProgressBar() {
+        setProgressBarIndeterminateVisibility(true);
+    }
+
+    public void hideProgressBar() {
+        setProgressBarIndeterminateVisibility(false);
     }
 
 }

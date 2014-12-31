@@ -4,6 +4,7 @@
     tools:context="com.vaiotech.attendaceapp.FunctionalMainActivity">
 
         <item android:id="@+id/logout"
+            android:icon="@drawable/login"
             android:title=""
             android:showAsAction="always"
          />

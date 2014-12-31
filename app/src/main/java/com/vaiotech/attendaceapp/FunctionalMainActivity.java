@@ -117,6 +117,7 @@ public class FunctionalMainActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_functional_main, menu);
         menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        menu.getItem(0).setIcon(isLogin ? R.drawable.logout : R.drawable.login);
         return true;
     }
 
@@ -125,6 +126,7 @@ public class FunctionalMainActivity extends BaseActivity {
         if ("Log Out" == item.getTitle()) {
             sharedPreferences.edit().remove("USER_DETAILS").commit();
             isUserLogedIn();
+            item.setIcon(R.drawable.login);
             item.setTitle("Log In");
         } else {
             Intent intent = new Intent(this , LoginActivity.class);
