@@ -1,9 +1,6 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
@@ -14,7 +11,6 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,19 +20,15 @@ import com.barcodescannerfordialogs.DialogScanner;
 import com.barcodescannerfordialogs.helpers.CameraFace;
 import com.bean.AttandanceTransaction;
 import com.bean.User;
-import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
 import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import roboguice.inject.ContentView;
@@ -133,6 +125,12 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         activitySpinner.setOnItemSelectedListener(this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new  HeavyTask(this).execute();
+    }
+
     private class HeavyTask extends AsyncTask<String, Void, Void> {
 
         private ScanQRCodeBatchActivity scanQRCodeBatchActivity;
@@ -176,15 +174,14 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
-        openDialog(view);
+        String msg = (view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText();
+        openDialog(msg);
+        if(scanSet != null)
+            scanSet.clear();
+        counterValTV.setText("0");
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE" , Context.MODE_PRIVATE);
-//        String val = sharedPreferences.getString("USER_DETAILS" , null);
-//        Gson gson = new Gson();
-//        User user = gson.fromJson(val , User.class);
-
         AttandanceTransaction t = new AttandanceTransaction();
         t.setAdminId(user.getUserId());
         t.setCardId(getCardIdList(scanSet));
@@ -210,24 +207,24 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         return retVal;
     }
 
-    public void openDialog(View view){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText());
-        alertDialogBuilder.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-        if(scanSet != null)
-            scanSet.clear();
-        counterValTV.setText("0");
-    }
+//    public void openDialog(View view){
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//
+//        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText());
+//        alertDialogBuilder.setPositiveButton("OK",
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                        startActivity(intent);
+//                    }
+//                });
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        alertDialog.show();
+//        if(scanSet != null)
+//            scanSet.clear();
+//        counterValTV.setText("0");
+//    }
 
     private void vibrate() {
         Log.d(TAG, "vibrate");
@@ -235,25 +232,4 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
         vibe.vibrate(500);
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.scan_card_single, menu);
-//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if ("Log Out" == item.getTitle()) {
-//            sharedPreferences.edit().remove("USER_DETAILS").commit();
-//            isUserLogedIn();
-//            item.setTitle("Log In");
-//        } else {
-//            Intent intent = new Intent(this , LoginActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
 }
