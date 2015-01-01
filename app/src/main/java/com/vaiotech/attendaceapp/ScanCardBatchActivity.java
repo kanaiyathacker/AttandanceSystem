@@ -161,7 +161,7 @@ public class ScanCardBatchActivity extends BaseActivity {
             nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         } else {
             isNFCSupported = false;
-            Toast.makeText(this, "Smart Card Scan Not Supported In This Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Smart Card Scan Not Supported On This Phone", Toast.LENGTH_SHORT).show();
         }
         cardList = new HashSet<String>();
         buildActivitySpinner(user , activitySpinner);

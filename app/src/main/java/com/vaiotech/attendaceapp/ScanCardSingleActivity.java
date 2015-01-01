@@ -146,7 +146,7 @@ public class ScanCardSingleActivity extends BaseActivity {
             nfcAdapter = NfcAdapter.getDefaultAdapter(this);
             nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardSingleActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         } else {
-            Toast.makeText(this, "Smart Card Scan Not Supported In This Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Smart Card Scan Not Supported On This Phone", Toast.LENGTH_SHORT).show();
         }
 
         buildActivitySpinner(user , activitySpinner);
