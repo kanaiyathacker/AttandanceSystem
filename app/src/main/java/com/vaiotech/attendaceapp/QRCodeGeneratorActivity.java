@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bean.User;
 import com.google.gson.Gson;
+import com.services.GetServerTimeRequest;
 import com.util.Util;
 
 import java.io.IOException;
@@ -36,53 +37,21 @@ public class QRCodeGeneratorActivity extends BaseActivity {
     @InjectView(R.id.seperateDateMMTV) TextView seperateDateMMTV;
 
     @InjectView(R.id.timeTV) TextView timeTV;
-    @InjectView(R.id.hhET) TextView hhET;
-    @InjectView(R.id.mmET) TextView mmET;
+    @InjectView(R.id.hhET) EditText hhET;
+    @InjectView(R.id.mmET) EditText mmET;
 
     @InjectView(R.id.dateTV) TextView dateTV;
-    @InjectView(R.id.ddET) TextView ddET;
-    @InjectView(R.id.MMET) TextView MMET;
-    @InjectView(R.id.yyET) TextView yyET;
+    @InjectView(R.id.ddET) EditText ddET;
+    @InjectView(R.id.MMET) EditText MMET;
+    @InjectView(R.id.yyET) EditText yyET;
     @InjectView(R.id.refreshButton) Button refreshButton;
     User user;
-
-    private class PushRequest extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... server) {
-            String result = null;
-            try {
-                result = Util.query("3.in.pool.ntp.org");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
-            int year = cal.get(Calendar.YEAR);
-
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_generator);
-        new PushRequest().execute();
+        new GetServerTimeRequest(hhET , mmET , ddET , MMET , yyET ).execute();
         SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();
@@ -106,43 +75,8 @@ public class QRCodeGeneratorActivity extends BaseActivity {
         yyET.setTypeface(digital);
         dateTV.setTypeface(digital);
         refreshButton.setTypeface(font);
-
-//        cal.set(Calendar.AM_PM, Calendar.PM);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int min = cal.get(Calendar.MINUTE);
-//        hhET.setText(""+hour);
-//        mmET.setText(""+(min < 10 ? "0"+ min : min));
-//
-//        int date = cal.get(Calendar.DATE);
-//        int month = cal.get(Calendar.MONTH);
-//        int year = cal.get(Calendar.YEAR);
-//
-//        ddET.setText("" + date);
-//        MMET.setText("" + month);
-//        yyET.setText("" + year);
-
     }
 
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if ("Log Out" == item.getTitle()) {
-//            sharedPreferences.edit().remove("USER_DETAILS").commit();
-//            isUserLogedIn();
-//            item.setTitle("Log In");
-//        } else {
-//            Intent intent = new Intent(this , LoginActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_functional_main, menu);
-//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-//        return true;
-//    }
 
     public void refresh(View view) {
         Calendar cal = Calendar.getInstance();

@@ -39,7 +39,7 @@ public class VoiceCodeGeneratorActivity extends BaseActivity {
     @InjectView(R.id.hhET)
     EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
-    @InjectView(R.id.dateTV) EditText dateTV;
+    @InjectView(R.id.dateTV) TextView dateTV;
     @InjectView(R.id.ddET) EditText ddET;
     @InjectView(R.id.MMET) EditText MMET;
     @InjectView(R.id.yyET) EditText yyET;

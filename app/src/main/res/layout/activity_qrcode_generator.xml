@@ -20,7 +20,8 @@
         android:layout_marginRight="15dp"
         />
 
-    <TextView
+    <EditText
+        android:enabled="false"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
@@ -51,7 +52,8 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
+        android:enabled="false"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
@@ -81,7 +83,8 @@
         android:layout_marginRight="15dp"
         />
 
-    <TextView
+    <EditText
+        android:enabled="false"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
@@ -112,7 +115,8 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
+        android:enabled="false"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
@@ -143,7 +147,8 @@
         android:layout_toRightOf="@+id/MMET"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
+        android:enabled="false"
         android:layout_marginTop="10dp"
         android:inputType="number"
         android:textStyle="bold"
