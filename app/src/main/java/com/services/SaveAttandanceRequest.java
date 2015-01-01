@@ -23,7 +23,6 @@ public class SaveAttandanceRequest extends RetrofitSpiceRequest<Object, RestServ
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
-        User user = new User();
         return getService().save(attandanceTransaction);
     }
 }
