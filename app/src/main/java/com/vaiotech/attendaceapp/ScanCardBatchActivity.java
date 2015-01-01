@@ -153,17 +153,16 @@ public class ScanCardBatchActivity extends BaseActivity {
 
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
+        shimmer = new Shimmer();
         if (mNfcAdapter != null) {
+            shimmer.start(shimmer_tv);
             isNFCSupported = true;
-//            Toast.makeText(this, "Smart Card Scan Not Supported", Toast.LENGTH_SHORT).show();
             nfcAdapter = NfcAdapter.getDefaultAdapter(this);
             nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardBatchActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         } else {
             isNFCSupported = false;
             Toast.makeText(this, "Smart Card Scan Not Supported In This Phone", Toast.LENGTH_SHORT).show();
         }
-        shimmer = new Shimmer();
-        shimmer.start(shimmer_tv);
         cardList = new HashSet<String>();
         buildActivitySpinner(user , activitySpinner);
     }

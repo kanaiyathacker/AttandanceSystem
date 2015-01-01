@@ -6,27 +6,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.os.AsyncTask;
+import android.nfc.Tag;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
-import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
@@ -37,24 +34,17 @@ import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-
-import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_scan_card_single)
 public class ScanCardSingleActivity extends BaseActivity {
+    private static final String TAG = ScanCardSingleActivity.class.getName();
 
     @InjectView(R.id.idLableTV) TextView idLableTV;
     @InjectView(R.id.idValueTV) TextView idValueTV;
@@ -86,16 +76,17 @@ public class ScanCardSingleActivity extends BaseActivity {
     @InjectView(R.id.activitySpinner) Spinner activitySpinner;
     private Shimmer shimmer;
 
-    private PendingIntent mPendingIntent;
-    private IntentFilter[] mIntentFilters;
-    private String[][] mNFCTechLists;
     private String cardId;
-    private NdefMessage mNdefPushMessage;
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
     private LocationManager lm;
     private Location location;
     private User user;
+
+    protected NfcAdapter nfcAdapter;
+    protected PendingIntent nfcPendingIntent;
+    private boolean isNFCSupported;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,19 +139,32 @@ public class ScanCardSingleActivity extends BaseActivity {
         user = gson.fromJson(val , User.class);
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
 
-        if (mNfcAdapter != null) {
-//            Toast.makeText(this, "Read an NFC tag", Toast.LENGTH_SHORT).show();
-        } else {
-//            Toast.makeText(this, "This phone is not NFC enabled", Toast.LENGTH_SHORT).show();
-        }
-        mPendingIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, ScanCardSingleActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
-                "Message from NFC Reader :-)", Locale.ENGLISH, true) });
         shimmer = new Shimmer();
-        shimmer.start(shimmer_tv);
+        if (mNfcAdapter != null) {
+              shimmer.start(shimmer_tv);
+            isNFCSupported= true;
+            nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+            nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, ScanCardSingleActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        } else {
+            Toast.makeText(this, "Smart Card Scan Not Supported In This Phone", Toast.LENGTH_SHORT).show();
+        }
+
         buildActivitySpinner(user , activitySpinner);
     }
+
+    public void enableForegroundMode() {
+        Log.d(TAG, "enableForegroundMode");
+
+        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED); // filter for all
+        IntentFilter[] writeTagFilters = new IntentFilter[] {tagDetected};
+        nfcAdapter.enableForegroundDispatch(this, nfcPendingIntent, writeTagFilters, null);
+    }
+
+    public void disableForegroundMode() {
+        Log.d(TAG, "disableForegroundMode");
+        nfcAdapter.disableForegroundDispatch(this);
+    }
+
 
     private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
         byte[] langBytes = locale.getLanguage().getBytes(Charset.forName("US-ASCII"));
@@ -182,18 +186,46 @@ public class ScanCardSingleActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mNfcAdapter != null) {
-            mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
-            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
-        }
+//        if (mNfcAdapter != null) {
+//            mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
+//            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
+//        }
+        if(isNFCSupported)
+            enableForegroundMode();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (mNfcAdapter != null) {
-            mNfcAdapter.disableForegroundDispatch(this);
-            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
+//        if (mNfcAdapter != null) {
+//            mNfcAdapter.disableForegroundDispatch(this);
+//            mNfcAdapter.setNdefPushMessage(mNdefPushMessage, this);
+//        }
+        if(isNFCSupported)
+            disableForegroundMode();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        Log.d(TAG, "onNewIntent");
+
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            byte[] id =tag.getId();
+            long cardId = getReversed(id);
+            this.cardId = ""+cardId;
+            idValueTV.setText(this.cardId);
+
+            inBUTTON.setEnabled(true);
+            outBUTTON.setEnabled(true);
+            getInfoBUTTON.setEnabled(true);
+
+
+            inBUTTON.setAlpha(1f);
+            outBUTTON.setAlpha(1f);
+            getInfoBUTTON.setAlpha(1f);
+            shimmer.cancel();
+            shimmer_tv.setText("");
         }
     }
 
@@ -231,11 +263,11 @@ public class ScanCardSingleActivity extends BaseActivity {
         return result;
     }
 
-    @Override
-    public void onNewIntent(Intent intent) {
-        setIntent(intent);
-        resolveIntent(intent);
-    }
+//    @Override
+//    public void onNewIntent(Intent intent) {
+//        setIntent(intent);
+//        resolveIntent(intent);
+//    }
 
     public void save(View view) {
         showProgressBar();
@@ -284,26 +316,5 @@ public class ScanCardSingleActivity extends BaseActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
         cardId = null;
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.scan_card_single, menu);
-        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if ("Log Out" == item.getTitle()) {
-            sharedPreferences.edit().remove("USER_DETAILS").commit();
-            isUserLogedIn();
-            item.setTitle("Log In");
-        } else {
-            Intent intent = new Intent(this , LoginActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
