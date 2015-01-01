@@ -1,14 +1,10 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
@@ -16,16 +12,10 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.Vibrator;
-import android.provider.Settings;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,7 +24,6 @@ import android.widget.Toast;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
-import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
 import com.romainpiel.shimmer.Shimmer;
@@ -43,19 +32,11 @@ import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
-import org.ndeftools.Message;
-import org.ndeftools.Record;
-import org.ndeftools.externaltype.AndroidApplicationRecord;
-
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import roboguice.inject.ContentView;
@@ -69,12 +50,8 @@ public class ScanCardBatchActivity extends BaseActivity {
     public static final String MIME_TEXT_PLAIN = "text/plain";
 
     private NfcAdapter mNfcAdapter;
-    private PendingIntent mPendingIntent;
-    private IntentFilter[] mIntentFilters;
-    private String[][] mNFCTechLists;
     private SaveAttandanceRequest saveAttandanceRequest;
     private String cardId;
-    private NdefMessage mNdefPushMessage;
 
     @InjectView(R.id.adminNameLableTV) TextView adminNameLableTV;
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
@@ -313,25 +290,6 @@ public class ScanCardBatchActivity extends BaseActivity {
         }
         return t;
     }
-
-//    public void openDialog(View view){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//
-//        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText());
-//        alertDialogBuilder.setPositiveButton("OK",
-//                new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-//        if(cardList != null)
-//            cardList.clear();
-//        counterValTV.setText("0");
-//    }
 
     private void vibrate() {
         Log.d(TAG, "vibrate");

@@ -158,47 +158,8 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
         return retVal;
     }
 
-//    public void openDialog(View view){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//
-//        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText());
-//        alertDialogBuilder.setPositiveButton("OK",
-//                new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-//        if(scanSet != null)
-//            scanSet.clear();
-//        counterValTV.setText("0");
-//    }
-
     private void vibrate() {
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
         vibe.vibrate(500);
     }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if ("Log Out" == item.getTitle()) {
-//            sharedPreferences.edit().remove("USER_DETAILS").commit();
-//            isUserLogedIn();
-//            item.setTitle("Log In");
-//        } else {
-//            Intent intent = new Intent(this , LoginActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_functional_main, menu);
-//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-//        return true;
-//    }
 }

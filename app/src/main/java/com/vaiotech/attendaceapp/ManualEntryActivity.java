@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
 import com.services.GetInfoRequest;
+import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
@@ -73,39 +74,6 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
     private User user;
     private String cardId;
 
-    private class PushRequest extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... server) {
-            String result = null;
-            try {
-                result = Util.query("3.in.pool.ntp.org");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH) + 1;
-            int year = cal.get(Calendar.YEAR);
-
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
-        }
-    }
-
-
     public String getCardId() {
         return cardId;
     }
@@ -118,8 +86,7 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_entry);
-
-        new PushRequest().execute();
+        new GetServerTimeRequest(hhET , mmET , ddET , MMET , yyET ).execute();
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
 
         idLableTV.setTypeface(font);
@@ -194,22 +161,6 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         cardId = null;
     }
 
-//    public void openDialog(View view){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//
-//        alertDialogBuilder.setMessage((view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + userIdValueET.getText() + " noted as " + hhET.getText() + ":" + mmET.getText());
-//        alertDialogBuilder.setPositiveButton("OK",
-//                new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-//    }
-
     public void getInfo(View view) {
         showProgressBar();
         getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
@@ -233,24 +184,4 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         }
         return false;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if ("Log Out" == item.getTitle()) {
-//            sharedPreferences.edit().remove("USER_DETAILS").commit();
-//            isUserLogedIn();
-//            item.setTitle("Log In");
-//        } else {
-//            Intent intent = new Intent(this , LoginActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.manual_entry, menu);
-//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-//        return true;
-//    }
 }
