@@ -2,20 +2,10 @@ package com.vaiotech.attendaceapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.bean.User;
-import com.google.gson.Gson;
-import com.util.Util;
-
-import java.io.IOException;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;

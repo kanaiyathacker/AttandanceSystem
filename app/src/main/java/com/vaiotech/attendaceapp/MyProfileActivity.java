@@ -1,16 +1,12 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +17,6 @@ import com.bean.User;
 import com.google.gson.Gson;
 import com.listener.ChangePasswordRequestListener;
 import com.services.ChangePasswordRequest;
-import com.services.LoginRequest;
 import com.util.Util;
 
 import roboguice.inject.ContentView;
@@ -99,27 +94,6 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
         newPasswordEV.setOnKeyListener(this);
         retypePasswordEV.setOnKeyListener(this);
     }
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if ("Log Out" == item.getTitle()) {
-//            sharedPreferences.edit().remove("USER_DETAILS").commit();
-//            isUserLogedIn();
-//            item.setTitle("Log In");
-//        } else {
-//            Intent intent = new Intent(this , LoginActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_functional_main, menu);
-//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-//        return true;
-//    }
 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {

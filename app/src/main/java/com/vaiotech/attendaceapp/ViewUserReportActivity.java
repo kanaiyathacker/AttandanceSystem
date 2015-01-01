@@ -14,7 +14,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.bean.User;
 import com.bean.UserMappingBean;

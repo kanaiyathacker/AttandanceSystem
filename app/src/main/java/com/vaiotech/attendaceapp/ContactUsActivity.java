@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,9 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.listener.ContactUsRequestListener;
-import com.listener.ViewReportRequestListener;
 import com.services.ContactUsRequest;
-import com.services.GetInfoRequest;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;

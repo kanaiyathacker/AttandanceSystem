@@ -7,9 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-import java.io.ByteArrayOutputStream;
-
-
 public class UserActivity extends Activity {
 
     @Override
