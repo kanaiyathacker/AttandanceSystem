@@ -134,4 +134,8 @@ public class Util {
         return ""+(value < 10 ? "0"+ value : value);
 
     }
+
+    public static String trimToEmpty(Object value) {
+        return value != null ? String.valueOf(value) : "";
+    }
 }
