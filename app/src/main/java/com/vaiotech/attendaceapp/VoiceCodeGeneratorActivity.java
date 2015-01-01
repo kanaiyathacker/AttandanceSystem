@@ -12,12 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bean.User;
 import com.google.gson.Gson;
+import com.services.GetServerTimeRequest;
 import com.util.Util;
 
 import java.io.IOException;
@@ -34,54 +36,23 @@ public class VoiceCodeGeneratorActivity extends BaseActivity {
     @InjectView(R.id.seperateDateTV) TextView seperateDateTV;
     @InjectView(R.id.seperateDateMMTV) TextView seperateDateMMTV;
     @InjectView(R.id.timeTV) TextView timeTV;
-    @InjectView(R.id.hhET) TextView hhET;
-    @InjectView(R.id.mmET) TextView mmET;
-    @InjectView(R.id.dateTV) TextView dateTV;
-    @InjectView(R.id.ddET) TextView ddET;
-    @InjectView(R.id.MMET) TextView MMET;
-    @InjectView(R.id.yyET) TextView yyET;
+    @InjectView(R.id.hhET)
+    EditText hhET;
+    @InjectView(R.id.mmET) EditText mmET;
+    @InjectView(R.id.dateTV) EditText dateTV;
+    @InjectView(R.id.ddET) EditText ddET;
+    @InjectView(R.id.MMET) EditText MMET;
+    @InjectView(R.id.yyET) EditText yyET;
     @InjectView(R.id.refreshButton) Button refreshButton;
     private User user;
     private ProgressBar progressBar ;
     private TextView progressDisplay;
 
-    private class PushRequest extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... server) {
-            String result = null;
-            try {
-                result = Util.query("3.in.pool.ntp.org");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH);
-            int year = cal.get(Calendar.YEAR);
-
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_code_generator);
-        new PushRequest().execute();
+        new GetServerTimeRequest(hhET , mmET , ddET , MMET , yyET ).execute();
         SharedPreferences sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         String val = sharedPreferences.getString("USER_DETAILS" , null);
         Gson gson = new Gson();

@@ -16,15 +16,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bean.AttandanceTransaction;
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
+import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
@@ -33,12 +37,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_scan_voice_code_single)
+@ContentView(R.layout.activity_scan_voice_code_batch)
 public class ScanVoiceCodeBatchActivity extends BaseActivity {
 
     @InjectView(R.id.adminNameLableTV)
@@ -57,52 +62,22 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
     @InjectView(R.id.counterLableTV) TextView counterLableTV;
 
     @InjectView(R.id.counterValTV) TextView counterValTV;
-    @InjectView(R.id.inBUTTON)
-    Button inBUTTON;
+    @InjectView(R.id.inBUTTON) Button inBUTTON;
     @InjectView(R.id.outBUTTON) Button outBUTTON;
+    @InjectView(R.id.activitySpinner)
+    Spinner activitySpinner;
+
     private Set<User> scanSet;
     private User user;
     private LocationManager lm;
     private Location location;
     private SaveAttandanceRequest saveAttandanceRequest;
 
-    private class PushRequest extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... server) {
-            String result = null;
-            try {
-                result = Util.query("3.in.pool.ntp.org");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH) + 1;
-            int year = cal.get(Calendar.YEAR);
-
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_voice_code_batch);
-        new PushRequest().execute();
+        new GetServerTimeRequest(hhET , mmET , ddET , MMET , yyET ).execute();
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
 
@@ -137,7 +112,9 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
         adminValueLableTV.setText(user.getfName() + " " + user.getlName());
 
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        buildActivitySpinner(user , activitySpinner);
     }
+
     public void save(View view) {
         showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";

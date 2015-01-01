@@ -1,6 +1,5 @@
 package com.vaiotech.attendaceapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,13 +12,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,15 +26,13 @@ import com.bean.AttandanceTransaction;
 import com.bean.User;
 import com.bean.UserMappingBean;
 import com.google.gson.Gson;
-import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
-import com.services.GetInfoRequest;
+import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +43,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_scan_qrcode_batch)
-public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener {
+public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScanner.OnQRCodeScanListener , AdapterView.OnItemSelectedListener{
 
     private static final String TAG = ScanQRCodeBatchActivity.class.getName();
 
@@ -77,43 +72,28 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
     private Location location;
     private SaveAttandanceRequest saveAttandanceRequest;
 
-    private class PushRequest extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... server) {
-            String result = null;
-            try {
-                result = Util.query("3.in.pool.ntp.org");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selItem = (String) activitySpinner.getSelectedItem();
+        if(!selItem.equals("Select") && scanSet!= null &&  scanSet.size() > 0) {
+            counterValTV.setText("" + scanSet.size());
+            inBUTTON.setEnabled(true);
+            outBUTTON.setEnabled(true);
+            inBUTTON.setAlpha(1f);
+            outBUTTON.setAlpha(1f);
         }
+    }
 
-        protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH) + 1;
-            int year = cal.get(Calendar.YEAR);
-
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
-        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qrcode_batch);
-        new PushRequest().execute();
+        new GetServerTimeRequest(hhET , mmET , ddET , MMET , yyET ).execute();
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Calibri.ttf");
         Typeface digital = Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf");
@@ -136,21 +116,6 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         inBUTTON.setTypeface(font);
         outBUTTON.setTypeface(font);
 
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.AM_PM, Calendar.PM);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int min = cal.get(Calendar.MINUTE);
-//        hhET.setText("" + hour);
-//        mmET.setText("" + (min < 10 ? "0" + min : min));
-//
-//        int date = cal.get(Calendar.DATE);
-//        int month = cal.get(Calendar.MONTH);
-//        int year = cal.get(Calendar.YEAR);
-//
-//        ddET.setText("" + date);
-//        MMET.setText("" + month);
-//        yyET.setText("" + year);
-
         inBUTTON.setEnabled(false);
         outBUTTON.setEnabled(false);
 
@@ -164,38 +129,9 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         adminValueLableTV.setText(user.getfName() + " " + user.getlName());
 
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        new  HeavyTask(this).execute();
-        buildActivitySpinner();
+        buildActivitySpinner(user , activitySpinner);
+        activitySpinner.setOnItemSelectedListener(this);
     }
-
-    private void buildActivitySpinner() {
-        List<UserMappingBean> userMappingList = user.getUserMappingList();
-        List<String> list = new ArrayList<String>();
-
-        Map<String, String> branches = user.getBranchs();
-        Map<String, String> departs = user.getDeparts();
-
-        for(UserMappingBean curr : userMappingList) {
-            String branch = curr.getBranchId();
-            String depart = curr.getDepartId();
-            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
-                String val = branches.get(branch) + " - " + departs.get(depart);
-                list.add(val);
-            }
-            if(branch != null && depart.length() > 0 && depart == null ) {
-                String val = branches.get(branch);
-                list.add(val);
-            }
-        }
-        if(list.isEmpty()) {
-            list.add("Add Org");
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, list);
-        activitySpinner.setAdapter(adapter);
-//        activitySpinner
-    }
-
 
     private class HeavyTask extends AsyncTask<String, Void, Void> {
 
@@ -206,27 +142,32 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         }
 
         protected Void doInBackground(String... args) {
-            dialog = DialogScanner.newInstance(CameraFace.BACK , 1 , null);
+            dialog = DialogScanner.newInstance(CameraFace.BACK , 1 , null , Typeface.createFromAsset(getAssets(), "fonts/digital_7_mono.ttf"));
+            dialog.show(scanQRCodeBatchActivity.getFragmentManager(), "cameraPreview");
             return null;
         }
 
         protected void onPostExecute(Void results) {
-            dialog.show(scanQRCodeBatchActivity.getFragmentManager(), "cameraPreview");
+//            dialog.show(scanQRCodeBatchActivity.getFragmentManager(), "cameraPreview");
+            hideProgressBar();
         }
+
     }
 
 
     @Override
     public void onQRCodeScan(Object contents) {
+        String selItem = (String) activitySpinner.getSelectedItem();
         if (contents != null) {
             scanSet = (Set)contents;
-            counterValTV.setText(""+scanSet.size());
-
-            inBUTTON.setEnabled(true);
-            outBUTTON.setEnabled(true);
-
-            inBUTTON.setAlpha(1f);
-            outBUTTON.setAlpha(1f);
+            int size = scanSet.size();
+            if(!selItem.equals("Select") && size > 0) {
+                counterValTV.setText("" + size);
+                inBUTTON.setEnabled(true);
+                outBUTTON.setEnabled(true);
+                inBUTTON.setAlpha(1f);
+                outBUTTON.setAlpha(1f);
+            }
         }
     }
 

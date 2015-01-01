@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -64,12 +65,13 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 
 	OnQRCodeScanListener scanListener;
     ProgressBar progressBar;
+    Typeface digital;
 	public interface OnQRCodeScanListener
 	{
 		public void onQRCodeScan(Object contents);
 	}
 
-	public static DialogScanner newInstance(CameraFace camera , int singleOrbatch , ProgressBar progressBar)
+	public static DialogScanner newInstance(CameraFace camera , int singleOrbatch , ProgressBar progressBar , Typeface digital)
 	{
 		DialogScanner dialog = new DialogScanner();
 		Bundle args = new Bundle();
@@ -77,6 +79,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
 		args.putInt(BUNDLE_SINGLE_OR_BATCH, singleOrbatch);
 		dialog.setArguments(args);
         dialog.progressBar = progressBar;
+        dialog.digital = digital;
 		return dialog;
 	}
 
@@ -153,10 +156,11 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
             countTv = new TextView(getDialog().getContext());
             countTv.setText("0");
             countTv.setId(R.id.counterValTV);
-            countTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            countTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
             countTv.setTextColor(Color.parseColor("#FFFFFF"));
             countTv.setGravity(Gravity.CENTER);
             countTv.setLayoutParams(tvLay);
+            countTv.setTypeface(digital);
             mScannerView.addView(countTv);
             scanResult = new HashSet<User>();
         }
@@ -164,7 +168,7 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
         FrameLayout.LayoutParams lay = new FrameLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-        lay.setMargins(0,480,0,0);
+        lay.setMargins(10,480,10,0);
 
         Button button = new Button(getDialog().getContext());
         button.setText(" Done ");
@@ -176,7 +180,6 @@ public class DialogScanner extends DialogFragment implements ZBarScannerView.Res
         mScannerView.addView(button);
 
         button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 scanListener.onQRCodeScan(scanResult != null ? scanResult : null);

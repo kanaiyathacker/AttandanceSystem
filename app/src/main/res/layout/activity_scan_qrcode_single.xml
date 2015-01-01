@@ -231,7 +231,7 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_width="fill_parent"
-            android:layout_weight="1.3"
+            android:layout_weight="1.5"
             android:layout_height="0dp"
             >
             <TextView
@@ -252,16 +252,16 @@
                 />
             <Spinner
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:id="@+id/activitySpinner"
                 >
             </Spinner>
         </LinearLayout>
         <LinearLayout
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="fill_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:layout_height="0dp"
             >
             <LinearLayout
@@ -308,9 +308,9 @@
         </LinearLayout>
         <LinearLayout
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="fill_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:layout_height="0dp"
             >
             <LinearLayout
@@ -358,16 +358,6 @@
             android:layout_weight="1"
             android:layout_height="0dp"
             >
-            <com.romainpiel.shimmer.ShimmerTextView
-                android:id="@+id/shimmer_tv"
-                android:text="Scanning..."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:layout_above="@+id/secHLine"
-                android:layout_centerHorizontal="true"
-                />
         </LinearLayout>
         <LinearLayout
             android:gravity="center"

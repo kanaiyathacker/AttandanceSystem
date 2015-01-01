@@ -85,41 +85,8 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
 
         Gson gson = new Gson();
         user = gson.fromJson(val , User.class);
-        buildActivitySpinner();
+        buildActivitySpinner(user , activitySpinner);
         activitySpinner.setOnItemSelectedListener(this);
-    }
-
-    private void buildActivitySpinner() {
-        List<UserMappingBean> userMappingList = user.getUserMappingList();
-        List<String> list = new LinkedList<String>();
-        list.add("Select");
-
-        Map<String, String> branches = user.getBranchs();
-        Map<String, String> departs = user.getDeparts();
-
-        for(UserMappingBean curr : userMappingList) {
-            String branch = curr.getBranchId();
-            String depart = curr.getDepartId();
-            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
-                String val = branches.get(branch) + " - " + departs.get(depart);
-                list.add(val);
-            }
-            if(branch != null && depart.length() > 0 && depart == null ) {
-                String val = branches.get(branch);
-                list.add(val);
-            }
-        }
-        if(list.isEmpty()) {
-            list.add(user.getCoName());
-        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                this, android.R.layout.simple_spinner_item, list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, R.layout.spinner_text, list);
-        activitySpinner.setAdapter(adapter);
-        if(list.size() == 2) {
-            activitySpinner.setSelection(1);
-        }
     }
 
     public void viewAbsenteeDetails(View view) {
@@ -141,10 +108,8 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        System.out.println(i);
         Map<String, String> branches = user.getBranchs();
         Map<String, String> departs = user.getDeparts();
-        System.out.println(activitySpinner.getSelectedItem());
         String selItem = (String) activitySpinner.getSelectedItem();
         if(!selItem.equals("Select")) {
             String[] split = selItem.split(" - ");

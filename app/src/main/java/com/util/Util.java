@@ -129,4 +129,9 @@ public class Util {
 
         return info.getMessage().getTransmitTimeStamp().toDateString();
     }
+
+    public static String paddingZero(int value) {
+        return ""+(value < 10 ? "0"+ value : value);
+
+    }
 }

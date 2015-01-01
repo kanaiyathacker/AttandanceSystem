@@ -39,6 +39,7 @@ import com.google.gson.Gson;
 import com.listener.SaveAttandanceRequestListener;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
+import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
@@ -110,43 +111,11 @@ public class ScanCardBatchActivity extends BaseActivity {
     private Shimmer shimmer;
     @InjectView(R.id.shimmer_tv) ShimmerTextView shimmer_tv;
 
-    private class PushRequest extends AsyncTask<String, Integer, String> {
-        protected String doInBackground(String... server) {
-            String result = null;
-            try {
-                result = Util.query("3.in.pool.ntp.org");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            Date dateTime = Util.convertStringToDate(result, Util.NTC_DATETIME_FORMAT);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(dateTime);
-            cal.set(Calendar.AM_PM, Calendar.PM);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-            int min = cal.get(Calendar.MINUTE);
-            hhET.setText(""+hour);
-            mmET.setText(""+(min < 10 ? "0"+ min : min));
-
-            int date = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH) + 1;
-            int year = cal.get(Calendar.YEAR);
-
-            ddET.setText("" + date);
-            MMET.setText("" + month);
-            yyET.setText("" + year);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_card_batch);
-        new PushRequest().execute();
+        new GetServerTimeRequest(hhET , mmET , ddET , MMET , yyET ).execute();
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         isUserLogedIn();
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -196,35 +165,7 @@ public class ScanCardBatchActivity extends BaseActivity {
         shimmer = new Shimmer();
         shimmer.start(shimmer_tv);
         cardList = new HashSet<String>();
-        buildActivitySpinner();
-    }
-
-    private void buildActivitySpinner() {
-        List<UserMappingBean> userMappingList = user.getUserMappingList();
-        List<String> list = new ArrayList<String>();
-
-        Map<String, String> branches = user.getBranchs();
-        Map<String, String> departs = user.getDeparts();
-
-        for(UserMappingBean curr : userMappingList) {
-            String branch = curr.getBranchId();
-            String depart = curr.getDepartId();
-            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
-                String val = branches.get(branch) + " - " + departs.get(depart);
-                list.add(val);
-            }
-            if(branch != null && depart.length() > 0 && depart == null ) {
-                String val = branches.get(branch);
-                list.add(val);
-            }
-        }
-        if(list.isEmpty()) {
-            list.add("Add Org");
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, list);
-        activitySpinner.setAdapter(adapter);
-//        activitySpinner
+        buildActivitySpinner(user , activitySpinner);
     }
 
     public void enableForegroundMode() {

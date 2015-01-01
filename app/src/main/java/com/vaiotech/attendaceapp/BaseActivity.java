@@ -9,11 +9,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.bean.User;
+import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.octo.android.robospice.SpiceManager;
 import com.services.AttandanceRestService;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import roboguice.activity.RoboActivity;
 
@@ -31,8 +38,8 @@ public class BaseActivity extends RoboActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+//                WindowManager.LayoutParams.FLAG_SECURE);
         hideProgressBar();
         sharedPreferences = getSharedPreferences("DIGITAL_ATTENDANCE", Context.MODE_PRIVATE);
         isUserLogedIn();
@@ -80,12 +87,40 @@ public class BaseActivity extends RoboActivity {
             isUserLogedIn();
             item.setIcon(R.drawable.login);
             item.setTitle("Log In");
-        } else {
-            Intent intent = new Intent(this , LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
         }
+        Intent intent = new Intent(this , LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
 
+    public void buildActivitySpinner(User user , Spinner activitySpinner) {
+        List<UserMappingBean> userMappingList = user.getUserMappingList();
+        List<String> list = new LinkedList<String>();
+        list.add("Select");
+
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+
+        for(UserMappingBean curr : userMappingList) {
+            String branch = curr.getBranchId();
+            String depart = curr.getDepartId();
+            if(branch != null && depart != null && branch.length()> 0 && depart.length() > 0) {
+                String val = branches.get(branch) + " - " + departs.get(depart);
+                list.add(val);
+            }
+            if(branch != null && depart.length() > 0 && depart == null ) {
+                String val = branches.get(branch);
+                list.add(val);
+            }
+        }
+        if(list.isEmpty()) {
+            list.add(user.getCoName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text, list);
+        activitySpinner.setAdapter(adapter);
+        if(list.size() == 2) {
+            activitySpinner.setSelection(1);
+        }
+    }
 }
