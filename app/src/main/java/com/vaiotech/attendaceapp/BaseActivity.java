@@ -1,9 +1,12 @@
 package com.vaiotech.attendaceapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -60,6 +63,29 @@ public class BaseActivity extends RoboActivity {
         User user = gson.fromJson(val , User.class);
         isLogin = (user != null && user.getUserId() != null && user.getUserId().length() > 0);
         isUserAdmin = (user != null && user.getType() != null && user.getType().length() > 0 && user.getType().equalsIgnoreCase("0"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_functional_main, menu);
+        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+        menu.getItem(0).setIcon(isLogin ? R.drawable.logout : R.drawable.login);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if ("Log Out" == item.getTitle()) {
+            sharedPreferences.edit().remove("USER_DETAILS").commit();
+            isUserLogedIn();
+            item.setIcon(R.drawable.login);
+            item.setTitle("Log In");
+        } else {
+            Intent intent = new Intent(this , LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

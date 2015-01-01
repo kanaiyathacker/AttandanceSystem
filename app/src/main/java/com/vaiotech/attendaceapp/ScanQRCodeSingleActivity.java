@@ -276,24 +276,24 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         cardId = null;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.scan_card_single, menu);
-        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if ("Log Out" == item.getTitle()) {
-            sharedPreferences.edit().remove("USER_DETAILS").commit();
-            isUserLogedIn();
-            item.setTitle("Log In");
-        } else {
-            Intent intent = new Intent(this , LoginActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.scan_card_single, menu);
+//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if ("Log Out" == item.getTitle()) {
+//            sharedPreferences.edit().remove("USER_DETAILS").commit();
+//            isUserLogedIn();
+//            item.setTitle("Log In");
+//        } else {
+//            Intent intent = new Intent(this , LoginActivity.class);
+//            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

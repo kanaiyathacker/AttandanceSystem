@@ -396,30 +396,30 @@ public class ScanCardBatchActivity extends BaseActivity {
         vibe.vibrate(500);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if ("Log Out" == item.getTitle()) {
-            sharedPreferences.edit().remove("USER_DETAILS").commit();
-            isUserLogedIn();
-            item.setTitle("Log In");
-        } else {
-            Intent intent = new Intent(this , LoginActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.scan_card_batch, menu);
-        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if ("Log Out" == item.getTitle()) {
+//            sharedPreferences.edit().remove("USER_DETAILS").commit();
+//            isUserLogedIn();
+//            item.setTitle("Log In");
+//        } else {
+//            Intent intent = new Intent(this , LoginActivity.class);
+//            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.scan_card_batch, menu);
+//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+//        return true;
+//    }
 
 }

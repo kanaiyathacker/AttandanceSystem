@@ -28,7 +28,7 @@
 
     <style name="ActionBarIPS" parent="@android:style/Widget.ActionBar">
         <item name="android:indeterminateProgressStyle">@style/IndeterminateProgress</item>
-        <item name="android:background">#739AC5</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
 
 </resources>

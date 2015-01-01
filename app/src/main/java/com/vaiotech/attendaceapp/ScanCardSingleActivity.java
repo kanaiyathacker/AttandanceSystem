@@ -66,6 +66,7 @@ public class ScanCardSingleActivity extends BaseActivity {
     @InjectView(R.id.adminValueLableTV) TextView adminValueLableTV;
     @InjectView(R.id.seperateTimeTV) TextView seperateTimeTV;
     @InjectView(R.id.seperateDateTV) TextView seperateDateTV;
+    @InjectView(R.id.seperateDateMMTV) TextView seperateDateMMTV;
     @InjectView(R.id.timeTV) TextView timeTV;
     @InjectView(R.id.hhET) EditText hhET;
     @InjectView(R.id.mmET) EditText mmET;
@@ -148,6 +149,7 @@ public class ScanCardSingleActivity extends BaseActivity {
 
         seperateTimeTV.setTypeface(digital);
         seperateDateTV.setTypeface(digital);
+        seperateDateMMTV.setTypeface(digital);
         hhET.setTypeface(digital);
         mmET.setTypeface(digital);
         timeTV.setTypeface(digital);
@@ -344,23 +346,23 @@ public class ScanCardSingleActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.scan_card_single, menu);
-        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if ("Log Out" == item.getTitle()) {
-            sharedPreferences.edit().remove("USER_DETAILS").commit();
-            isUserLogedIn();
-            item.setTitle("Log In");
-        } else {
-            Intent intent = new Intent(this , LoginActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.scan_card_single, menu);
+//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if ("Log Out" == item.getTitle()) {
+//            sharedPreferences.edit().remove("USER_DETAILS").commit();
+//            isUserLogedIn();
+//            item.setTitle("Log In");
+//        } else {
+//            Intent intent = new Intent(this , LoginActivity.class);
+//            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

@@ -40,19 +40,6 @@ public class MainActivity extends BaseActivity {
         button4.setTypeface(font);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void scanQRCode(View view) {
         Intent intent = R.id.singleModeRB == modeRadioGroup.getCheckedRadioButtonId() ?
                 new Intent(this, ScanQRCodeSingleActivity.class) : new Intent(this, ScanQRCodeBatchActivity.class);

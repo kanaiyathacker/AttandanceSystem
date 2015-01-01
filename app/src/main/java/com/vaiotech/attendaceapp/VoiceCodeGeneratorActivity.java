@@ -162,26 +162,26 @@ public class VoiceCodeGeneratorActivity extends BaseActivity {
 
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_voice_code_generator, menu);
-        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if ("Log Out" == item.getTitle()) {
-            sharedPreferences.edit().remove("USER_DETAILS").commit();
-            isUserLogedIn();
-            item.setTitle("Log In");
-        } else {
-            Intent intent = new Intent(this , LoginActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_voice_code_generator, menu);
+//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if ("Log Out" == item.getTitle()) {
+//            sharedPreferences.edit().remove("USER_DETAILS").commit();
+//            isUserLogedIn();
+//            item.setTitle("Log In");
+//        } else {
+//            Intent intent = new Intent(this , LoginActivity.class);
+//            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void refresh(View view) {
         initData();
