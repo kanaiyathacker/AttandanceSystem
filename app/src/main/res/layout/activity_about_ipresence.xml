@@ -34,7 +34,7 @@
             android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This apps aims at providing low cost solution to your attendance tracking and monitoring owes.This app integrates three most popular scanning formats under one screen enabling you to choose the one that suits best for your business."
+            android:text="This app aims at providing low cost solution to your attendance tracking and monitoring owes.This app integrates three most popular scanning formats under one screen enabling you to choose the one that suits best for your business."
             android:id="@+id/aboutiPresenceTV"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -74,7 +74,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ipresenceThree"
-            android:text="Equipped with smart card scanner to scan RF cards and register attendance"
+            android:text="Equipped with voice scanner to scan voice code and register attendance"
             />
 
         <TextView
@@ -86,7 +86,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ipresenceFour"
-            android:text="Equipped with smart card scanner to scan RF cards and register attendance"
+            android:text="Generates quick view of daily attendance"
             />
 
         <TextView
