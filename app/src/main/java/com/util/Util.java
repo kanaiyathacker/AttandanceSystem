@@ -138,4 +138,8 @@ public class Util {
     public static String trimToEmpty(Object value) {
         return value != null ? String.valueOf(value) : "";
     }
+
+    public static boolean isEmpty(String value) {
+        return value == null || value.length() == 0;
+    }
 }

@@ -1,23 +1,18 @@
 package com.vaiotech.attendaceapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bean.User;
-import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.listener.SendMessageRequestListener;
 import com.listener.ViewAbsenteeDetailsRequestListener;
@@ -25,10 +20,8 @@ import com.listener.ViewReportRequestListener;
 import com.services.SendMessageRequest;
 import com.services.ViewAbsenteeDetailsRequest;
 import com.services.ViewReportRequest;
+import com.util.Util;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import roboguice.inject.ContentView;
@@ -49,6 +42,7 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     @InjectView(R.id.totalStrengthColonTV)   TextView totalStrengthColonTV;
     @InjectView(R.id.absentColonTV)   TextView absentColonTV;
     @InjectView(R.id.activitySpinner) Spinner activitySpinner;
+    @InjectView(R.id.absentResultLV) ListView absentResultLV;
 
     private SendMessageRequest sendMessageRequest;
     private ViewReportRequest viewReportRequest;
@@ -90,9 +84,11 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     }
 
     public void viewAbsenteeDetails(View view) {
-        showProgressBar();
-        viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(searchType , searchId);
-        spiceManager.execute(viewAbsenteeDetailsRequest ,new ViewAbsenteeDetailsRequestListener(this));
+        if(!Util.isEmpty(searchType) && !Util.isEmpty(searchId)) {
+            showProgressBar();
+            viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(searchType, searchId);
+            spiceManager.execute(viewAbsenteeDetailsRequest, new ViewAbsenteeDetailsRequestListener(this));
+        }
     }
 
     public void sendMessage(View view) {
@@ -142,6 +138,16 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
             showProgressBar();
             viewReportRequest = new ViewReportRequest(searchType, key);
             spiceManager.execute(viewReportRequest, new ViewReportRequestListener(this));
+        } else {
+            this.searchType =  null;
+            this.searchId = null;
+            totalStrengthValueTV.setText("0");
+            absentValueTV.setText("0");
+        }
+        ArrayAdapter adapter = (ArrayAdapter) absentResultLV.getAdapter();
+        if (adapter != null){
+            adapter.clear();
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -149,24 +155,4 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_view_report, menu);
-//        menu.getItem(0).setTitle(isLogin ? "Log Out" : "Log In");
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if ("Log Out" == item.getTitle()) {
-//            sharedPreferences.edit().remove("USER_DETAILS").commit();
-//            isUserLogedIn();
-//            item.setTitle("Log In");
-//        } else {
-//            Intent intent = new Intent(this , LoginActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }
