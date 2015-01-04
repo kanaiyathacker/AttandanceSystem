@@ -88,8 +88,6 @@ public class ScanCardSingleActivity extends BaseActivity {
     protected NfcAdapter nfcAdapter;
     protected PendingIntent nfcPendingIntent;
     private boolean isNFCSupported;
-    private String searchType;
-    private String searchId;
 
 
     @Override
@@ -274,10 +272,12 @@ public class ScanCardSingleActivity extends BaseActivity {
 //    }
 
     public void save(View view) {
-        onItemSelected();
+        onItemSelected(user , activitySpinner);
         showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
-        saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
+        AttandanceTransaction t = buildAttandanceTransaction(type , user , Arrays.asList(cardId) , hhET.getText().toString()
+                , mmET.getText().toString() , lm);
+        saveAttandanceRequest = new SaveAttandanceRequest(t);
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         String msg = (view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + cardId + " noted as " + hhET.getText() + ":" + mmET.getText();
         openDialog(msg);
@@ -290,59 +290,4 @@ public class ScanCardSingleActivity extends BaseActivity {
         spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 
-    public AttandanceTransaction buildAttandanceTransaction(String type) {
-        AttandanceTransaction t = new AttandanceTransaction();
-        t.setAdminId(user.getUserId());
-        t.setCardId(Arrays.asList(cardId));
-        t.setDate(Util.convertDateToString(new Date()));
-        t.setTime(hhET.getText() + ":" + mmET.getText());
-        t.setOrgId(user.getCoId());
-        t.setSearchType(searchType);
-        t.setSearchValue(searchId);
-        t.setType(type);
-        if(lm != null) {
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(location != null) {
-                t.setLongitude(""+location.getLongitude());
-                t.setLatitude(""+location.getLatitude());
-            }
-        }
-        return t;
-    }
-
-    public void onItemSelected() {
-        Map<String, String> branches = user.getBranchs();
-        Map<String, String> departs = user.getDeparts();
-        String selItem = (String) activitySpinner.getSelectedItem();
-        if(!selItem.equals("Select")) {
-            String[] split = selItem.split(" - ");
-            String searchType = null;
-            String key = null;
-            if (split.length > 1) {
-                for (String val : departs.keySet()) {
-                    if(departs.get(val).equalsIgnoreCase(split[1])) {
-                        key = val;
-                        searchType = "DEPART";
-                        break;
-                    }
-                }
-            } else {
-                for (String val : branches.keySet()) {
-                    if(branches.get(val).equalsIgnoreCase(split[1])) {
-                        key = val;
-                        searchType = "BRANCH";
-                        break;
-                    }
-                }
-            }
-            if (key == null) {
-                // set the org id
-                key = user.getCoId();
-                searchType = "ORG";
-            }
-            this.searchType =  searchType;
-            this.searchId = key;
-
-        }
-    }
 }

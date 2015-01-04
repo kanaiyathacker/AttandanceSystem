@@ -27,6 +27,7 @@ import com.services.SaveAttandanceRequest;
 import com.util.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -170,9 +171,12 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
     }
 
     public void save(View view) {
+        onItemSelected(user , activitySpinner);
         showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
-        saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
+        AttandanceTransaction t = buildAttandanceTransaction(type , user ,getCardIdList(scanSet)  , hhET.getText().toString()
+                , mmET.getText().toString() , lm);
+        saveAttandanceRequest = new SaveAttandanceRequest(t);
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         String msg = (view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + counterValTV.getText() + "Users noted as " + hhET.getText() + ":" + mmET.getText();
         openDialog(msg);
@@ -181,23 +185,23 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
         counterValTV.setText("0");
     }
 
-    public AttandanceTransaction buildAttandanceTransaction(String type) {
-        AttandanceTransaction t = new AttandanceTransaction();
-        t.setAdminId(user.getUserId());
-        t.setCardId(getCardIdList(scanSet));
-        t.setDate(Util.convertDateToString(new Date()));
-        t.setTime(hhET.getText() + ":" + mmET.getText());
-        t.setOrgId(user.getCoId());
-        t.setType(type);
-        if(lm != null) {
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(location != null) {
-                t.setLongitude(""+location.getLongitude());
-                t.setLatitude(""+location.getLatitude());
-            }
-        }
-        return t;
-    }
+//    public AttandanceTransaction buildAttandanceTransaction(String type) {
+//        AttandanceTransaction t = new AttandanceTransaction();
+//        t.setAdminId(user.getUserId());
+//        t.setCardId(getCardIdList(scanSet));
+//        t.setDate(Util.convertDateToString(new Date()));
+//        t.setTime(hhET.getText() + ":" + mmET.getText());
+//        t.setOrgId(user.getCoId());
+//        t.setType(type);
+//        if(lm != null) {
+//            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            if(location != null) {
+//                t.setLongitude(""+location.getLongitude());
+//                t.setLatitude(""+location.getLatitude());
+//            }
+//        }
+//        return t;
+//    }
 
     private List<String> getCardIdList(Set<User> scanSet) {
         List<String> retVal = new ArrayList<String>();

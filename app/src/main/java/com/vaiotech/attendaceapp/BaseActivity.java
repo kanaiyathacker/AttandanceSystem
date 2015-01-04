@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +15,16 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.bean.AttandanceTransaction;
 import com.bean.User;
 import com.bean.UserMappingBean;
 import com.google.gson.Gson;
 import com.octo.android.robospice.SpiceManager;
 import com.services.AttandanceRestService;
+import com.util.Util;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +39,8 @@ public class BaseActivity extends RoboActivity {
     SharedPreferences sharedPreferences;
     boolean isLogin;
     boolean isUserAdmin;
+    String searchType;
+    String searchId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,5 +150,61 @@ public class BaseActivity extends RoboActivity {
         alertDialog.show();
     }
 
+    public void onItemSelected(User user , Spinner activitySpinner) {
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+        String selItem = (String) activitySpinner.getSelectedItem();
+        if(!selItem.equals("Select")) {
+            String[] split = selItem.split(" - ");
+            String searchType = null;
+            String key = null;
+            if (split.length > 1) {
+                for (String val : departs.keySet()) {
+                    if(departs.get(val).equalsIgnoreCase(split[1])) {
+                        key = val;
+                        searchType = "DEPART";
+                        break;
+                    }
+                }
+            } else {
+                for (String val : branches.keySet()) {
+                    if(branches.get(val).equalsIgnoreCase(split[1])) {
+                        key = val;
+                        searchType = "BRANCH";
+                        break;
+                    }
+                }
+            }
+            if (key == null) {
+                // set the org id
+                key = user.getCoId();
+                searchType = "ORG";
+            }
+            this.searchType =  searchType;
+            this.searchId = key;
+
+        }
+    }
+
+    public AttandanceTransaction buildAttandanceTransaction(String type , User user , List<String> cardList ,
+            String hour , String minutes , LocationManager lm) {
+        AttandanceTransaction t = new AttandanceTransaction();
+        t.setAdminId(user.getUserId());
+        t.setCardId(cardList);
+        t.setDate(Util.convertDateToString(new Date()));
+        t.setTime(hour + ":" + minutes);
+        t.setOrgId(user.getCoId());
+        t.setSearchType(searchType);
+        t.setSearchValue(searchId);
+        t.setType(type);
+        if(lm != null) {
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(location != null) {
+                t.setLongitude(""+location.getLongitude());
+                t.setLatitude(""+location.getLatitude());
+            }
+        }
+        return t;
+    }
 
 }
