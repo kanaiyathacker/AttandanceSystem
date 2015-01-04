@@ -13,6 +13,8 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,17 +26,20 @@ import com.bean.User;
 import com.google.gson.Gson;
 import com.listener.GetInfoRequestListener;
 import com.listener.SaveAttandanceRequestListener;
+import com.listener.ViewReportRequestListener;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 import com.services.GetInfoRequest;
 import com.services.GetServerTimeRequest;
 import com.services.SaveAttandanceRequest;
+import com.services.ViewReportRequest;
 import com.util.Util;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -83,6 +88,8 @@ public class ScanCardSingleActivity extends BaseActivity {
     protected NfcAdapter nfcAdapter;
     protected PendingIntent nfcPendingIntent;
     private boolean isNFCSupported;
+    private String searchType;
+    private String searchId;
 
 
     @Override
@@ -267,6 +274,7 @@ public class ScanCardSingleActivity extends BaseActivity {
 //    }
 
     public void save(View view) {
+        onItemSelected();
         showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
@@ -289,6 +297,8 @@ public class ScanCardSingleActivity extends BaseActivity {
         t.setDate(Util.convertDateToString(new Date()));
         t.setTime(hhET.getText() + ":" + mmET.getText());
         t.setOrgId(user.getCoId());
+        t.setSearchType(searchType);
+        t.setSearchValue(searchId);
         t.setType(type);
         if(lm != null) {
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -298,5 +308,41 @@ public class ScanCardSingleActivity extends BaseActivity {
             }
         }
         return t;
+    }
+
+    public void onItemSelected() {
+        Map<String, String> branches = user.getBranchs();
+        Map<String, String> departs = user.getDeparts();
+        String selItem = (String) activitySpinner.getSelectedItem();
+        if(!selItem.equals("Select")) {
+            String[] split = selItem.split(" - ");
+            String searchType = null;
+            String key = null;
+            if (split.length > 1) {
+                for (String val : departs.keySet()) {
+                    if(departs.get(val).equalsIgnoreCase(split[1])) {
+                        key = val;
+                        searchType = "DEPART";
+                        break;
+                    }
+                }
+            } else {
+                for (String val : branches.keySet()) {
+                    if(branches.get(val).equalsIgnoreCase(split[1])) {
+                        key = val;
+                        searchType = "BRANCH";
+                        break;
+                    }
+                }
+            }
+            if (key == null) {
+                // set the org id
+                key = user.getCoId();
+                searchType = "ORG";
+            }
+            this.searchType =  searchType;
+            this.searchId = key;
+
+        }
     }
 }

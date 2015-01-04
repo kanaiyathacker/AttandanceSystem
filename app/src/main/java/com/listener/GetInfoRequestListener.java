@@ -29,16 +29,18 @@ public class GetInfoRequestListener implements com.octo.android.robospice.reques
     @Override
     public void onRequestSuccess(Object o) {
         LinkedTreeMap map = (LinkedTreeMap) o;
-        String name = valueOf(trimToEmpty(map.get("fName"))) + " " +valueOf(trimToEmpty(map.get("mName"))) + " " + valueOf(trimToEmpty(map.get("lName")));
-        TextView nameValueTV = (TextView)baseActivity.findViewById(R.id.userNameValueTV);
-        nameValueTV.setText(name);
-        if(name != null && name.trim().length() > 0) {
-            if(baseActivity instanceof ManualEntryActivity) {
-                ((ManualEntryActivity)baseActivity).setCardId(""+map.get("cardId"));
-                baseActivity.findViewById(R.id.inBUTTON).setEnabled(true);
-                baseActivity.findViewById(R.id.inBUTTON).setAlpha(1f);
-                baseActivity.findViewById(R.id.outBUTTON).setEnabled(true);
-                baseActivity.findViewById(R.id.outBUTTON).setAlpha(1f);
+        if(map != null) {
+            String name = valueOf(trimToEmpty(map.get("fName"))) + " " + valueOf(trimToEmpty(map.get("mName"))) + " " + valueOf(trimToEmpty(map.get("lName")));
+            TextView nameValueTV = (TextView) baseActivity.findViewById(R.id.userNameValueTV);
+            nameValueTV.setText(name);
+            if (name != null && name.trim().length() > 0) {
+                if (baseActivity instanceof ManualEntryActivity) {
+                    ((ManualEntryActivity) baseActivity).setCardId("" + map.get("cardId"));
+                    baseActivity.findViewById(R.id.inBUTTON).setEnabled(true);
+                    baseActivity.findViewById(R.id.inBUTTON).setAlpha(1f);
+                    baseActivity.findViewById(R.id.outBUTTON).setEnabled(true);
+                    baseActivity.findViewById(R.id.outBUTTON).setAlpha(1f);
+                }
             }
         }
         baseActivity.hideProgressBar();
