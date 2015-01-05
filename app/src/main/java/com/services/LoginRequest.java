@@ -1,6 +1,7 @@
 package com.services;
 
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
+import com.util.Util;
 
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class LoginRequest  extends RetrofitSpiceRequest<Object, RestServiceInter
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
-        return getService().login(loginID , password , deviceId);
+        return getService().login(loginID , password , deviceId , Util.encodeCredentialsForBasicAuthorization("kthacker" , "password"));
     }
 
 }
