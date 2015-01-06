@@ -6,6 +6,7 @@ import com.bean.User;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
@@ -23,7 +24,7 @@ public interface RestServiceInterface {
     Object save(@Body AttandanceTransaction attandanceTransaction);
 
     @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
-    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId);
+    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId , @Header("Authorization") String authorization);
 
     @GET("/ScanAttandanceApp/getUserInfo/{searchType}/{searchValue}")
     Object getUserInfo(@Path("searchType") String searchType , @Path("searchValue") String searchValue);

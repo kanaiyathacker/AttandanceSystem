@@ -1,6 +1,7 @@
 package com.util;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -142,4 +143,10 @@ public class Util {
     public static boolean isEmpty(String value) {
         return value == null || value.length() == 0;
     }
+
+    public static String encodeCredentialsForBasicAuthorization(String userName , String password) {
+        final String userAndPassword = userName + ":" + password;
+        return "Basic " + Base64.encodeToString(userAndPassword.getBytes(), Base64.NO_WRAP);
+    }
+
 }
