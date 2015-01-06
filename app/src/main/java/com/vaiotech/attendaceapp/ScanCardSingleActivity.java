@@ -82,7 +82,6 @@ public class ScanCardSingleActivity extends BaseActivity {
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
     private LocationManager lm;
-    private Location location;
     private User user;
 
     protected NfcAdapter nfcAdapter;

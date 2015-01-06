@@ -59,7 +59,6 @@ public class ScanVoiceCodeSingleActivity extends BaseActivity  {
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
     private LocationManager lm;
-    private Location location;
     private User user;
     private String cardId;
 

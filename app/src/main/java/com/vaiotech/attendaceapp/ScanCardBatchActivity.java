@@ -82,7 +82,6 @@ public class ScanCardBatchActivity extends BaseActivity {
     protected NfcAdapter nfcAdapter;
     protected PendingIntent nfcPendingIntent;
     private LocationManager lm;
-    private Location location;
     private User user;
     private boolean isNFCSupported;
     private Shimmer shimmer;

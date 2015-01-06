@@ -61,7 +61,6 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
     private LocationManager lm;
-    private Location location;
     private User user;
     private String cardId;
 

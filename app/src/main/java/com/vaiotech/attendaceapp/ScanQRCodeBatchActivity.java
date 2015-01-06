@@ -62,7 +62,6 @@ public class ScanQRCodeBatchActivity extends BaseActivity implements DialogScann
     private Set<User> scanSet;
     private User user;
     private LocationManager lm;
-    private Location location;
     private SaveAttandanceRequest saveAttandanceRequest;
 
     @Override

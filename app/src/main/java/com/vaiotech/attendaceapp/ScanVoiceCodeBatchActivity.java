@@ -57,7 +57,6 @@ public class ScanVoiceCodeBatchActivity extends BaseActivity {
     private Set<User> scanSet;
     private User user;
     private LocationManager lm;
-    private Location location;
     private SaveAttandanceRequest saveAttandanceRequest;
 
     @Override
