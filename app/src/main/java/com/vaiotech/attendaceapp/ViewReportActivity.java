@@ -93,7 +93,8 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
 
     public void sendMessage(View view) {
         showProgressBar();
-        sendMessageRequest = new SendMessageRequest(user.getUserId() , user.getUserId() , user.getPassword());
+        sendMessageRequest = new SendMessageRequest(searchType
+                 , searchId , user.getUserId() , user.getPassword());
         spiceManager.execute(sendMessageRequest ,new SendMessageRequestListener(this));
     }
 

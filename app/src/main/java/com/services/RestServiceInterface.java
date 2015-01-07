@@ -32,14 +32,14 @@ public interface RestServiceInterface {
     @GET("/ScanAttandanceApp/viewReport/{searchType}/{searchId}")
     Object viewReport(@Path("searchType") String searchType , @Path("searchId") String searchId , @Header("Authorization") String authorization);
 
-    @GET("/ScanAttandanceApp/viewAbsenteeDetails/{adminId}/{orgId}")
-    Object viewAbsenteeDetailsRequest(@Path("adminId") String adminId  , @Path("orgId") String orgId , @Header("Authorization") String authorization);
+    @GET("/ScanAttandanceApp/viewAbsenteeDetails/{searchType}/{searchId}")
+    Object viewAbsenteeDetailsRequest(@Path("searchType") String searchType  , @Path("searchId") String searchId , @Header("Authorization") String authorization);
 
     @POST("/ScanAttandanceApp/changePassword")
     Object changePassword(@Body ChangePassword changePassword , @Header("Authorization") String authorization);
 
-    @POST("/ScanAttandanceApp/sendMessage/{adminId}")
-    Object sendMessage(@Path("adminId") String adminId , @Header("Authorization") String authorization);
+    @POST("/ScanAttandanceApp/sendMessage/{searchType}/{searchId}")
+    Object sendMessage(@Path("searchType") String searchType  , @Path("searchId") String searchId , @Header("Authorization") String authorization);
 
     @POST("/ScanAttandanceApp/contact/{emailId}/{contactUsDetails}")
     Object submitEnquiry(@Path("emailId") String emailId , @Path("contactUsDetails") String contactUsDetails );

@@ -8,21 +8,23 @@ import com.util.Util;
  */
 public class SendMessageRequest extends RetrofitSpiceRequest<Object, RestServiceInterface> {
 
-    private String adminId;
+    private String searchType;
+    private String searchId;
     private String user;
     private String password;
 
-    public SendMessageRequest(String adminId , String user , String password) {
+    public SendMessageRequest(String searchType , String searchId, String user , String password) {
         super(Object.class, RestServiceInterface.class);
-        this.user = user;
+        this.searchType = searchId;
+        this.searchId = searchType;
         this.password = password;
-        this.adminId = adminId;
+        this.user = user;
     }
 
     @Override
     public Object loadDataFromNetwork() throws Exception {
 
-        return getService().sendMessage(adminId,  Util.encodeCredentialsForBasicAuthorization(user, password));
+        return getService().sendMessage(searchType , searchId,  Util.encodeCredentialsForBasicAuthorization(user, password));
     }
 
 }
