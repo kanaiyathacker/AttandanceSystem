@@ -86,14 +86,14 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
     public void viewAbsenteeDetails(View view) {
         if(!Util.isEmpty(searchType) && !Util.isEmpty(searchId)) {
             showProgressBar();
-            viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(searchType, searchId);
+            viewAbsenteeDetailsRequest = new ViewAbsenteeDetailsRequest(searchType, searchId , user.getUserId() , user.getPassword());
             spiceManager.execute(viewAbsenteeDetailsRequest, new ViewAbsenteeDetailsRequestListener(this));
         }
     }
 
     public void sendMessage(View view) {
         showProgressBar();
-        sendMessageRequest = new SendMessageRequest(user.getUserId());
+        sendMessageRequest = new SendMessageRequest(user.getUserId() , user.getUserId() , user.getPassword());
         spiceManager.execute(sendMessageRequest ,new SendMessageRequestListener(this));
     }
 
@@ -136,7 +136,7 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
             this.searchType =  searchType;
             this.searchId = key;
             showProgressBar();
-            viewReportRequest = new ViewReportRequest(searchType, key);
+            viewReportRequest = new ViewReportRequest(searchType, key , user.getUserId() , user.getPassword());
             spiceManager.execute(viewReportRequest, new ViewReportRequestListener(this));
         } else {
             this.searchType =  null;

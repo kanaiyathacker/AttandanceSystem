@@ -23,29 +23,30 @@ public interface RestServiceInterface {
     @POST("/ScanAttandanceApp/saveDetails")
     Object save(@Body AttandanceTransaction attandanceTransaction);
 
-    @POST("/ScanAttandanceApp/login/{loginId}/{password}/{deviceId}")
-    Object login(@Path("loginId") String loginId , @Path("password") String password ,@Path("deviceId") String deviceId , @Header("Authorization") String authorization);
+    @POST("/ScanAttandanceApp/login/{deviceId}")
+    Object login(@Path("deviceId") String deviceId , @Header("Authorization") String authorization);
 
     @GET("/ScanAttandanceApp/getUserInfo/{searchType}/{searchValue}")
-    Object getUserInfo(@Path("searchType") String searchType , @Path("searchValue") String searchValue);
+    Object getUserInfo(@Path("searchType") String searchType , @Path("searchValue") String searchValue , @Header("Authorization") String authorization);
 
     @GET("/ScanAttandanceApp/viewReport/{searchType}/{searchId}")
-    Object viewReport(@Path("searchType") String searchType , @Path("searchId") String searchId);
+    Object viewReport(@Path("searchType") String searchType , @Path("searchId") String searchId , @Header("Authorization") String authorization);
 
     @GET("/ScanAttandanceApp/viewAbsenteeDetails/{adminId}/{orgId}")
-    Object viewAbsenteeDetailsRequest(@Path("adminId") String adminId  , @Path("orgId") String orgId);
+    Object viewAbsenteeDetailsRequest(@Path("adminId") String adminId  , @Path("orgId") String orgId , @Header("Authorization") String authorization);
 
     @POST("/ScanAttandanceApp/changePassword")
-    Object changePassword(@Body ChangePassword changePassword);
+    Object changePassword(@Body ChangePassword changePassword , @Header("Authorization") String authorization);
 
     @POST("/ScanAttandanceApp/sendMessage/{adminId}")
-    Object sendMessage(@Path("adminId") String adminId );
+    Object sendMessage(@Path("adminId") String adminId , @Header("Authorization") String authorization);
 
     @POST("/ScanAttandanceApp/contact/{emailId}/{contactUsDetails}")
     Object submitEnquiry(@Path("emailId") String emailId , @Path("contactUsDetails") String contactUsDetails );
 
     @GET("/ScanAttandanceApp/getUserAbsenteeReport/{searchType}/{searchId}/{cardId}/{month}/{year}")
-    Object getUserAbsenteeReport(@Path("searchType") String searchType , @Path("searchId") String searchId  ,@Path("cardId") String cardId , @Path("month") String month , @Path("year") String year);
+    Object getUserAbsenteeReport(@Path("searchType") String searchType , @Path("searchId") String searchId
+            ,@Path("cardId") String cardId , @Path("month") String month , @Path("year") String year , @Header("Authorization") String authorization);
 
 
 //    @POST("/DeviceTokenApplicaion-0.0.1-SNAPSHOT/ScanAttandanceApp/saveDetails")

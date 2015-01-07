@@ -112,7 +112,10 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
             dialog(" Wrong current password " + Util.getEditViewText(currentPasswordEV));
         } else {
             showProgressBar();
-            changePasswordRequest = new ChangePasswordRequest(new ChangePassword(user.getUserId() , getEditViewText(currentPasswordEV) , getEditViewText(newPasswordEV) , getEditViewText(retypePasswordEV)));
+            changePasswordRequest = new ChangePasswordRequest(
+                    new ChangePassword(user.getUserId() , getEditViewText(currentPasswordEV) ,
+                            getEditViewText(newPasswordEV) , getEditViewText(retypePasswordEV)
+                            ), user.getUserId() , user.getPassword());
             spiceManager.execute(changePasswordRequest , new ChangePasswordRequestListener(this));
         }
     }

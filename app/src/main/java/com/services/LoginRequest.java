@@ -24,7 +24,7 @@ public class LoginRequest  extends RetrofitSpiceRequest<Object, RestServiceInter
 
     @Override
     public Object loadDataFromNetwork() throws java.lang.Exception{
-        return getService().login(loginID , password , deviceId , Util.encodeCredentialsForBasicAuthorization("kthacker" , "password"));
+        return getService().login(deviceId , Util.encodeCredentialsForBasicAuthorization(loginID, password));
     }
 
 }

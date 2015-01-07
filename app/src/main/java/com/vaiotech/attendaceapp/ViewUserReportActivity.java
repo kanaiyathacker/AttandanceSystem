@@ -85,7 +85,8 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
                 monthSel = monthStr;
                 yearSel = ""+year;
                 if(searchType != null && searchId != null) {
-                    getUserAbsenteeRequest = new GetUserAbsenteeRequest(searchType , searchId , user.getCardId(), monthStr, "" + year);
+                    getUserAbsenteeRequest = new GetUserAbsenteeRequest(
+                            searchType , searchId , user.getCardId(), monthStr, "" + year , user.getUserId() , user.getPassword());
                     spiceManager.execute(getUserAbsenteeRequest, new GetUserAbsenteeRequestListener(caldroidFragment));
                 }
             }
@@ -174,7 +175,8 @@ public class ViewUserReportActivity extends FragmentActivity implements AdapterV
             this.searchType =  searchType;
             this.searchId = key;
             showProgressBar();
-            getUserAbsenteeRequest = new GetUserAbsenteeRequest(searchType , searchId ,user.getCardId() , monthSel , ""+ yearSel);
+            getUserAbsenteeRequest = new GetUserAbsenteeRequest(
+                    searchType , searchId ,user.getCardId() , monthSel , ""+ yearSel , user.getUserId() , user.getPassword());
             spiceManager.execute(getUserAbsenteeRequest ,new GetUserAbsenteeRequestListener(caldroidFragment));
         }
     }

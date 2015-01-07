@@ -153,7 +153,7 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
 
     public void getInfo(View view) {
         showProgressBar();
-        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET));
+        getInfoRequest = new GetInfoRequest("USER_ID" , getEditViewText(userIdValueET) , user.getUserId() , user.getPassword());
         spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 

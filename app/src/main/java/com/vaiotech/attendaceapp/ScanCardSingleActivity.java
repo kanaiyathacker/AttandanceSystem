@@ -285,7 +285,7 @@ public class ScanCardSingleActivity extends BaseActivity {
 
     public void getInfo(View view) {
         showProgressBar();
-        getInfoRequest = new GetInfoRequest("CARD_ID" , cardId);
+        getInfoRequest = new GetInfoRequest("CARD_ID" , cardId , user.getUserId() , user.getPassword());
         spiceManager.execute(getInfoRequest, new GetInfoRequestListener(this));
     }
 
