@@ -90,7 +90,7 @@
             <EditText
                 android:inputType="number"
                 android:textStyle="bold"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:gravity="center"
                 android:width="40dp"
                 android:textColor="#E81B11"
