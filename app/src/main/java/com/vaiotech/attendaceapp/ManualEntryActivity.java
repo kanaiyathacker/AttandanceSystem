@@ -144,7 +144,7 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
     public void save(View view) {
         showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
-        saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type));
+        saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type) , user.getUserId() , user.getPassword());
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         String msg = (view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + userIdValueET.getText() + " noted as " + hhET.getText() + ":" + mmET.getText();
         openDialog(msg);

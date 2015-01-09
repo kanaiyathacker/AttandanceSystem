@@ -190,7 +190,7 @@ public class ScanQRCodeSingleActivity extends BaseActivity implements DialogScan
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
         AttandanceTransaction t = buildAttandanceTransaction(type , user , Arrays.asList(cardId) , hhET.getText().toString()
                 , mmET.getText().toString() , lm);
-        saveAttandanceRequest = new SaveAttandanceRequest(t);
+        saveAttandanceRequest = new SaveAttandanceRequest(t , user.getUserId() , user.getPassword());
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         String msg = (view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + cardId + " noted as " + hhET.getText() + ":" + mmET.getText();
         openDialog(msg);

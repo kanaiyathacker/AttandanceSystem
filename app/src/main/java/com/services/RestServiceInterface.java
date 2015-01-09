@@ -21,7 +21,7 @@ public interface RestServiceInterface {
 //                @Path("time") String time,@Path("desc") String desc );
 //
     @POST("/ScanAttandanceApp/saveDetails")
-    Object save(@Body AttandanceTransaction attandanceTransaction);
+    Object save(@Body AttandanceTransaction attandanceTransaction, @Header("Authorization") String authorization);
 
     @POST("/ScanAttandanceApp/login/{deviceId}")
     Object login(@Path("deviceId") String deviceId , @Header("Authorization") String authorization);
