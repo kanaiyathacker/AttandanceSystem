@@ -45,7 +45,7 @@
                 android:paddingBottom="10dp"
                 android:drawablePadding="10dp"
                 android:gravity="bottom|center"
-                android:drawableBottom="@drawable/about_info"
+                android:drawableBottom="@drawable/about_info1"
                 android:onClick="aboutIPresence"
                 android:textSize="20sp"
                 android:textColor="#DCE0E5"
