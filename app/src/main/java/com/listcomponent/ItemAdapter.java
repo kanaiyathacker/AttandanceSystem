@@ -54,7 +54,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
         holder.txtDesc.setText(rowItem.getDescription());
         holder.txtTitle.setText(rowItem.getTitle());
-        if(position == 0) {
+        if(rowItem.getTitle().equals("User Id")) {
             holder.txtDesc.setTypeface(font , Typeface.BOLD);
             holder.txtTitle.setTypeface(font , Typeface.BOLD);
         } else {

@@ -9,9 +9,9 @@
 
     <LinearLayout
         android:id="@+id/adminLinear"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="0dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentStart="true"
@@ -24,11 +24,11 @@
         <LinearLayout
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:layout_height="0dp"
             >
             <LinearLayout
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
@@ -58,14 +58,14 @@
             android:gravity="center"
             android:layout_marginTop="1dp"
             android:layout_width="fill_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:layout_height="0dp"
             >
             <View
                 android:layout_above="@+id/getInfoBUTTON"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="#080807"/>
+                android:background="#FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout

@@ -87,7 +87,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
             idValueTV.setText(user.getUserId());
             nameValueTV.setText(user.getfName() + " " + user.getmName() + " " + user.getlName());
             orgValueTV.setText(user.getCoName());
-            statusValueTV.setText(user.getStatus());
+            statusValueTV.setText(user.getStatus().equals("1") ? "Active" :"Inactive");
         }
 
         currentPasswordEV.setOnKeyListener(this);
