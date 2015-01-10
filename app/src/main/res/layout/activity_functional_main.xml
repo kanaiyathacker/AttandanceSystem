@@ -31,7 +31,7 @@
                 android:gravity="bottom|center"
                 android:drawableBottom="@drawable/user_profile1"
                 android:onClick="myProfile"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textColor="#DCE0E5"
                 android:background="@drawable/apptheme_btn_default_holo_light"
                 android:layout_margin="2dp"

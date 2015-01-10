@@ -81,6 +81,8 @@ public class ViewReportActivity extends BaseActivity implements AdapterView.OnIt
         user = gson.fromJson(val , User.class);
         buildActivitySpinner(user , activitySpinner);
         activitySpinner.setOnItemSelectedListener(this);
+        sendMSGButton.setEnabled(false);
+        sendMSGButton.setAlpha(.5f);
     }
 
     public void viewAbsenteeDetails(View view) {

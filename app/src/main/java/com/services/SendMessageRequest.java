@@ -10,21 +10,21 @@ public class SendMessageRequest extends RetrofitSpiceRequest<Object, RestService
 
     private String searchType;
     private String searchId;
-    private String user;
+    private String userId;
     private String password;
 
-    public SendMessageRequest(String searchType , String searchId, String user , String password) {
+    public SendMessageRequest(String searchType , String searchId, String userId , String password) {
         super(Object.class, RestServiceInterface.class);
         this.searchType = searchId;
         this.searchId = searchType;
         this.password = password;
-        this.user = user;
+        this.userId = userId;
     }
 
     @Override
     public Object loadDataFromNetwork() throws Exception {
 
-        return getService().sendMessage(searchType , searchId,  Util.encodeCredentialsForBasicAuthorization(user, password));
+        return getService().sendMessage(searchType , searchId,  Util.encodeCredentialsForBasicAuthorization(userId, password));
     }
 
 }

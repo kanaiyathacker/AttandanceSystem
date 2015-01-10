@@ -50,14 +50,17 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         } else
             holder = (ViewHolder) convertView.getTag();
 
-        if(position == 1) {
 
-        }
 
         holder.txtDesc.setText(rowItem.getDescription());
         holder.txtTitle.setText(rowItem.getTitle());
-        holder.txtDesc.setTypeface(font);
-        holder.txtTitle.setTypeface(font);
+        if(position == 0) {
+            holder.txtDesc.setTypeface(font , Typeface.BOLD);
+            holder.txtTitle.setTypeface(font , Typeface.BOLD);
+        } else {
+            holder.txtDesc.setTypeface(font);
+            holder.txtTitle.setTypeface(font);
+        }
         convertView.setBackgroundColor(position % 2 == 0 ?Color.parseColor("#ffffff") : Color.parseColor("#d7d7d7"));
         return convertView;
     }

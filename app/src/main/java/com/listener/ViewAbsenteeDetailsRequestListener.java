@@ -1,6 +1,7 @@
 package com.listener;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -41,6 +42,11 @@ public class ViewAbsenteeDetailsRequestListener implements RequestListener<Objec
         for(LinkedTreeMap currVal : listMap) {
             String name = currVal.get("fName") + " " + currVal.get("lName");
             result.add(new Item(currVal.get("userId").toString() , name));
+        }
+        if(result.size() > 0) {
+            Button sendMSGButton = (Button) viewReportActivity.findViewById(R.id.sendMSGButton);
+            sendMSGButton.setEnabled(true);
+            sendMSGButton.setAlpha(1f);
         }
 
         ListView listView = (ListView)viewReportActivity.findViewById(R.id.absentResultLV);
