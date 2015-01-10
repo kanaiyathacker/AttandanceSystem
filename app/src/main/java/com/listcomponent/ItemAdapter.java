@@ -54,13 +54,13 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
         holder.txtDesc.setText(rowItem.getDescription());
         holder.txtTitle.setText(rowItem.getTitle());
-        if(rowItem.getTitle().equals("User Id")) {
-            holder.txtDesc.setTypeface(font , Typeface.BOLD);
-            holder.txtTitle.setTypeface(font , Typeface.BOLD);
-        } else {
+//        if(rowItem.getTitle().equals("User Id")) {
+//            holder.txtDesc.setTypeface(font , Typeface.BOLD);
+//            holder.txtTitle.setTypeface(font , Typeface.BOLD);
+//        } else {
             holder.txtDesc.setTypeface(font);
             holder.txtTitle.setTypeface(font);
-        }
+//        }
         convertView.setBackgroundColor(position % 2 == 0 ?Color.parseColor("#ffffff") : Color.parseColor("#d7d7d7"));
         return convertView;
     }
