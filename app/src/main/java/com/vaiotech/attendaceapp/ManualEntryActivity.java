@@ -8,6 +8,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -121,6 +123,9 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         user = gson.fromJson(val , User.class);
         adminValueLableTV.setText(user.getfName() + " " +  user.getlName());
         userIdValueET.setOnKeyListener(this);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(userIdValueET, InputMethodManager.SHOW_IMPLICIT);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     public AttandanceTransaction buildAttandanceTransaction(String type) {

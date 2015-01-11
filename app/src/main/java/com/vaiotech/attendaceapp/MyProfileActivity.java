@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -93,6 +94,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnKeyListene
         currentPasswordEV.setOnKeyListener(this);
         newPasswordEV.setOnKeyListener(this);
         retypePasswordEV.setOnKeyListener(this);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     @Override
