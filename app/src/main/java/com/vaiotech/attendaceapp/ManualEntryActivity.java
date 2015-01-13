@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bean.AttandanceTransaction;
@@ -58,6 +59,8 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
 
     @InjectView(R.id.outBUTTON) Button outBUTTON;
     @InjectView(R.id.getInfoBUTTON) Button getInfoBUTTON;
+    @InjectView(R.id.activitySpinner)
+    Spinner activitySpinner;
 
     private SaveAttandanceRequest saveAttandanceRequest;
     private GetInfoRequest getInfoRequest;
@@ -126,30 +129,35 @@ public class ManualEntryActivity extends BaseActivity implements View.OnKeyListe
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(userIdValueET, InputMethodManager.SHOW_IMPLICIT);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        buildActivitySpinner(user , activitySpinner);
     }
 
-    public AttandanceTransaction buildAttandanceTransaction(String type) {
-        AttandanceTransaction t = new AttandanceTransaction();
-        t.setAdminId(user.getUserId());
-        t.setDate(Util.convertDateToString(new Date()));
-        t.setTime(hhET.getText() + ":" + mmET.getText());
-        t.setOrgId(user.getCoId());
-        t.setType(type);
-        t.setCardId(Arrays.asList(getCardId()));
-        if(lm != null) {
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(location != null) {
-                t.setLongitude(""+location.getLongitude());
-                t.setLatitude(""+location.getLatitude());
-            }
-        }
-        return t;
-    }
+//    public AttandanceTransaction buildAttandanceTransaction(String type) {
+//        AttandanceTransaction t = new AttandanceTransaction();
+//        t.setAdminId(user.getUserId());
+//        t.setDate(Util.convertDateToString(new Date()));
+//        t.setTime(hhET.getText() + ":" + mmET.getText());
+//        t.setOrgId(user.getCoId());
+//        t.setType(type);
+//        t.setCardId(Arrays.asList(getCardId()));
+//        if(lm != null) {
+//            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            if(location != null) {
+//                t.setLongitude(""+location.getLongitude());
+//                t.setLatitude(""+location.getLatitude());
+//            }
+//        }
+//        return t;
+//    }
 
     public void save(View view) {
         showProgressBar();
         String type = view.getId() == R.id.inBUTTON ? "IN" : "OUT";
-        saveAttandanceRequest = new SaveAttandanceRequest(buildAttandanceTransaction(type) , user.getUserId() , user.getPassword());
+        AttandanceTransaction t = buildAttandanceTransaction(type , user , Arrays.asList(getCardId()) , hhET.getText().toString()
+                , mmET.getText().toString() , lm);
+        saveAttandanceRequest = new SaveAttandanceRequest(t , user.getUserId() , user.getPassword());
+
+
         spiceManager.execute(saveAttandanceRequest , new SaveAttandanceRequestListener(this));
         String msg = (view.getId() == R.id.inBUTTON ? "IN Time for " : "OUT Time for ") + userIdValueET.getText() + " noted as " + hhET.getText() + ":" + mmET.getText();
         openDialog(msg);
